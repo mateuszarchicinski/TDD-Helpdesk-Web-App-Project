@@ -35,24 +35,24 @@ describe('Models:', () => {
                 new Route();
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw Error('Route constructor does not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('Route constructor does not pass test.');
             }
         });
 
-        it('constructor without specified object property url should throw an error', () => {
+        it('constructor without specified required object property url should throw an error', () => {
             let error;
 
             try {
                 new Route({});
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw Error('Route constructor does not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('Route constructor does not pass test.');
             }
         });
 
@@ -64,10 +64,33 @@ describe('Models:', () => {
 
         });
 
+        it('a new object with specified object properties url, method and controller should contain object properties with the same values', () => {
+            const obj = {
+                url: '/test',
+                method: 'get',
+                controller: () => {}
+            };
+            const route = new Route(obj);
+
+            expect(route).to.deep.equal(obj);
+        });
+
         it('constructor with specified required first argument url should return an new object', () => {
 
             expect(new Route('test')).to.be.an('object');
 
+        });
+
+        it('a new object with specified arguments url, method and controller should contain object properties with the same values', () => {
+            const fn = () => {};
+            const route = new Route('/test', 'get', fn);
+            const obj = {
+                url: '/test',
+                method: 'get',
+                controller: fn
+            };
+
+            expect(route).to.deep.equal(obj);
         });
 
         it('constructor with specified wrong object property method should throw an error', () => {
@@ -80,10 +103,10 @@ describe('Models:', () => {
                 });
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw Error('Route constructor does not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('Route constructor does not pass test.');
             }
         });
 
@@ -94,11 +117,10 @@ describe('Models:', () => {
                 new Route('/test', 'test');
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw error;
-                    throw Error('Route constructor does not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('Route constructor does not pass test.');
             }
         });
 

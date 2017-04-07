@@ -1,3 +1,6 @@
+/* eslint no-unused-vars: ["error", { "args": "none" }] */
+
+
 'use strict';
 
 
@@ -6,15 +9,30 @@ const chai = require('chai');
 const expect = chai.expect;
 
 
-//NODE MODULESconst app = new require('express')();
-const app = new require('express')();
-
-
 // LOCAL MODULES
 const routesInjector = require('../../helpers/routesInjector');
+const app = new require('express')();
+const baseUrl = 'http://localhost:3880/';
+const Route = require('../../models/route');
+const routeO = new Route('/testo');
+const routeA = new Route('/testa');
+const RoutesArray = require('../../models/routesArray');
+const routesArray = new RoutesArray(Route);
+routesArray.addRoute(routeO);
+routesArray.addRoute(routeA);
+const request = require('request');
 
 
 describe('Helpers:', () => {
+    let createServer;
+
+    before(() => {
+        createServer = app.listen(3880);
+    });
+
+    after(() => {
+        createServer.close();
+    });
 
     describe('routesInjector.js', () => {
         it('is a function', () => {
@@ -23,22 +41,28 @@ describe('Helpers:', () => {
 
         });
 
-        it('without any arguments should returns false', () => {
+        it('without any arguments should return false', () => {
 
             expect(routesInjector()).to.be.false;
 
         });
 
-        it('without object property appObj should returns false', () => {
+        it('without object property appObj should return false', () => {
 
             expect(routesInjector({
-                routeObj: routes[0],
-                routesArr: routes
+                routeObj: routeO,
+                routesArr: routesArray
             })).to.be.false;
 
         });
 
-        it('without object property routeObj and routesArr should returns false', () => {
+        it('without argument appObj should return false', () => {
+
+            expect(routesInjector(null, routeA, routesArray)).to.be.false;
+
+        });
+
+        it('without object properties routeObj and routesArr should return false', () => {
 
             expect(routesInjector({
                 appObj: app
@@ -46,40 +70,79 @@ describe('Helpers:', () => {
 
         });
 
-        it('with object properties appObj, routeObj and routesArr should return true', () => {
+        it('without arguments routeObj and routesArr should return false', () => {
 
-            expect(routesInjector({
-                appObj: app,
-                routeObj: routes[0],
-                routesArr: routes
-            })).to.be.true;
+            expect(routesInjector(app)).to.be.false;
 
         });
 
-        it('with object property appObj which is not a function should returns false', () => {
+        it('with required object properties appObj and routeObj should adds new route', (done) => {
 
-            expect(routesInjector({
-                appObj: 'abc',
-                routeObj: routes[0]
-            })).to.be.false;
+            routesInjector({
+                appObj: app,
+                routeObj: routeO
+            });
+
+            request.get(`${baseUrl}testo`, (error, response, body) => {
+                if (error) {
+                    throw error;
+                }
+
+                expect(response.statusCode).to.equal(200);
+
+                done();
+            });
 
         });
 
-        it('with object property routeObj which is not an object should returns false', () => {
+        it('with required arguments appObj and routeObj should adds new route', (done) => {
 
-            expect(routesInjector({
-                appObj: app,
-                routeObj: 'abc'
-            })).to.be.false;
+            routesInjector(app, routeA);
+
+            request.get(`${baseUrl}testa`, (error, response, body) => {
+                if (error) {
+                    throw error;
+                }
+
+                expect(response.statusCode).to.equal(200);
+
+                done();
+            });
 
         });
 
-        it('with object property routesArr which is not an object should returns false', () => {
+        it('with required object properties appObj and routesArr should adds new route', (done) => {
 
-            expect(routesInjector({
+            routesInjector({
                 appObj: app,
-                routesArr: 'abc'
-            })).to.be.false;
+                routesArr: routesArray
+            });
+
+            request.get(`${baseUrl}testo`, (error, response, body) => {
+                if (error) {
+                    throw error;
+                }
+
+                expect(response.statusCode).to.equal(200);
+
+                done();
+            });
+
+        });
+
+        it('with required arguments appObj and routesArr should adds new route', (done) => {
+
+            routesInjector(app, null, routesArray);
+
+            request.get(`${baseUrl}testa`, (error, response, body) => {
+                if (error) {
+                    throw error;
+                }
+
+                expect(response.statusCode).to.equal(200);
+
+                done();
+            });
 
         });
     });

@@ -34,17 +34,22 @@ describe('Models:', () => {
                 new RoutesArray();
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw Error('RouteArray constructor does not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('RouteArray constructor does not pass test.');
             }
         });
 
-        it('constructor with Route function argument should return an new object', () => {
+        it('constructor with Route function argument should return a new object with properties routeInstance, routesArray and alreadyTakenUrls', () => {
+            const routesArray = new RoutesArray(Route);
+            const obj = {
+                routeInstance: Route,
+                routesArray: [],
+                alreadyTakenUrls: []
+            };
 
-            expect(new RoutesArray(Route)).to.be.an('object');
-
+            expect(routesArray).to.deep.equal(obj);
         });
 
         it('object method addRoute() without any arguments should throw an error', () => {
@@ -56,10 +61,10 @@ describe('Models:', () => {
                 routesArray.addRoute();
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw Error('RouteArray.addRoute() method do not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('RouteArray.addRoute() method do not pass test.');
             }
         });
 
@@ -72,10 +77,10 @@ describe('Models:', () => {
                 routesArray.addRoute({});
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw Error('RouteArray.addRoute() method do not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('RouteArray.addRoute() method do not pass test.');
             }
         });
 
@@ -99,10 +104,10 @@ describe('Models:', () => {
                 routesArray.addRoute(route);
             } catch (e) {
                 error = e;
-            } finally {
-                if (!error) {
-                    throw Error('RouteArray.addRoute() method do not pass test.');
-                }
+            }
+
+            if (!error) {
+                throw Error('RouteArray.addRoute() method do not pass test.');
             }
         });
 
