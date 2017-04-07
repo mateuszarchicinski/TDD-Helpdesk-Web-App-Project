@@ -1,7 +1,3 @@
-// APP CONFIG
-const APP_CONFIG = require('../app.config.js');
-
-
 module.exports = class RoutesArray {
     constructor(routeInstance) {
         if (arguments.length === 0) {
@@ -11,7 +7,7 @@ module.exports = class RoutesArray {
         this.routeInstance = routeInstance;
         this.routesArray = [];
         this.alreadyTakenUrls = [];
-    };
+    }
     addRoute(route) {
         if (route instanceof this.routeInstance && route.url && !this.alreadyTakenUrls.includes(route.url)) {
             this.routesArray.push(route);
@@ -19,5 +15,5 @@ module.exports = class RoutesArray {
         } else {
             throw Error('Route object is not an instance of right function or have specified already taken url.');
         }
-    };
+    }
 };

@@ -22,6 +22,6 @@ module.exports = class Route {
 
         this.url = args.url || url;
         this.method = args.method || method || APP_CONFIG.ROUTE.DEFAULT_METHOD;
-        this.controller = args.fileName || controller || APP_CONFIG.ROUTE.DEFAULT_CONTROLLER;
-    };
+        this.controller = args.controller || controller || require(`../controllers/${APP_CONFIG.ROUTE.DEFAULT_CONTROLLER}`);
+    }
 };

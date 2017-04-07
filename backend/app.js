@@ -17,7 +17,6 @@ const chalk = require('chalk');
 
 // APP MODULES
 const routesInjector = require('./helpers/routesInjector');
-const routes = require('./routes/routes');
 
 
 // APP CONFIG
@@ -27,10 +26,9 @@ const APP_CONFIG = require('./app.config.js');
 // USEFUL FUNCTIONS
 // To display a console log message in five types: normal, success, info, warning and error
 function alertHandler(args) {
+    return;
 
     args = args || {};
-
-    return;
 
     if (app.get('env') === 'production' && args.type !== 'error') {
         return;
@@ -284,26 +282,9 @@ app[METHOD:get,post,put...]('/ROUTE_EXAMPLE', FUNCTION(req, res, next) => {
 
 // Second way recommended: Go into directory ./routes then in file routes.js defines your route objects.
 // Adds routes to app object
-
 const Route = require('./models/route');
-const route = new Route({
-    url: '/test',
-    controller: (req, res, next) => {
-        res.send('test');
-    }
-});
-
-console.log(routesInjector({
-    appObj: app,
-    routesArr: {}
-}));
-
-
-
-
-
-
-
+const route = new Route('/test');
+routesInjector(app, route);
 
 
 ////////////////////////////////////

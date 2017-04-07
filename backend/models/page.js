@@ -26,9 +26,9 @@ module.exports = class Page {
         this.statusCode = args.statusCode || statusCode || APP_CONFIG.HTTP_CODE.SUCCESS;
         this.type = args.type || type || APP_CONFIG.PAGE.DEFAULT_TYPE;
         this.root = args.root || root || APP_CONFIG.DIRECTORY.PAGES_DIR;
-    };
+    }
 
     fullFileName(lang) {
         return `${this.fileName}-${lang || APP_CONFIG.LANGUAGES[0]}.html`;
-    };
+    }
 };
