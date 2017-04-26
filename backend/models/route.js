@@ -1,27 +1,55 @@
-// APP CONFIG
-const APP_CONFIG = require('../app.config.js');
+// NODE MODULES
+const mongoose = require('../services/mongoose');
+const mongooseUniqueValidator = require('mongoose-unique-validator');
 
 
-module.exports = class Route {
-    constructor(url, method, controller, ...args) {
-        if (arguments.length === 0) {
-            throw Error(`Specify an arguments <url[string], method[string:default ${APP_CONFIG.ROUTE.DEFAULT_METHOD}], controller[string:default ${APP_CONFIG.ROUTE.DEFAULT_CONTROLLER}]> or an object properties {url: <string>, method: <string:default ${APP_CONFIG.ROUTE.DEFAULT_METHOD}>, controller: <string:default ${APP_CONFIG.ROUTE.DEFAULT_CONTROLLER}>}.`);
-        }
+// ROUTES CONFIG
+const ROUTES_CONFIG = require('../app.config').ROUTES_CONFIG;
 
-        if (arguments.length === 1 && typeof arguments[0] === 'object') {
-            args = arguments[0];
 
-            if (!args.url || (args.method && !APP_CONFIG.ROUTE.METHODS.includes(args.method))) {
-                throw Error(`Error: Bad arguments ${JSON.stringify(arguments)}. Specify required object properties: {url: <string>, method: <string:supports ${APP_CONFIG.ROUTE.METHODS}}.`);
-            }
-        } else {
-            if (!url || (method && !APP_CONFIG.ROUTE.METHODS.includes(method))) {
-                throw Error(`Error: Bad arguments ${JSON.stringify(arguments)}. Specify required argument: <url[string], method[string:supports ${APP_CONFIG.ROUTE.METHODS}]>.`);
-            }
-        }
-
-        this.url = args.url || url;
-        this.method = args.method || method || APP_CONFIG.ROUTE.DEFAULT_METHOD;
-        this.controller = args.controller || controller || require(`../controllers/${APP_CONFIG.ROUTE.DEFAULT_CONTROLLER}`);
+const routeSchema = new mongoose.Schema({
+    url: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    method: {
+        type: String,
+        default: ROUTES_CONFIG.MODEL.DEFAULT_METHOD
+    },
+    middlewares: {
+        type: String
+    },
+    controller: {
+        type: String,
+        default: ROUTES_CONFIG.MODEL.DEFAULT_CONTROLLER
     }
+}, {
+    versionKey: false
+});
+
+
+routeSchema.methods.getMiddlewares = function () {
+    const strArr = this.middlewares ? this.middlewares.split(',') : [];
+    const midArr = [];
+
+    strArr.forEach((elem) => {
+        midArr.push(require(`..${ROUTES_CONFIG.DIRECTORY.MIDDLEWARES_DIR}/${elem}`));
+    });
+
+    return midArr;
+};
+
+
+routeSchema.methods.getController = function () {
+    return require(`..${ROUTES_CONFIG.DIRECTORY.CONTROLLERS_DIR}/${this.controller}`);
+};
+
+
+routeSchema.plugin(mongooseUniqueValidator);
+
+
+module.exports = {
+    schema: routeSchema,
+    model: mongoose.model('Route', routeSchema)
 };
