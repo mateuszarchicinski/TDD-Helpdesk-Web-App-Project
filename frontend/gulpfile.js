@@ -204,16 +204,19 @@ gulp.task('sass:lint', () => {
 });
 
 
-// Validates JavaScript (JS) Code, atm default configuration for more info check ---> http://jshint.com/docs/
-gulp.task('js:hint', () => {
+// Validates JavaScript (JS) Code, atm default configuration for more info check ---> http://eslint.org/
+gulp.task('js:eslint', () => {
     
-    $.util.log($.util.colors.cyan('JS HINT TASK RUNNING...'));
+    $.util.log($.util.colors.cyan('JS ESLINT TASK RUNNING...'));
     
     
-    return gulp.src(`${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/js/**/*.js`)
-        .pipe($.plumber())
-        .pipe($.jshint())
-        .pipe($.jshint.reporter(jshintStylish)); // https://github.com/spalger/gulp-jshint#reporters
+    return gulp.src([
+        `${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/js/**/*.js`,
+        `${PROJECT_CONFIG.DIRECTORY.TEST_DIR}/spec/**/*.js`
+    ])
+    .pipe($.plumber())
+    .pipe($.eslint('.eslintrc.json')) // http://eslint.org/docs/user-guide/configuring
+    .pipe($.eslint.format());
     
 });
 
@@ -455,7 +458,7 @@ gulp.task('watch', () => {
 
 
 // Created to fix problem with browserSync.reload, more info ---> https://github.com/BrowserSync/browser-sync/issues/717#issuecomment-119713757
-gulp.task('js:watch', ['js:hint'], browserSync.reload);
+gulp.task('js:watch', ['js:eslint'], browserSync.reload);
 
 
 // Created to fix problem with browserSync.reload, more info ---> https://github.com/BrowserSync/browser-sync/issues/717#issuecomment-119713757
@@ -611,7 +614,7 @@ gulp.task('build', (cb) => {
     $.util.log($.util.colors.red('BUILD TASK RUNNING...'));
     
     
-    runSequence('clean', 'sass:lint', 'sass:css', 'js:hint', 'pug:lint', 'pug', 'html:hint', 'html', 'html:minify', 'copy', 'images', 'upload', cb);
+    runSequence('clean', 'sass:lint', 'sass:css', 'js:eslint', 'pug:lint', 'pug', 'html:hint', 'html', 'html:minify', 'copy', 'images', 'upload', cb);
     
 });
 
@@ -633,6 +636,6 @@ gulp.task('default', (cb) => {
     $.util.log($.util.colors.red('DEFAULT TASK RUNNING...'));
     
     
-    runSequence('sass:lint', 'sass:css', 'js:hint', 'pug:lint', 'pug', 'html:hint', 'server', 'watch', cb);
+    runSequence('sass:lint', 'sass:css', 'js:eslint', 'pug:lint', 'pug', 'html:hint', 'server', 'watch', cb);
     
 });

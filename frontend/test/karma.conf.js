@@ -15,7 +15,11 @@ module.exports = function (config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['jasmine'],
+        frameworks: [
+            'mocha',
+            'chai',
+            'sinon-chai'
+        ],
 
 
         // list of files / patterns to load in the browser
@@ -58,7 +62,11 @@ module.exports = function (config) {
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {},
+        preprocessors: {
+            'bundle.js': [
+                'coverage'
+            ]
+        },
 
 
         // test results reporter to use
@@ -72,7 +80,13 @@ module.exports = function (config) {
             suppressSkipped: false,
             showSpecTiming: false
         },
-        reporters: ['spec'],
+        coverageReporter: {
+            type: 'text-summary'
+        },
+        reporters: [
+            'spec',
+            'coverage'
+        ],
 
 
         // web server port
@@ -94,7 +108,9 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['PhantomJS'],
+        browsers: [
+            'PhantomJS'
+        ],
 
 
         // Continuous Integration mode
@@ -105,5 +121,5 @@ module.exports = function (config) {
         // Concurrency level
         // how many browser should be started simultaneous
         concurrency: Infinity
-    })
-}
+    });
+};
