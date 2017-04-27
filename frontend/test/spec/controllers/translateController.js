@@ -1,29 +1,49 @@
-describe('controller: translateController', function () {
-
-    'use strict';
+'use strict';
 
 
-    beforeEach(module('app'));
+describe('Controllers: translateController', function () {
     var translateController,
-        scope,
-        window;
+        window,
+        APP_CONFIG;
 
+    beforeEach(function () {
+        module('app')
 
-    beforeEach(inject(function ($controller, $rootScope, $window) {
-        scope = $rootScope.$new();
-        window = {
-            translation: $window.translation
-        };
+        inject(function ($controller, _urlParams_, _APP_CONFIG_) {
+            window = {
+                location: {
+                    href: null
+                }
+            };
 
-        translateController = $controller('translateController', {$scope: scope, $window: window});
+            translateController = $controller('translateController', {
+                urlParams: _urlParams_,
+                $window: window
+            });
 
-    }));
-
-
-    it('should attach a list of awesomeThings to the scope', function () {
-
-        expect(translateController.awesomeThings.length).toBe(4);
-
+            APP_CONFIG = _APP_CONFIG_;
+        });
     });
 
+    afterEach(function () {
+        window.location.href = null;
+    });
+
+    it('ctrl.language should be a string', function () {
+        expect(translateController.language).to.be.a('string');
+    });
+
+    it('ctrl.language should return correct language code', function () {
+        expect(translateController.language).to.be.oneOf(APP_CONFIG.languages);
+    });
+
+    it('ctrl.translate(langCode) should be a function', function () {
+        expect(translateController.translate).to.be.a('function');
+    });
+
+    it('ctrl.translate(langCode) called with another language of current state should call window.location.href', function () {
+        translateController.translate('en');
+
+        expect(window.location.href).to.match(/\/en\//);
+    });
 });
