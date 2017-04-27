@@ -21,6 +21,6 @@ module.exports = {
     ROUTES_CONFIG: require('./routes.config.js'),
     PAGES_CONFIG: require('./pages.config.js'),
     DIRECTORY: {
-        STATIC_DIR: '/assets', // Static files directory
+        STATIC_DIR: '/../frontend/src', // Static files directory
     }
 };

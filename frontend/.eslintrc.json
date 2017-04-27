@@ -1,0 +1,38 @@
+{
+    "env": {
+        "browser": true,
+        "shared-node-browser": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+        "angular": true,
+        "app": true,
+        "module": true,
+        "inject": true,
+        "expect": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "impliedStrict": true
+        }
+    },
+    "rules": {
+        "indent": [
+            2,
+            4
+        ],
+        "linebreak-style": [
+            2,
+            "windows"
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "semi": [
+            2,
+            "always"
+        ]
+    }
+}
