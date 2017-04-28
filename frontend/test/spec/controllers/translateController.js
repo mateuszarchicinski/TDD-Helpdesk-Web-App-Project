@@ -3,30 +3,37 @@
 
 describe('Controllers: translateController', function () {
     var translateController,
+        urlParams,
         window,
         APP_CONFIG;
 
     beforeEach(function () {
-        module('app')
+        module('app');
 
         inject(function ($controller, _urlParams_, _APP_CONFIG_) {
+            urlParams = _urlParams_;
+
             window = {
                 location: {
-                    href: null
+                    href: 'http://localhost:4848/pl'
                 }
             };
 
+            APP_CONFIG = _APP_CONFIG_;
+
             translateController = $controller('translateController', {
-                urlParams: _urlParams_,
+                urlParams: urlParams,
                 $window: window
             });
-
-            APP_CONFIG = _APP_CONFIG_;
         });
+
+        sinon.spy(urlParams, 'rightPath');
     });
 
     afterEach(function () {
         window.location.href = null;
+
+        urlParams.rightPath.restore();
     });
 
     it('ctrl.language should be a string', function () {
@@ -44,6 +51,16 @@ describe('Controllers: translateController', function () {
     it('ctrl.translate(langCode) called with another language of current state should call window.location.href', function () {
         translateController.translate('en');
 
-        expect(window.location.href).to.match(/\/en\//);
+        expect(urlParams.rightPath).to.have.been.calledOnce;
+
+        expect(window.location.href).to.match(/^en.*/);
+    });
+
+    it('ctrl.translate(langCode) called with the same language of current state should not call window.location.href', function () {
+        translateController.translate('pl');
+
+        expect(urlParams.rightPath).to.not.have.been.calledOnce;
+
+        expect(window.location.href).to.match(/\/pl$/);
     });
 });

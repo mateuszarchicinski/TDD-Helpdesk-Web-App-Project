@@ -10,7 +10,7 @@
 
         this.translate = function (langCode) {
             if (this.language !== langCode) {
-                $window.location.href = '/' + langCode + '/' + urlParams.rightPath();
+                $window.location.href = langCode + urlParams.rightPath();
             }
         };
     }]);
