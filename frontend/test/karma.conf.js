@@ -40,15 +40,13 @@ module.exports = function (config) {
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/app.config.js',
 
             // application controllers
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/controllers/readmeController.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/controllers/notfoundController.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/controllers/translateController.js',
+            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/controllers/**/*.js',
 
             // application directives
-
+            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/directives/**/*.js',
 
             // application services
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/services/urlParamsProvider.js',
+            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/services/**/*.js',
 
             // application tests
             PROJECT_CONFIG.DIRECTORY.TEST_DIR + '/spec/**/*.js'
@@ -63,7 +61,7 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'bundle.js': [
+            '*/js/**/*.js': [
                 'coverage'
             ]
         },
@@ -113,12 +111,12 @@ module.exports = function (config) {
         ],
 
 
-        // Continuous Integration mode
+        // continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false,
 
 
-        // Concurrency level
+        // concurrency level
         // how many browser should be started simultaneous
         concurrency: Infinity
     });

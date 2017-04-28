@@ -1,33 +1,41 @@
-describe('service: urlParamsProvider', function () {
-
-    'use strict';
+'use strict';
 
 
-    var LANGUAGES = ['pl', 'en'];
+describe('Services: urlParamsProvider', function () {
+    var urlParams;
 
+    beforeEach(module(function ($provide) {
+        var windowMock = {
+            location: {
+                pathname: '/en/something',
+                search: '?search'
+            }
+        };
 
-    beforeEach(module('app'));
-    var urlParams,
-        scope,
-        window;
+        $provide.value('$window', windowMock);
+    }));
 
     beforeEach(function () {
-
-        module(function (urlParamsProvider) {
-            urlParamsProvider.languages = LANGUAGES;
-        });
+        module('app');
 
         inject(function (_urlParams_) {
             urlParams = _urlParams_;
         });
-
     });
 
-
-    it('should return one/default language from list of supported languages', function () {
-
-        expect(urlParams.currentLanguage()).toBe(LANGUAGES[0]);
-
+    it('urlParams.currentLanguage() should return a string', function () {
+        expect(urlParams.currentLanguage()).to.be.a('string');
     });
 
+    it('urlParams.currentLanguage() should return current language code', function () {
+        expect(urlParams.currentLanguage()).to.equal('en');
+    });
+
+    it('urlParams.rightPath() should return a string', function () {
+        expect(urlParams.rightPath()).to.be.a('string');
+    });
+
+    it('urlParams.rightPath() should return complete path after language param', function () {
+        expect(urlParams.rightPath()).to.equal('/something?search');
+    });
 });
