@@ -4,7 +4,9 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "build": "gulp build --option advanced --upload"
+    "dev": "gulp",
+    "test": "gulp js:eslint && gulp js:test",
+    "prod": "gulp build --option advanced --upload"
   },
   "author": "Mateusz Archiciński",
   "license": "ISC",

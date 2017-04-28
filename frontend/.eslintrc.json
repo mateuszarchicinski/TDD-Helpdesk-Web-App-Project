@@ -10,7 +10,8 @@
         "app": true,
         "module": true,
         "inject": true,
-        "expect": true
+        "expect": true,
+        "sinon": true
     },
     "parserOptions": {
         "ecmaFeatures": {

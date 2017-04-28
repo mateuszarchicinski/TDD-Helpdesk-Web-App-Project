@@ -434,7 +434,10 @@ gulp.task('watch', () => {
         'sass:css'
     ]);
     
-    gulp.watch(`${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/js/**/*.js`, [
+    gulp.watch([
+        `${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/js/**/*.js`,
+        `${PROJECT_CONFIG.DIRECTORY.TEST_DIR}/spec/**/*.js`
+    ], [
         'js:watch'
     ]);
     

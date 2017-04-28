@@ -17,24 +17,21 @@
             return 'views/' + langValue + '/' + nameFile + '.html';
         };
 
-
-        $stateProvider.state('main', {
-            url: '/',
-            redirectTo: 'readme'
-        }).state('language', {
-            url: '/' + langValue,
-            redirectTo: 'readme'
+        $stateProvider.state('login', {
+            url: baseUrl + 'login',
+            templateUrl: getTemplateUrl('login'),
+            controller: 'loginController'
+        }).state('register', {
+            url: baseUrl + 'register',
+            templateUrl: getTemplateUrl('register'),
+            controller: 'registerController'
         }).state('readme', {
-            url: baseUrl + 'readme',
-            templateUrl: getTemplateUrl('readme'),
-            controller: 'readmeController'
-        }).state('notfound', {
-            url: baseUrl + 'notfound',
-            templateUrl: getTemplateUrl('notfound'),
-            controller: 'notfoundController'
+            url: baseUrl + 'helpdesk',
+            templateUrl: getTemplateUrl('helpdesk'),
+            controller: 'helpdeskController'
         });
 
-        $urlRouterProvider.otherwise(baseUrl + 'notfound');
+        $urlRouterProvider.otherwise('/');
 
         $locationProvider.html5Mode(true);
 
