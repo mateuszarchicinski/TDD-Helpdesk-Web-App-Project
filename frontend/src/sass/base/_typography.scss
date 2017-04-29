@@ -81,14 +81,16 @@ $quaternary-heading__font-size: 1.15em !default;
 
 
 /* Text */
-//__small
+//-small
 $text-small__font-size: 0.85em !default;
-//__normal
+//-normal
 $text-normal__font-size: 1em !default;
-//__medium
+//-medium
 $text-medium__font-size: 1.15em !default;
-//__large
+//-large
 $text-large__font-size: 1.3em !default;
+//-muted
+$text-muted__color: $secondary-text-color !default;
 // strong
 $strong__font-weight: 500 !default;
 
@@ -113,6 +115,9 @@ $strong__font-weight: 500 !default;
 // sass-lint:enable no-important
     &-hidden {
         @include no-text;
+    }
+    &-muted {
+        color: $text-muted__color;
     }
 }
 

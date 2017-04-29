@@ -1,0 +1,14 @@
+//~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* LOGIN *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~//
+
+
+//__toolbar
+$toolbar__background-color: $primary-color !default;
+
+
+.login-view {
+    &__toolbar._md {
+        background-color: $toolbar__background-color;
+    }
+}

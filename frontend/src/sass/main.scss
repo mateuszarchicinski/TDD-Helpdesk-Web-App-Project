@@ -72,6 +72,10 @@
     @import 'components/table';
 
 
+    // *--------- BUTTONS ---------*
+    @import 'components/buttons';
+
+
     // *--------- LINKS ---------*
     @import 'components/links';
 
@@ -90,16 +94,12 @@
 
 
 // ---------------------
-//     PAGES
+//     VIEWS
 // ---------------------
 
 
-    // *--------- README ---------*
-    @import 'pages/readme';
-
-
-    // *--------- NOTFOUND ---------*
-    @import 'pages/notfound';
+    // *--------- LOGIN ---------*
+    @import 'views/login';
 
 
 // ---------------------

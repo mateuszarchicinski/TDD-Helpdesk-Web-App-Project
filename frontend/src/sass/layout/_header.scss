@@ -4,5 +4,10 @@
 
 
 .main-header {
-    padding: 25px 0 18px;
+    padding: 75px 0 18px;
+    &__brand-logo {
+        max-width: 100px;
+        display: block;
+        margin: 0 auto;
+    }
 }

@@ -26,6 +26,11 @@ body {
     color: $body__color;
 }
 
+html,
+body {
+    height: auto;
+}
+
 .clearfix {
     @include clearfix;
 }

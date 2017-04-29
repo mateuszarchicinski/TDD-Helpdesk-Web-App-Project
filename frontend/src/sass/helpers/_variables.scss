@@ -34,10 +34,10 @@ $font-weight__normal:  400;
 $font-weight__lighter: 300;
 
 // Colors
-$primary-color-dark:   $color__persian-red;
-$primary-color:        $color__red-orange;
-$primary-color-light:  $color__we-peep;
-$accent-color:         $color__neon-blue;
+$primary-color-dark:   $color__pine-green;
+$primary-color:        $color__dark-cyan;
+$primary-color-light:  $color__scandal;
+$accent-color:         $color__amber;
 $primary-text-color:   $color__nero;
 $secondary-text-color: $color__grey;
 $divider-color:        $color__silver;
@@ -207,42 +207,8 @@ $l-s-link-active__color: $color__white;
 
 
 // ---------------------
-//     PAGES
+//     VIEWS
 // ---------------------
-
-
-// *--------- README ---------*
-// __info
-$readme__info__padding: 0 0 0.125em 1em;
-$readme__info__border-left: 0.25em solid $primary-color-dark;
-$readme__info__color: $secondary-text-color;
-
-
-// *--------- NOTFOUND ---------*
-// __header
-$notfound-page__header__text-align: center;
-// __title
-$notfound-page__title__margin-bottom: #{(3 / 16)}em;
-// __info
-$notfound-page__info__color: $secondary-text-color;
-// __button
-$notfound-page__button__font-size: $base__font-size - 0.2;
-$notfound-page__button__font-weight: $font-weight__bold;
-$notfound-page__button__text-transform: uppercase;
-$notfound-page__button__padding: 1em;
-$notfound-page__button__border: 1px solid rgba($color__black, 0.25);
-$notfound-page__button__box-shadow: 0 2.5px 5px 0 rgba($color__black, 0.25);
-$notfound-page__button__transition: 0.25s background ease;
-// __button-primary
-$notfound-page__button-primary__background: lighten($primary-color, 4%);
-$notfound-page__button-primary__color: $color__white;
-$notfound-page__button-primary__border: 1px solid rgba($notfound-page__button-primary__background, 0.25);
-// __button-primary :link & :visited
-$notfound-page__button-primary-l-v__color: $notfound-page__button-primary__color;
-// __button-primary :hover
-$notfound-page__button-primary-hover__background: $primary-color-dark;
-// __button-primary :active
-$notfound-page__button-primary-active__background: $notfound-page__button-primary-hover__background;
 
 
 // ---------------------

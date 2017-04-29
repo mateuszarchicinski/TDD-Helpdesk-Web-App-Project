@@ -2,6 +2,31 @@
     PL - Login
 
 //Login View
-section
-    header
-        h2 Login view
+section(layout="row" layout-align="center" class="login-view")
+    div(flex-xs="100" flex-sm="55" flex-md="30" flex-lg="25" flex-xl="20" layout="column" class="md-whiteframe-z1")
+        md-toolbar(class="login-view__toolbar")
+            header.md-toolbar-tools
+                h2 Sign In
+        md-content(layout-padding)
+            form(name="loginForm" layout="column" novalidate)
+                md-input-container
+                    label Email address
+                    input(name="email" ng-model="email" type="email" required)
+                    div(ng-messages="loginForm.email.$error" role="alert")
+                        div(ng-message="email") This is not an email address!
+                        div(ng-message="required") This is required!
+                md-input-container
+                    label Password
+                    input(name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
+                    div(ng-messages="loginForm.password.$error" role="alert")
+                        div(ng-message="required") This is required!
+                        div(ng-message="minlength") That's too short!
+                        div(ng-message="maxlength") That's too long!
+                md-button(type="submit" layout-fill class="btn btn-primary") Sign In
+            p(class="text-center text-muted")
+                small Don't have an account yet? 
+                    a(ng-href="" rel="help") Sign up
+        md-divider
+        md-content(layout="row" layout-margin)
+            md-button(flex="50" class="btn btn-facebook") Facebook
+            md-button(flex="50" class="btn btn-google") Google

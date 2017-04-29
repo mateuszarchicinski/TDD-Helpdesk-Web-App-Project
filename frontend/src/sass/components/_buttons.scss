@@ -1,0 +1,36 @@
+//~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* BUTTONS *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+// .btn
+$btn__color: $color__white !default;
+// .btn-primary
+$btn-primary__background-color: $accent-color !default;
+// .btn-facebook
+$btn-facebook__background-color: $color__facebook !default;
+// .btn-google
+$btn-google__background-color: $color__google !default;
+
+
+.btn {
+    color: $btn__color;
+    &-primary,
+    &-primary:not([disabled]):hover,
+    &-primary:not([disabled]).md-focused,
+    &-primary[disabled] {
+        background-color: $btn-primary__background-color;
+    }
+    &-facebook,
+    &-facebook:not([disabled]):hover,
+    &-facebook:not([disabled]).md-focused,
+    &-facebook[disabled] {
+        background-color: $btn-facebook__background-color;
+    }
+    &-google,
+    &-google:not([disabled]):hover,
+    &-google:not([disabled]).md-focused,
+    &-google[disabled] {
+        background-color: $btn-google__background-color;
+    }
+}
