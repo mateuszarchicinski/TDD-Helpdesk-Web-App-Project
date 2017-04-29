@@ -9,7 +9,7 @@
             "ogTitle": "",
             "ogDescription": "",
             "header": {
-                "headline": "Helpdesk - PL"
+                "headline": "Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT"
             },
             "section": [],
             "footer": {
@@ -18,7 +18,7 @@
         },
         "en": {
             "lang": "en",
-            "title": "Helpdesk - EN",
+            "title": "Helpdesk - Help in solving IT problems",
             "description": "",
             "keywords": "",
             "author": "Mateusz Archiciński",
