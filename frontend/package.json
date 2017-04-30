@@ -4,7 +4,9 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "gulp",
+    "gulp": "gulp",
+    "eslint": "eslint */**.js || true",
+    "dev": "gulp default",
     "test": "gulp js:eslint && gulp js:test",
     "prod": "gulp build --option advanced --upload"
   },

@@ -289,6 +289,7 @@ Remember to set up your LANGUAGES in ${PROJECT_CONFIG.CONFIG_FILE} file.`
             languages: PROJECT_CONFIG.LANGUAGES,
             baseUrl: PROJECT_CONFIG.BASE_URL,
             host: PROJECT_CONFIG.HOST,
+            themeColor: PROJECT_CONFIG.THEME_COLOR,
             googleAnalytics: {
                 trackingId: PROJECT_CONFIG.GOOGLE_ANALYTICS.TRACKING_ID
             },
