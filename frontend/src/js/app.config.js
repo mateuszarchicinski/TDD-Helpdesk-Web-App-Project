@@ -20,15 +20,15 @@
         $stateProvider.state('login', {
             url: baseUrl + 'login',
             templateUrl: getTemplateUrl('login'),
-            controller: 'loginController'
+            controller: 'loginController as LC'
         }).state('register', {
             url: baseUrl + 'register',
             templateUrl: getTemplateUrl('register'),
-            controller: 'registerController'
+            controller: 'registerController as RC'
         }).state('readme', {
             url: baseUrl + 'helpdesk',
             templateUrl: getTemplateUrl('helpdesk'),
-            controller: 'helpdeskController'
+            controller: 'helpdeskController as HC'
         });
 
         $urlRouterProvider.otherwise('/');
