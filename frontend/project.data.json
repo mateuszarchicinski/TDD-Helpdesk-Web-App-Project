@@ -2,7 +2,7 @@
     "lang": {
         "pl": {
             "lang": "pl",
-            "title": "Helpdesk - PL",
+            "title": "Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT",
             "description": "",
             "keywords": "",
             "author": "Mateusz Archiciński",
@@ -11,7 +11,79 @@
             "header": {
                 "headline": "Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT"
             },
-            "section": [],
+            "section": {
+                "login": {
+                    "headline": "Zaloguj się",
+                    "form": {
+                        "email": {
+                            "value": "Adres email",
+                            "errors": {
+                                "email": "To nie jest poprawny adres email!",
+                                "required": "To jest wymagane!"
+                            }
+                        },
+                        "password": {
+                            "value": "Hasło",
+                            "errors": {
+                                "required": "To jest wymagane!",
+                                "minLength": "To jest za krótkie!",
+                                "maxLength": "To jest za długie!"
+                            }
+                        },
+                        "submitBtn": "Zaloguj się"
+                    },
+                    "copy": [
+                        "Nie masz jeszcze konta?",
+                        "Zarejestruj się",
+                        "lub Zaloguj się przez:"
+                    ]
+                },
+                "register": {
+                    "headline": "Zarejestruj się",
+                    "form": {
+                        "name": {
+                            "value": "Imię",
+                            "errors": {
+                                "required": "To jest wymagane!",
+                                "pattern": "To nie jest poprawne imię!"
+                            }
+                        },
+                        "email": {
+                            "value": "Adres email",
+                            "errors": {
+                                "email": "To nie jest poprawny adres email!",
+                                "required": "To jest wymagane!"
+                            }
+                        },
+                        "password": {
+                            "value": "Hasło",
+                            "errors": {
+                                "required": "To jest wymagane!",
+                                "minLength": "To jest za krótkie!",
+                                "maxLength": "To jest za długie!"
+                            }
+                        },
+                        "confirmPassword": {
+                            "value": "Potwierdź hasło",
+                            "errors": {
+                                "required": "To jest wymagane!",
+                                "minLength": "To jest za krótkie!",
+                                "maxLength": "To jest za długie!"
+                            }
+                        },
+                        "submitBtn": "Zarejestruj się"
+                    },
+                    "copy": [
+                        "Klikając na Zarejestruj się, zgadzasz się z",
+                        "zasadami & warunkami",
+                        "i",
+                        "polityką prywatności",
+                        "Posiadasz już konto?",
+                        "Zaloguj się"
+                    ]
+                },
+                "helpdesk": {}
+            },
             "footer": {
                 "author": "Mateusz Archiciński"
             }
@@ -25,9 +97,81 @@
             "ogTitle": "",
             "ogDescription": "",
             "header": {
-                "headline": "Helpdesk - EN"
+                "headline": "Helpdesk - Help in solving IT problems"
             },
-            "section": [],
+            "section": {
+                "login": {
+                    "headline": "Sign In",
+                    "form": {
+                        "email": {
+                            "value": "Email address",
+                            "errors": {
+                                "email": "This is not an correct email address!",
+                                "required": "This is required!"
+                            }
+                        },
+                        "password": {
+                            "value": "Password",
+                            "errors": {
+                                "required": "This is required!",
+                                "minLength": "That's too short!",
+                                "maxLength": "That's too long!"
+                            }
+                        },
+                        "submitBtn": "Sign In"
+                    },
+                    "copy": [
+                        "Don't have an account yet?",
+                        "Sign up",
+                        "or Sign in with"
+                    ]
+                },
+                "register": {
+                    "headline": "Sign Up",
+                    "form": {
+                        "name": {
+                            "value": "Name",
+                            "errors": {
+                                "required": "This is required!",
+                                "pattern": "This is not a correct name!"
+                            }
+                        },
+                        "email": {
+                            "value": "Email address",
+                            "errors": {
+                                "email": "This is not an correct email address!",
+                                "required": "This is required!"
+                            }
+                        },
+                        "password": {
+                            "value": "Password",
+                            "errors": {
+                                "required": "This is required!",
+                                "minLength": "That's too short!",
+                                "maxLength": "That's too long!"
+                            }
+                        },
+                        "confirmPassword": {
+                            "value": "Confirm password",
+                            "errors": {
+                                "required": "This is required!",
+                                "minLength": "That's too short!",
+                                "maxLength": "That's too long!"
+                            }
+                        },
+                        "submitBtn": "Sign Up"
+                    },
+                    "copy": [
+                        "By clicking on Sign up, you agree to",
+                        "terms & conditions",
+                        "and",
+                        "privacy policy",
+                        "Already have an account?",
+                        "Sign in"
+                    ]
+                },
+                "helpdesk": {}
+            },
             "footer": {
                 "author": "Mateusz Archiciński"
             }

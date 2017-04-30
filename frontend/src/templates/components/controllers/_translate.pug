@@ -5,4 +5,4 @@ div(ng-controller="translateController as TC" class="language-settings")
     ul.language-settings__list
         each lang in languages
             li
-                a(ng-click="TC.translate('" + lang + "')" ng-class="{'language-settings__link-active': TC.language === '" + lang + "'}" class="language-settings__link" href="" rel="help") #{lang}
+                a(ng-click="TC.translate('" + lang + "')" ng-class="{'language-settings__link-active': TC.language === '" + lang + "'}" class="language-settings__link" ng-href="#" rel="help") #{lang}

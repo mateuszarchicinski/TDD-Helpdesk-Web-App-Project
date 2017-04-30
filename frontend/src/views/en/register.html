@@ -1,7 +1,52 @@
 
 <!--Register View-->
-<section>
-  <header>
-    <h2>Register View</h2>
-  </header>
+<section class="form-view" layout="row" layout-align="center">
+  <div class="md-whiteframe-z1 form-view__container" flex-xs="100" layout="column">
+    <md-toolbar class="form-view__toolbar">
+      <header class="md-toolbar-tools">
+        <h2>Sign Up</h2>
+      </header>
+    </md-toolbar>
+    <md-content layout-padding="layout-padding">
+      <form name="registerForm" layout="column" novalidate="novalidate">
+        <md-input-container>
+          <label>Name</label>
+          <input name="name" ng-model="name" type="text" required="required" pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$"/>
+          <div ng-messages="registerForm.name.$error" role="alert">
+            <div ng-message="required">This is required!</div>
+            <div ng-message="pattern">This is not a correct name!</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Email address</label>
+          <input name="email" ng-model="email" type="email" required="required"/>
+          <div ng-messages="registerForm.email.$error" role="alert">
+            <div ng-message="email">This is not an correct email address!</div>
+            <div ng-message="required">This is required!</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Password</label>
+          <input name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+          <div ng-messages="registerForm.password.$error" role="alert">
+            <div ng-message="required">This is required!</div>
+            <div ng-message="minlength">That's too short!</div>
+            <div ng-message="maxlength">That's too long!</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Confirm password</label>
+          <input name="confirmPassword" ng-model="confirmPassword" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+          <div ng-messages="registerForm.confirmPassword.$error" role="alert">
+            <div ng-message="required">This is required!</div>
+            <div ng-message="minlength">That's too short!</div>
+            <div ng-message="maxlength">That's too long!</div>
+          </div>
+        </md-input-container>
+        <p class="form-view__terms-conditions text-center text-muted"><small>By clicking on Sign up, you agree to <a ng-href="#" rel="help">terms &amp; conditions</a> and <a ng-href="#" rel="help">privacy policy</a>.</small></p>
+        <md-button class="btn btn-primary" type="submit" ng-click="registerForm.$invalid || RC.registerForm.submit()">Sign Up</md-button>
+      </form>
+      <p class="text-center text-muted"><small>Already have an account? <a ng-href="#" rel="help">Sign in</a></small></p>
+    </md-content>
+  </div>
 </section>

@@ -12,7 +12,7 @@
     <!--Phone Numbers Detection-->
     <meta name="format-detection" content="telephone=no">
     <!--Search Engine Optimization Sources-->
-    <title>Helpdesk - PL</title>
+    <title>Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Mateusz Archiciński">
@@ -25,7 +25,7 @@
     <!--Icon Sources-->
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!--Google Chrome - Theme Color-->
-    <meta name="theme-color" content="#F44336">
+    <meta name="theme-color" content="#009688">
     <!--Cascading Style Sheets Sources-->
     <!--build:css css/main.min.css-->
     <!--Bower Components-->
@@ -66,13 +66,13 @@
       <!--Language Settings-->
       <div class="language-settings" ng-controller="translateController as TC">
         <ul class="language-settings__list">
-          <li><a class="language-settings__link" ng-click="TC.translate('pl')" ng-class="{'language-settings__link-active': TC.language === 'pl'}" href="" rel="help">pl</a></li>
-          <li><a class="language-settings__link" ng-click="TC.translate('en')" ng-class="{'language-settings__link-active': TC.language === 'en'}" href="" rel="help">en</a></li>
+          <li><a class="language-settings__link" ng-click="TC.translate('pl')" ng-class="{'language-settings__link-active': TC.language === 'pl'}" ng-href="#" rel="help">pl</a></li>
+          <li><a class="language-settings__link" ng-click="TC.translate('en')" ng-class="{'language-settings__link-active': TC.language === 'en'}" ng-href="#" rel="help">en</a></li>
         </ul>
       </div>
       <!--Main Header-->
       <header class="main-header">
-        <h1 class="main-header__title primary-heading text-center">Helpdesk - PL</h1>
+        <h1 class="main-header__title"><span class="hide">Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT</span><img class="main-header__brand-logo" src="images/logo/HD logo.png" alt="Helpdesk Logo"></h1>
       </header>
       <!--Main Wrapper-->
       <div class="main-wrapper">
@@ -82,7 +82,7 @@
       </div>
       <!--Main Footer-->
       <footer class="main-footer">
-        <p class="main-footer__paragraph text-center"><small class="main-footer__copyright">&copy; Mateusz Archiciński</small></p>
+        <p class="text-center text-muted"><small class="main-footer__copyright">&copy; Mateusz Archiciński</small></p>
       </footer>
     </main>
   </body>

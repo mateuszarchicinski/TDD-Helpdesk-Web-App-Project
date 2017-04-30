@@ -2,31 +2,34 @@
     PL - Login
 
 //Login View
-section(layout="row" layout-align="center" class="login-view")
-    div(flex-xs="100" flex-sm="55" flex-md="30" flex-lg="25" flex-xl="20" layout="column" class="md-whiteframe-z1")
-        md-toolbar(class="login-view__toolbar")
+section(layout="row" layout-align="center" class="form-view")
+    div(flex-xs="100" layout="column" class="md-whiteframe-z1 form-view__container")
+        md-toolbar(class="form-view__toolbar")
             header.md-toolbar-tools
-                h2 Sign In
+                h2 #{data.section.login.headline}
         md-content(layout-padding)
             form(name="loginForm" layout="column" novalidate)
                 md-input-container
-                    label Email address
+                    label #{data.section.login.form.email.value}
                     input(name="email" ng-model="email" type="email" required)
                     div(ng-messages="loginForm.email.$error" role="alert")
-                        div(ng-message="email") This is not an email address!
-                        div(ng-message="required") This is required!
+                        div(ng-message="email") #{data.section.login.form.email.errors.email}
+                        div(ng-message="required") #{data.section.login.form.email.errors.required}
                 md-input-container
-                    label Password
+                    label #{data.section.login.form.password.value}
                     input(name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
                     div(ng-messages="loginForm.password.$error" role="alert")
-                        div(ng-message="required") This is required!
-                        div(ng-message="minlength") That's too short!
-                        div(ng-message="maxlength") That's too long!
-                md-button(type="submit" layout-fill class="btn btn-primary") Sign In
+                        div(ng-message="required") #{data.section.login.form.password.errors.required}
+                        div(ng-message="minlength") #{data.section.login.form.password.errors.minLength}
+                        div(ng-message="maxlength") #{data.section.login.form.password.errors.maxLength}
+                md-button(type="submit" ng-click="loginForm.$invalid || LC.loginForm.submit()" class="btn btn-primary") #{data.section.login.form.submitBtn}
             p(class="text-center text-muted")
-                small Don't have an account yet? 
-                    a(ng-href="" rel="help") Sign up
+                small #{data.section.login.copy[0]} 
+                    a(ng-href="#" rel="help") #{data.section.login.copy[1]}
         md-divider
-        md-content(layout="row" layout-margin)
-            md-button(flex="50" class="btn btn-facebook") Facebook
-            md-button(flex="50" class="btn btn-google") Google
+        md-content(layout-padding)
+            p(class="text-center text-muted")
+                small #{data.section.login.copy[2]}
+            div(layout="row")
+                md-button(flex="50" class="btn btn-facebook") Facebook
+                md-button(flex="50" class="btn btn-google") Google
