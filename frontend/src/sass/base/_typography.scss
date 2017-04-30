@@ -4,8 +4,6 @@
 
 
 /* Fonts: Roboto */
-
-
 @include font-face(Roboto, "../fonts/Roboto/Roboto-Thin", normal, 100, ttf);
 @include font-face(Roboto, "../fonts/Roboto/Roboto-ThinItalic", italic, 100, ttf);
 @include font-face(Roboto, "../fonts/Roboto/Roboto-Light", normal, 300, ttf);
@@ -22,25 +20,26 @@
 
 /* Headings */
 // .primary-heading
-$primary-heading__font-size: 2em !default;
-$primary-heading__font-weight: 300 !default;
+$primary-heading__font-size: $base__font-size * 2 !default;
+$primary-heading__font-weight: $font-weight__lighter !default;
 $primary-heading__text-transform: uppercase !default;
 // ::after
-$primary-heading__after__width: 150px !default;
-$primary-heading__after__height: 3px !default;
+$primary-heading__after__width: #{(150 / 16)}em !default;
+$primary-heading__after__height: #{(3 / 16)}em !default;
 $primary-heading__after__background: $primary-color !default;
-$primary-heading__after__font-size: 0.5em !default;
+$primary-heading__after__font-size: $primary-heading__font-size / 4 !default;
 $primary-heading__after__border-radius: 20% !default;
-$primary-heading__after__margin: 5px auto 0 !default;
+$primary-heading__after__margin: #{(5 / 16)}em auto 0 !default;
 // .secondary-heading .tertiary-heading .quaternary-heading
-$secondary-heading__font-size: 1.5em !default;
-$tertiary-heading__font-size: 1.25em !default;
-$headings__font-weight: 400 !default;
-$headings__padding-bottom: 4px !default;
+$secondary-heading__font-size: $primary-heading__font-size - 0.5 !default;
+$tertiary-heading__font-size: $secondary-heading__font-size - 0.25 !default;
+$headings__font-weight: $base__font-weight !default;
+$headings__padding-bottom: #{(4 / 16)}em !default;
 $headings__border-bottom: 1px solid $primary-color !default;
-$quaternary-heading__font-size: 1.15em !default;
+$quaternary-heading__font-size: $tertiary-heading__font-size - 0.1 !default;
 
 
+/****
 .primary-heading {
     font-size: $primary-heading__font-size;
     font-weight: $primary-heading__font-weight;
@@ -78,21 +77,22 @@ $quaternary-heading__font-size: 1.15em !default;
     border-bottom: 0;
     margin: 0;
 }
+****/
 
 
 /* Text */
-//-small
-$text-small__font-size: 0.85em !default;
-//-normal
-$text-normal__font-size: 1em !default;
-//-medium
-$text-medium__font-size: 1.15em !default;
-//-large
-$text-large__font-size: 1.3em !default;
+//__normal
+$text-normal__font-size: $base__font-size !default;
+//__small
+$text-small__font-size: $text-normal__font-size - 0.15 !default;
+//__medium
+$text-medium__font-size: $text-normal__font-size + 0.15 !default;
+//__large
+$text-large__font-size: $text-medium__font-size + 0.15 !default;
 //-muted
 $text-muted__color: $secondary-text-color !default;
 // strong
-$strong__font-weight: 500 !default;
+$strong__font-weight: $font-weight__bold !default;
 
 
 .text {

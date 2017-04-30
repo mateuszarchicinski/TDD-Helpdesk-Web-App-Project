@@ -4,7 +4,7 @@
 
 
 // [ui-view]
-$ui-view__transition: all 0.25s ease !default;
+$ui-view__transition: 0.25s all ease !default;
 // .ng-enter
 $ui-view__ng-enter__opacity: 0 !default;
 $ui-view__ng-enter__transform: scale3d(.95, .95, .95) !default;

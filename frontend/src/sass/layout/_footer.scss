@@ -4,8 +4,8 @@
 
 
 // __copyright
-$main-footer__copyright__font-size: 0.8em !default;
-$main-footer__copyright__font-weight: 400 !default;
+$main-footer__copyright__font-size: $base__font-size * 0.80 !default;
+$main-footer__copyright__font-weight: $base__font-weight !default;
 
 
 .main-footer {

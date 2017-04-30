@@ -5,9 +5,9 @@
 
 $box-sizing: border-box !default;
 // html
-$html__line-height: 1.2 !default;
+$html__line-height: $base__line-height !default;
 // body
-$body__font-size: 1em !default;
+$body__font-size: $base__font-size !default;
 $body__color: $primary-text-color !default;
 
 
@@ -24,11 +24,6 @@ html {
 body {
     font-size: $body__font-size;
     color: $body__color;
-}
-
-html,
-body {
-    height: auto;
 }
 
 .clearfix {
