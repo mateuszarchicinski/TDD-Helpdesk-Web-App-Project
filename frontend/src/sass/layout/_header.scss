@@ -4,7 +4,9 @@
 
 
 .main-header {
-    padding: 25px 0 18px;
+    &__title {
+        padding: 25px 0 18px;
+    }
     &__brand-logo {
         max-width: 100px;
         display: block;
