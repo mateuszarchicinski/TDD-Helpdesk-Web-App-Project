@@ -9,7 +9,9 @@
 
         var registerForm = this.registerForm = {};
 
-        registerForm.submit = function () {
+        registerForm.submit = function (evt) {
+            evt.preventDefault();
+
             $log.info('registerForm successfully submitted!');
         };
 

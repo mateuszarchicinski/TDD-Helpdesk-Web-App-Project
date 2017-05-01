@@ -9,7 +9,9 @@
 
         var loginForm = this.loginForm = {};
 
-        loginForm.submit = function () {
+        loginForm.submit = function (evt) {
+            evt.preventDefault();
+
             $log.info('loginForm successfully submitted!');
         };
 
