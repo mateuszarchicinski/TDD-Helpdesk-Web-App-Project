@@ -23999,12 +23999,13 @@ body {
 .clearfix::after {
   clear: both; }
 
-.main-header {
+.main-header__title {
   padding: 25px 0 18px; }
-  .main-header__brand-logo {
-    max-width: 100px;
-    display: block;
-    margin: 0 auto; }
+
+.main-header__brand-logo {
+  max-width: 100px;
+  display: block;
+  margin: 0 auto; }
 
 .main-wrapper__container {
   position: relative; }

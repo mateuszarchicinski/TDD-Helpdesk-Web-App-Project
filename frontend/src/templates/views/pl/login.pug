@@ -4,25 +4,25 @@
 //Login View
 section(layout="row" layout-align="center" class="form-view")
     div(flex-xs="100" layout="column" class="md-whiteframe-z1 form-view__container")
-        md-toolbar(class="form-view__toolbar")
+        md-toolbar
             header.md-toolbar-tools
                 h2 #{data.section.login.headline}
         md-content(layout-padding)
             form(name="loginForm" layout="column" novalidate)
                 md-input-container
-                    label #{data.section.login.form.email.value}
-                    input(name="email" ng-model="email" type="email" required)
+                    label(for="LFE") #{data.section.login.form.email.value}
+                    input(id="LFE" name="email" ng-model="email" type="email" required autofocus)
                     div(ng-messages="loginForm.email.$error" role="alert")
                         div(ng-message="email") #{data.section.login.form.email.errors.email}
                         div(ng-message="required") #{data.section.login.form.email.errors.required}
                 md-input-container
-                    label #{data.section.login.form.password.value}
-                    input(name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
+                    label(for="LFP") #{data.section.login.form.password.value}
+                    input(id="LFP" name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
                     div(ng-messages="loginForm.password.$error" role="alert")
                         div(ng-message="required") #{data.section.login.form.password.errors.required}
                         div(ng-message="minlength") #{data.section.login.form.password.errors.minLength}
                         div(ng-message="maxlength") #{data.section.login.form.password.errors.maxLength}
-                md-button(type="submit" ng-click="loginForm.$invalid || LC.loginForm.submit()" class="btn btn-primary") #{data.section.login.form.submitBtn}
+                md-button(type="submit" ng-click="loginForm.$invalid || LC.loginForm.submit($event)" class="btn btn-primary") #{data.section.login.form.submitBtn}
             p(class="text-center text-muted")
                 small #{data.section.login.copy[0]} 
                     a(ng-href="#" rel="help") #{data.section.login.copy[1]}

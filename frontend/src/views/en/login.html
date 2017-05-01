@@ -2,7 +2,7 @@
 <!--Login View-->
 <section class="form-view" layout="row" layout-align="center">
   <div class="md-whiteframe-z1 form-view__container" flex-xs="100" layout="column">
-    <md-toolbar class="form-view__toolbar">
+    <md-toolbar>
       <header class="md-toolbar-tools">
         <h2>Sign In</h2>
       </header>
@@ -10,23 +10,23 @@
     <md-content layout-padding="layout-padding">
       <form name="loginForm" layout="column" novalidate="novalidate">
         <md-input-container>
-          <label>Email address</label>
-          <input name="email" ng-model="email" type="email" required="required"/>
+          <label for="LFE">Email address</label>
+          <input id="LFE" name="email" ng-model="email" type="email" required="required" autofocus="autofocus"/>
           <div ng-messages="loginForm.email.$error" role="alert">
             <div ng-message="email">This is not an correct email address!</div>
             <div ng-message="required">This is required!</div>
           </div>
         </md-input-container>
         <md-input-container>
-          <label>Password</label>
-          <input name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+          <label for="LFP">Password</label>
+          <input id="LFP" name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
           <div ng-messages="loginForm.password.$error" role="alert">
             <div ng-message="required">This is required!</div>
             <div ng-message="minlength">That's too short!</div>
             <div ng-message="maxlength">That's too long!</div>
           </div>
         </md-input-container>
-        <md-button class="btn btn-primary" type="submit" ng-click="loginForm.$invalid || LC.loginForm.submit()">Sign In</md-button>
+        <md-button class="btn btn-primary" type="submit" ng-click="loginForm.$invalid || LC.loginForm.submit($event)">Sign In</md-button>
       </form>
       <p class="text-center text-muted"><small>Don't have an account yet? <a ng-href="#" rel="help">Sign up</a></small></p>
     </md-content>

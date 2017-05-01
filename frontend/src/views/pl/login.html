@@ -2,7 +2,7 @@
 <!--Login View-->
 <section class="form-view" layout="row" layout-align="center">
   <div class="md-whiteframe-z1 form-view__container" flex-xs="100" layout="column">
-    <md-toolbar class="form-view__toolbar">
+    <md-toolbar>
       <header class="md-toolbar-tools">
         <h2>Zaloguj się</h2>
       </header>
@@ -10,23 +10,23 @@
     <md-content layout-padding="layout-padding">
       <form name="loginForm" layout="column" novalidate="novalidate">
         <md-input-container>
-          <label>Adres email</label>
-          <input name="email" ng-model="email" type="email" required="required"/>
+          <label for="LFE">Adres email</label>
+          <input id="LFE" name="email" ng-model="email" type="email" required="required" autofocus="autofocus"/>
           <div ng-messages="loginForm.email.$error" role="alert">
             <div ng-message="email">To nie jest poprawny adres email!</div>
             <div ng-message="required">To jest wymagane!</div>
           </div>
         </md-input-container>
         <md-input-container>
-          <label>Hasło</label>
-          <input name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+          <label for="LFP">Hasło</label>
+          <input id="LFP" name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
           <div ng-messages="loginForm.password.$error" role="alert">
             <div ng-message="required">To jest wymagane!</div>
             <div ng-message="minlength">To jest za krótkie!</div>
             <div ng-message="maxlength">To jest za długie!</div>
           </div>
         </md-input-container>
-        <md-button class="btn btn-primary" type="submit" ng-click="loginForm.$invalid || LC.loginForm.submit()">Zaloguj się</md-button>
+        <md-button class="btn btn-primary" type="submit" ng-click="loginForm.$invalid || LC.loginForm.submit($event)">Zaloguj się</md-button>
       </form>
       <p class="text-center text-muted"><small>Nie masz jeszcze konta? <a ng-href="#" rel="help">Zarejestruj się</a></small></p>
     </md-content>

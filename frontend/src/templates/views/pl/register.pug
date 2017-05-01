@@ -4,33 +4,33 @@
 //Register View
 section(layout="row" layout-align="center" class="form-view")
     div(flex-xs="100" layout="column" class="md-whiteframe-z1 form-view__container")
-        md-toolbar(class="form-view__toolbar")
+        md-toolbar
             header.md-toolbar-tools
                 h2 #{data.section.register.headline}
         md-content(layout-padding)
             form(name="registerForm" layout="column" novalidate)
                 md-input-container
-                    label #{data.section.register.form.name.value}
-                    input(name="name" ng-model="name" type="text" required pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$")
+                    label(for="RFN") #{data.section.register.form.name.value}
+                    input(id="RFN" name="name" ng-model="name" type="text" required pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus)
                     div(ng-messages="registerForm.name.$error" role="alert")
                         div(ng-message="required") #{data.section.register.form.name.errors.required}
                         div(ng-message="pattern") #{data.section.register.form.name.errors.pattern}
                 md-input-container
-                    label #{data.section.register.form.email.value}
-                    input(name="email" ng-model="email" type="email" required)
+                    label(for="RFE") #{data.section.register.form.email.value}
+                    input(id="RFE" name="email" ng-model="email" type="email" required)
                     div(ng-messages="registerForm.email.$error" role="alert")
                         div(ng-message="email") #{data.section.register.form.email.errors.email}
                         div(ng-message="required") #{data.section.register.form.email.errors.required}
                 md-input-container
-                    label #{data.section.register.form.password.value}
-                    input(name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
+                    label(for="RFP") #{data.section.register.form.password.value}
+                    input(id="RFP" name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
                     div(ng-messages="registerForm.password.$error" role="alert")
                         div(ng-message="required") #{data.section.register.form.password.errors.required}
                         div(ng-message="minlength") #{data.section.register.form.password.errors.minLength}
                         div(ng-message="maxlength") #{data.section.register.form.password.errors.maxLength}
                 md-input-container
-                    label #{data.section.register.form.confirmPassword.value}
-                    input(name="confirmPassword" ng-model="confirmPassword" type="password" required ng-minlength="8" ng-maxlength="25")
+                    label(for="RFCP") #{data.section.register.form.confirmPassword.value}
+                    input(id="RFCP" name="confirmPassword" ng-model="confirmPassword" type="password" required ng-minlength="8" ng-maxlength="25")
                     div(ng-messages="registerForm.confirmPassword.$error" role="alert")
                         div(ng-message="required") #{data.section.register.form.confirmPassword.errors.required}
                         div(ng-message="minlength") #{data.section.register.form.confirmPassword.errors.minLength}
@@ -41,7 +41,7 @@ section(layout="row" layout-align="center" class="form-view")
                         |  #{data.section.register.copy[2]} 
                         a(ng-href="#" rel="help") #{data.section.register.copy[3]}
                         | .
-                md-button(type="submit" ng-click="registerForm.$invalid || RC.registerForm.submit()" class="btn btn-primary") #{data.section.register.form.submitBtn}
+                md-button(type="submit" ng-click="registerForm.$invalid || RC.registerForm.submit($event)" class="btn btn-primary") #{data.section.register.form.submitBtn}
             p(class="text-center text-muted")
                 small #{data.section.register.copy[4]} 
                     a(ng-href="#" rel="help") #{data.section.register.copy[5]}

@@ -1,11 +1,11 @@
 //-
     Header
 
-//Language Settings
-include ../components/controllers/_translate
-
 //Main Header
 header.main-header
+    //Language Settings - Module
+    include ../components/controllers/_translate
+    
     h1.main-header__title
         span(class="hide") #{data.header.headline}
         img(class="main-header__brand-logo" src="images/logo/HD logo.png" alt="Helpdesk Logo")
