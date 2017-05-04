@@ -3,3 +3,11 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
+.helpdesk-view {
+    &__container {
+        min-height: calc(100vh - 65px);
+    }
+    &__sidenav {
+        width: 320px;
+    }
+}

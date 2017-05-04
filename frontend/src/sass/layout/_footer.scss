@@ -15,3 +15,15 @@ $main-footer__copyright__font-weight: $base__font-weight !default;
         font-weight: $main-footer__copyright__font-weight;
     }
 }
+
+
+// Authorized
+.authorized {
+    .main-footer {
+        width: 320px; // ????
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 100;
+    }
+}

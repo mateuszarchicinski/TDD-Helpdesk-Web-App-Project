@@ -2,19 +2,15 @@
     PL - Helpdesk
 
 //Helpdesk View
-section
-    div(layout="row")
-        md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" class="md-sidenav-left" md-disable-backdrop="false" md-whiteframe="4")
-            md-content(flex layout-padding)
+section(class="helpdesk-view")
+    div(layout="row" class="helpdesk-view__container")
+        md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation" class="md-sidenav-left helpdesk-view__sidenav")
+            md-content(layout-padding)
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
-                p {{md-is-open}}
         div(flex)
-            md-toolbar
-                header.md-toolbar-tools
-                    h2 Section Name
             md-content(layout-padding)
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.

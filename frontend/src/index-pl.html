@@ -52,21 +52,24 @@
     <!--Application Initialize / Configuration-->
     <script src="js/app.js"></script>
     <script src="js/app.config.js"></script>
+    <!--Application Models-->
+    <script src="js/models/appStateFactory.js"></script>
+    <!--Application Services-->
+    <script src="js/services/urlParamsProvider.js"></script>
+    <!--Application Directives-->
+    <script src="js/directives/injectComponentDirective.js"></script>
     <!--Application Controllers-->
     <script src="js/controllers/mainController.js"></script>
     <script src="js/controllers/loginController.js"></script>
     <script src="js/controllers/registerController.js"></script>
     <script src="js/controllers/helpdeskController.js"></script>
+    <script src="js/controllers/userPanelController.js"></script>
     <script src="js/controllers/translateController.js"></script>
-    <!--Application Directives-->
-    <!--Application Services-->
-    <script src="js/services/urlParamsProvider.js"></script>
     <!--endbuild-->
     <!--[if lt IE 8]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.</p><![endif]-->
-    <main class="{{MC.appState.getClass()}}" ng-controller="mainController as MC">
+    <main class="{{MC.authorizedClass()}}" ng-controller="mainController as MC">
       <!--Main Header-->
-      <header class="main-header">
-        <!--Language Settings - Module-->
+      <header class="main-header" ng-class="{'md-whiteframe-z1': MC.isAuthorized()}">
         <div class="language-settings" ng-controller="translateController as TC">
           <ul class="language-settings__list">
             <li><a class="language-settings__link" ng-click="TC.translate('pl')" ng-class="{'language-settings__link-active': TC.language === 'pl'}" ng-href="#" rel="help">pl</a></li>
@@ -74,6 +77,7 @@
           </ul>
         </div>
         <h1 class="main-header__title"><span class="hide">Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT</span><img class="main-header__brand-logo" src="images/logo/HD logo.png" alt="Helpdesk Logo"></h1>
+        <inject-component condition="MC.isAuthorized()" include="'components/userPanel'"></inject-component>
       </header>
       <!--Main Wrapper-->
       <div class="main-wrapper">

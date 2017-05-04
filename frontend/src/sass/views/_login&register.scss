@@ -3,16 +3,9 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
-//__toolbar
-$toolbar__background-color: $primary-color !default;
-
-
 .form-view {
     &__container {
         width: 360px;
-    }
-    &__toolbar._md {
-        background-color: $toolbar__background-color;
     }
     &__terms-conditions {
         padding-bottom: 20px;

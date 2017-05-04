@@ -23950,8 +23950,8 @@ html[lang="en"] {
       -ms-flex-pack: center;
           justify-content: center;
   list-style: none;
-  padding: 0;
-  margin: 15px 0 0; }
+  padding: 15px 0 0;
+  margin: 0; }
 
 .language-settings__link {
   line-height: 1.3;
@@ -23970,15 +23970,37 @@ html[lang="en"] {
     .language-settings__link-active, .language-settings__link-active:link, .language-settings__link-active:visited {
       color: #fff; }
 
+.user-panel {
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .user-panel__user-image {
+    background-color: #ffc107;
+    border-radius: 50%; }
+  .user-panel__icon-button {
+    background-image: url(../images/sprite.png);
+    background-position: -4px -52px; }
+
 .form-view__container {
   width: 360px; }
-
-.form-view__toolbar._md {
-  background-color: #009688; }
 
 .form-view__terms-conditions {
   padding-bottom: 20px;
   margin: 0; }
+
+.helpdesk-view__container {
+  min-height: calc(100vh - 65px); }
+
+.helpdesk-view__sidenav {
+  width: 320px; }
 
 *,
 *::before,
@@ -24006,6 +24028,35 @@ body {
   max-width: 100px;
   display: block;
   margin: 0 auto; }
+
+.authorized .main-header {
+  height: 65px;
+  background: #fff;
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 100;
+  padding: 0 8px; }
+  .authorized .main-header > * {
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
+  .authorized .main-header__title {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-order: -1;
+        -ms-flex-order: -1;
+            order: -1;
+    padding: 0;
+    margin: 0; }
+  .authorized .main-header__brand-logo {
+    max-width: 80px;
+    margin: 0 0 0 120px; }
 
 .main-wrapper__container {
   position: relative; }
@@ -24035,5 +24086,12 @@ body {
   .main-footer__copyright {
     font-size: 0.8em;
     font-weight: 400; }
+
+.authorized .main-footer {
+  width: 320px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100; }
 
 /*# sourceMappingURL=maps/main.css.map */
