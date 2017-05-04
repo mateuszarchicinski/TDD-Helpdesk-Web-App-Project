@@ -1,0 +1,123 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$menu-black-name: 'menu_black';
+$menu-black-x: 0px;
+$menu-black-y: 0px;
+$menu-black-offset-x: 0px;
+$menu-black-offset-y: 0px;
+$menu-black-width: 48px;
+$menu-black-height: 48px;
+$menu-black-total-width: 96px;
+$menu-black-total-height: 96px;
+$menu-black-image: '../images/sprite.png';
+$menu-black: (0px, 0px, 0px, 0px, 48px, 48px, 96px, 96px, '../images/sprite.png', 'menu_black', );
+$menu-white-name: 'menu_white';
+$menu-white-x: 48px;
+$menu-white-y: 0px;
+$menu-white-offset-x: -48px;
+$menu-white-offset-y: 0px;
+$menu-white-width: 48px;
+$menu-white-height: 48px;
+$menu-white-total-width: 96px;
+$menu-white-total-height: 96px;
+$menu-white-image: '../images/sprite.png';
+$menu-white: (48px, 0px, -48px, 0px, 48px, 48px, 96px, 96px, '../images/sprite.png', 'menu_white', );
+$more-vert-black-name: 'more_vert_black';
+$more-vert-black-x: 0px;
+$more-vert-black-y: 48px;
+$more-vert-black-offset-x: 0px;
+$more-vert-black-offset-y: -48px;
+$more-vert-black-width: 48px;
+$more-vert-black-height: 48px;
+$more-vert-black-total-width: 96px;
+$more-vert-black-total-height: 96px;
+$more-vert-black-image: '../images/sprite.png';
+$more-vert-black: (0px, 48px, 0px, -48px, 48px, 48px, 96px, 96px, '../images/sprite.png', 'more_vert_black', );
+$more-vert-white-name: 'more_vert_white';
+$more-vert-white-x: 48px;
+$more-vert-white-y: 48px;
+$more-vert-white-offset-x: -48px;
+$more-vert-white-offset-y: -48px;
+$more-vert-white-width: 48px;
+$more-vert-white-height: 48px;
+$more-vert-white-total-width: 96px;
+$more-vert-white-total-height: 96px;
+$more-vert-white-image: '../images/sprite.png';
+$more-vert-white: (48px, 48px, -48px, -48px, 48px, 48px, 96px, 96px, '../images/sprite.png', 'more_vert_white', );
+$spritesheet-width: 96px;
+$spritesheet-height: 96px;
+$spritesheet-image: '../images/sprite.png';
+$spritesheet-sprites: ($menu-black, $menu-white, $more-vert-black, $more-vert-white, );
+$spritesheet: (96px, 96px, '../images/sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}
