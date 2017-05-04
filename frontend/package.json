@@ -5,7 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "gulp": "gulp",
-    "eslint": "eslint */**.js || true",
+    "eslint": "eslint src/js/**/*.js test/spec/**/*.js || true",
     "dev": "gulp default",
     "test": "gulp js:eslint && gulp js:test",
     "prod": "gulp build --option advanced --upload"

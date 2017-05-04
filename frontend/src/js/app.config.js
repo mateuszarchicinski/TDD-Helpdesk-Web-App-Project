@@ -1,58 +1,51 @@
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
 
 
-(function () {
+app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$mdThemingProvider', function (urlParamsProvider, APP_CONFIG, $stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
-    'use strict';
+    urlParamsProvider.languages = APP_CONFIG.languages;
 
+    var langValue = urlParamsProvider.$get().currentLanguage(),
+        baseUrl = '/' + langValue + '/';
 
-    app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$mdThemingProvider', function (urlParamsProvider, APP_CONFIG, $stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
+    var getTemplateUrl = function (nameFile) {
+        return 'views/' + langValue + '/' + nameFile + '.html';
+    };
 
-        urlParamsProvider.languages = APP_CONFIG.languages;
+    $stateProvider.state('login', {
+        url: baseUrl + 'login',
+        templateUrl: getTemplateUrl('login'),
+        controller: 'loginController as LC'
+    }).state('register', {
+        url: baseUrl + 'register',
+        templateUrl: getTemplateUrl('register'),
+        controller: 'registerController as RC'
+    }).state('readme', {
+        url: baseUrl + 'helpdesk',
+        templateUrl: getTemplateUrl('helpdesk'),
+        controller: 'helpdeskController as HC'
+    });
 
-        var langValue = urlParamsProvider.$get().currentLanguage(),
-            baseUrl = '/' + langValue + '/';
+    $urlRouterProvider.otherwise('/');
 
-        var getTemplateUrl = function (nameFile) {
-            return 'views/' + langValue + '/' + nameFile + '.html';
-        };
+    $locationProvider.html5Mode(true);
 
-        $stateProvider.state('login', {
-            url: baseUrl + 'login',
-            templateUrl: getTemplateUrl('login'),
-            controller: 'loginController as LC'
-        }).state('register', {
-            url: baseUrl + 'register',
-            templateUrl: getTemplateUrl('register'),
-            controller: 'registerController as RC'
-        }).state('readme', {
-            url: baseUrl + 'helpdesk',
-            templateUrl: getTemplateUrl('helpdesk'),
-            controller: 'helpdeskController as HC'
-        });
+    $mdThemingProvider.theme('default')
+        .primaryPalette('teal')
+        .accentPalette('amber');
 
-        $urlRouterProvider.otherwise('/');
+}]).constant('APP_CONFIG', {
+    languages: ['pl', 'en'] // First element is a default value of language
+}).run(['urlParams', '$rootScope', '$state', function (urlParams, $rootScope, $state) {
 
-        $locationProvider.html5Mode(true);
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+        console.log('Event:', '$stateChangeStart');
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('teal')
-            .accentPalette('amber');
+        if (toState.redirectTo) {
+            event.preventDefault();
 
-    }]).constant('APP_CONFIG', {
-        languages: ['pl', 'en'] // First element is a default value of language
-    }).run(['urlParams', '$rootScope', '$state', function (urlParams, $rootScope, $state) {
+            $state.go(toState.redirectTo, toParams);
+        }
+    });
 
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
-            console.log('Event:', '$stateChangeStart');
-            
-            if (toState.redirectTo) {
-                event.preventDefault();
-
-                $state.go(toState.redirectTo, toParams);
-            }
-        });
-
-    }]);
-
-})();
+}]);
