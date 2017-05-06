@@ -3,38 +3,47 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
+// __list-item
+$fun-list__list-item__border-bottom: 1px solid rgba($color__white, .05) !default;
 // __link
-$fun-list__link__color: $color__white !default;
+$fun-list__link__color: rgba($color__white, .85) !default;
+// __link:hover
+$fun-list__link-hover__background-color: rgba($color__black, .05) !default;
+$fun-list__link-hover__color: $color__white !default;
+// __link-active
+$fun-list__link-active__border-left: 3px solid $accent-color !default;
 
 
 .fun-list {
-    padding: 25px 0 25px 0;
+    padding: 0;
     &__list-item,
     &__list-item._md {
         align-items: stretch;
         padding: 0;
+        border-bottom: $fun-list__list-item__border-bottom;
+        &:last-child {
+            border-bottom: 0;
+        }
     }
     &__link {
         line-height: 48px;
         flex: 1;
-        text-transform: uppercase;
-        letter-spacing: 1px;
         white-space: nowrap;
-        padding: 0 16px;
-        transition: .3s background-color linear,
-                    .2s border linear;
+        padding: 0 25px;
+        transition: .2s background-color ease,
+                    .2s color ease,
+                    .1s border ease;
         &,
         &:link,
         &:visited {
             color: $fun-list__link__color;
         }
-        &:hover,
-        &-active {
-            background-color: rgba($color__black, .4);
-            border-left: 5px solid $color__white;
+        &:hover {
+            background-color: $fun-list__link-hover__background-color;
+            color: $fun-list__link-hover__color;
         }
         &-active {
-            
+            border-left: $fun-list__link-active__border-left;
         }
     }
 }

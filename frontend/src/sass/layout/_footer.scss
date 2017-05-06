@@ -8,6 +8,9 @@ $main-footer__paragraph__color: $color__white !default;
 // __copyright
 $main-footer__copyright__font-size: $base__font-size * 0.80 !default;
 $main-footer__copyright__font-weight: $base__font-weight !default;
+// Authorized
+// .main-footer
+$main-footer__width: $sidenav__width !default;
 
 
 .main-footer {
@@ -22,7 +25,7 @@ $main-footer__copyright__font-weight: $base__font-weight !default;
 // Authorized
 .authorized {
     .main-footer {
-        width: 320px;
+        width: $main-footer__width;
         position: fixed;
         left: 0;
         bottom: 0;

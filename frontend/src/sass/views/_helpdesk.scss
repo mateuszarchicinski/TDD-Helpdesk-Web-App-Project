@@ -4,7 +4,8 @@
 
 
 // __sidenav
-$sidenav__background-color: $primary-color-dark !default;
+$hv__sidenav__width: $sidenav__width !default;
+$hv__sidenav__background-color: $primary-color-dark !default;
 
 
 .helpdesk-view {
@@ -19,7 +20,7 @@ $sidenav__background-color: $primary-color-dark !default;
         top: 0;
     }
     &__sidenav {
-        width: 320px;
-        background-color: $sidenav__background-color;
+        width: $hv__sidenav__width;
+        background-color: $hv__sidenav__background-color;
     }
 }

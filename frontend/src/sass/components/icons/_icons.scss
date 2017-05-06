@@ -1,0 +1,34 @@
+//~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* ICONS *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~//
+
+
+/****
+.icon {
+    display: inline-block;
+    &-dashboard {
+        &__white {
+            @include sprite($home-white);
+        }
+        &__black {
+            @include sprite($home-black);
+        }
+    }
+    &-myaccount {
+        &__white {
+            @include sprite($account-circle-white);
+        }
+        &__black {
+            @include sprite($account-circle-black);
+        }
+    }
+    &-logout {
+        &__white {
+            @include sprite($exit-to-app-white);
+        }
+        &__black {
+            @include sprite($exit-to-app-black);
+        }
+    }
+}
+****/

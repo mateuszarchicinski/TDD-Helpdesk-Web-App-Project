@@ -23881,32 +23881,64 @@ md-toolbar {
   .hide-print:not(.show-print):not(.show) {
     display: none !important; } }
 
+/****
+.icon {
+    display: inline-block;
+    &-dashboard {
+        &__white {
+            @include sprite($home-white);
+        }
+        &__black {
+            @include sprite($home-black);
+        }
+    }
+    &-myaccount {
+        &__white {
+            @include sprite($account-circle-white);
+        }
+        &__black {
+            @include sprite($account-circle-black);
+        }
+    }
+    &-logout {
+        &__white {
+            @include sprite($exit-to-app-white);
+        }
+        &__black {
+            @include sprite($exit-to-app-black);
+        }
+    }
+}
+****/
 .arrow-right::before {
   content: "\20\2794\20";
   font-size: 1.05em; }
 
 .fun-list {
-  padding: 25px 0 25px 0; }
+  padding: 0; }
   .fun-list__list-item, .fun-list__list-item._md {
     -webkit-align-items: stretch;
         -ms-flex-align: stretch;
             align-items: stretch;
-    padding: 0; }
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .fun-list__list-item:last-child, .fun-list__list-item._md:last-child {
+      border-bottom: 0; }
   .fun-list__link {
     line-height: 48px;
     -webkit-flex: 1;
         -ms-flex: 1;
             flex: 1;
-    text-transform: uppercase;
-    letter-spacing: 1px;
     white-space: nowrap;
-    padding: 0 16px;
-    transition: .3s background-color linear, .2s border linear; }
+    padding: 0 25px;
+    transition: .2s background-color ease, .2s color ease, .1s border ease; }
     .fun-list__link, .fun-list__link:link, .fun-list__link:visited {
+      color: rgba(255, 255, 255, 0.85); }
+    .fun-list__link:hover {
+      background-color: rgba(0, 0, 0, 0.05);
       color: #fff; }
-    .fun-list__link:hover, .fun-list__link-active {
-      background-color: rgba(0, 0, 0, 0.4);
-      border-left: 5px solid #fff; }
+    .fun-list__link-active {
+      border-left: 3px solid #ffc107; }
 
 a {
   text-decoration: none;
@@ -24030,7 +24062,7 @@ html[lang="en"] {
   top: 0; }
 
 .helpdesk-view__sidenav {
-  width: 320px;
+  width: 280px;
   background-color: #00796b; }
 
 *,
@@ -24087,8 +24119,8 @@ body {
     margin: 0; }
   .authorized .main-header__brand-logo {
     max-width: 80px;
-    margin: 0 0 0 112px; }
-    @media screen and (max-width: 725px) {
+    margin: 0 0 0 92px; }
+    @media screen and (max-width: 645px) {
       .authorized .main-header__brand-logo {
         margin: 0 0 0 22px; } }
 
@@ -24126,7 +24158,7 @@ body {
     font-weight: 400; }
 
 .authorized .main-footer {
-  width: 320px;
+  width: 280px;
   position: fixed;
   left: 0;
   bottom: 0;

@@ -6,6 +6,8 @@
 // Authorized
 // .main-header
 $main-header__background-color: $color__white !default;
+// __brand-logo
+$brand-logo__margin: 0 0 0 ($sidenav__width - 96px)/2 !default;
 
 
 .main-header {
@@ -41,7 +43,7 @@ $main-header__background-color: $color__white !default;
         }
         &__brand-logo {
             max-width: 80px;
-            margin: 0 0 0 112px;
+            margin: $brand-logo__margin;
             @media screen and (max-width: $break-point__2) {
                 margin: 0 0 0 22px;
             }
