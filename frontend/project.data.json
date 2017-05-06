@@ -82,7 +82,35 @@
                         "Zaloguj się"
                     ]
                 },
-                "helpdesk": {}
+                "helpdesk": {},
+                "modules": {
+                    "userPanel": {
+                        "ariaLabels": [
+                            "Menu użytkownika - Więcej"
+                        ],
+                        "menuItems": [
+                            "Moje konto",
+                            "Wyloguj się"
+                        ]
+                    },
+                    "fun": {
+                        "dashboard": {
+                            "name": "Panel główny",
+                            "fullName": "",
+                            "description": ""
+                        },
+                        "myaccount": {
+                            "name": "Moje konto",
+                            "fullName": "",
+                            "description": ""
+                        },
+                        "logout": {
+                            "name": "Wyloguj się"
+                        }
+                    },
+                    "assistant": {},
+                    "admin": {}
+                }
             },
             "footer": {
                 "author": "Mateusz Archiciński"
@@ -130,10 +158,10 @@
                     "headline": "Sign Up",
                     "form": {
                         "name": {
-                            "value": "Name",
+                            "value": "First name",
                             "errors": {
                                 "required": "This is required!",
-                                "pattern": "This is not a correct name!"
+                                "pattern": "This is not a correct first name!"
                             }
                         },
                         "email": {
@@ -170,7 +198,35 @@
                         "Sign in"
                     ]
                 },
-                "helpdesk": {}
+                "helpdesk": {},
+                "modules": {
+                    "userPanel": {
+                        "ariaLabels": [
+                            "User menu - More"
+                        ],
+                        "menuItems": [
+                            "My Account",
+                            "Sign Out"
+                        ]
+                    },
+                    "fun": {
+                        "dashboard": {
+                            "name": "Dashboard",
+                            "fullName": "",
+                            "description": ""
+                        },
+                        "myaccount": {
+                            "name": "My Account",
+                            "fullName": "",
+                            "description": ""
+                        },
+                        "logout": {
+                            "name": "Sign Out"
+                        }
+                    },
+                    "assistant": {},
+                    "admin": {}
+                }
             },
             "footer": {
                 "author": "Mateusz Archiciński"

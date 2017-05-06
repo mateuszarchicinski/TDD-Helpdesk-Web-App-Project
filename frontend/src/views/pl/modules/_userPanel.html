@@ -1,0 +1,14 @@
+
+<div class="user-panel" ng-controller="userPanelController as UPC"><img class="user-panel__user-image" ng-src="{{user.imageSource}}" alt="{{user.firstName}} {{user.lastName}}"/>
+  <md-menu md-position-mode="right bottom">
+    <md-button class="md-icon-button user-panel__icon-button" ng-click="$mdMenu.open($event)" aria-label="Menu użytkownika - Więcej"></md-button>
+    <md-menu-content>
+      <md-menu-item>
+        <md-button ng-click="UPC.userAccount()">Moje konto</md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ng-click="UPC.userLogOut()">Wyloguj się</md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</div>

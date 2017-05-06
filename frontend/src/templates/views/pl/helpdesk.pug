@@ -4,13 +4,13 @@
 //Helpdesk View
 section(class="helpdesk-view")
     div(layout="row" class="helpdesk-view__container")
-        md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation" class="md-sidenav-left helpdesk-view__sidenav")
-            md-content(layout-padding)
-                p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
-                p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
-                p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
-                p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
+        md-button(ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide" class="md-fab md-primary helpdesk-view__icon-button")
+        md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation" class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav")
+            include components/functionalities/_functionalities
         div(flex)
+            md-toolbar(style="background:0;color:#000;")
+                header.md-toolbar-tools
+                    h2 Dashboard
             md-content(layout-padding)
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.
                 p Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.

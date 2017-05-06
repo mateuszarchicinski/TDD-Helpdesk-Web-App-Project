@@ -9,4 +9,4 @@ header(ng-class="{'md-whiteframe-z1': MC.isAuthorized()}" class="main-header")
         span(class="hide") #{data.header.headline}
         img(class="main-header__brand-logo" src="images/logo/HD logo.png" alt="Helpdesk Logo")
     
-    inject-component(condition="MC.isAuthorized()" include="'components/userPanel'")
+    inject-component(condition="MC.isAuthorized()" include="'modules/_userPanel'")

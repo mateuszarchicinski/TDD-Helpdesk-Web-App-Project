@@ -1,0 +1,12 @@
+//-
+    PL - Functionalities
+
+// Functionalities
+md-list(class="fun-list")
+    md-list-item(class="fun-list__list-item")
+        a(ui-sref="helpdesk({fun: 'dashboard'})" ui-sref-active="fun-list__link-active" class="fun-list__link") #{data.section.modules.fun.dashboard.name}
+    inject-component(include="HC.funUrlTemplate()")
+    md-list-item(class="fun-list__list-item")
+        a(ui-sref="helpdesk({fun: 'myaccount'})" ui-sref-active="fun-list__link-active" class="fun-list__link") #{data.section.modules.fun.myaccount.name}
+    md-list-item(class="fun-list__list-item")
+        a(ui-sref="helpdesk({fun: 'logout'})" ui-sref-active="fun-list__link-active" class="fun-list__link") #{data.section.modules.fun.logout.name}

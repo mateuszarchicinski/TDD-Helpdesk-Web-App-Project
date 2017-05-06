@@ -2,15 +2,22 @@
 <!--Helpdesk View-->
 <section class="helpdesk-view">
   <div class="helpdesk-view__container" layout="row">
-    <md-sidenav class="md-sidenav-left helpdesk-view__sidenav" layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation">
-      <md-content layout-padding="layout-padding">
-        <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-        <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-        <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-        <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-      </md-content>
+    <md-button class="md-fab md-primary helpdesk-view__icon-button" ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide"></md-button>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav" layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation">
+      <!-- Functionalities-->
+      <md-list class="fun-list">
+        <md-list-item class="fun-list__list-item"><a class="fun-list__link" ui-sref="helpdesk({fun: 'dashboard'})" ui-sref-active="fun-list__link-active">Dashboard</a></md-list-item>
+        <inject-component include="HC.funUrlTemplate()"></inject-component>
+        <md-list-item class="fun-list__list-item"><a class="fun-list__link" ui-sref="helpdesk({fun: 'myaccount'})" ui-sref-active="fun-list__link-active">My Account</a></md-list-item>
+        <md-list-item class="fun-list__list-item"><a class="fun-list__link" ui-sref="helpdesk({fun: 'logout'})" ui-sref-active="fun-list__link-active">Sign Out</a></md-list-item>
+      </md-list>
     </md-sidenav>
     <div flex="flex">
+      <md-toolbar style="background:0;color:#000;">
+        <header class="md-toolbar-tools">
+          <h2>Dashboard</h2>
+        </header>
+      </md-toolbar>
       <md-content layout-padding="layout-padding">
         <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
         <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>

@@ -10,11 +10,11 @@
     <md-content layout-padding="layout-padding">
       <form name="registerForm" layout="column" novalidate="novalidate">
         <md-input-container>
-          <label for="RFN">Name</label>
-          <input id="RFN" name="name" ng-model="name" type="text" required="required" pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus="autofocus"/>
-          <div ng-messages="registerForm.name.$error" role="alert">
+          <label for="RFFN">First name</label>
+          <input id="RFFN" name="firstName" ng-model="firstName" type="text" required="required" pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus="autofocus"/>
+          <div ng-messages="registerForm.firstName.$error" role="alert">
             <div ng-message="required">This is required!</div>
-            <div ng-message="pattern">This is not a correct name!</div>
+            <div ng-message="pattern">This is not a correct first name!</div>
           </div>
         </md-input-container>
         <md-input-container>

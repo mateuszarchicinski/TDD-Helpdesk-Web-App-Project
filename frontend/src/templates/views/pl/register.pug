@@ -10,9 +10,9 @@ section(layout="row" layout-align="center" class="form-view")
         md-content(layout-padding)
             form(name="registerForm" layout="column" novalidate)
                 md-input-container
-                    label(for="RFN") #{data.section.register.form.name.value}
-                    input(id="RFN" name="name" ng-model="name" type="text" required pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus)
-                    div(ng-messages="registerForm.name.$error" role="alert")
+                    label(for="RFFN") #{data.section.register.form.name.value}
+                    input(id="RFFN" name="firstName" ng-model="firstName" type="text" required pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus)
+                    div(ng-messages="registerForm.firstName.$error" role="alert")
                         div(ng-message="required") #{data.section.register.form.name.errors.required}
                         div(ng-message="pattern") #{data.section.register.form.name.errors.pattern}
                 md-input-container
