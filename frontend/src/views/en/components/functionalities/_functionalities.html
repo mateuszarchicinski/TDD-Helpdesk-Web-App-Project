@@ -1,8 +1,8 @@
 
 <!-- Functionalities-->
-<md-list class="fun-list">
+<md-list class="fun-list md-body-1">
   <md-list-item class="fun-list__list-item"><a class="fun-list__link" ui-sref="helpdesk({fun: 'dashboard'})" ui-sref-active="fun-list__link-active">Dashboard</a></md-list-item>
-  <inject-component include="HC.funUrlTemplate()"></inject-component>
+  <inject-component include="fun.templateUrl"></inject-component>
   <md-list-item class="fun-list__list-item"><a class="fun-list__link" ui-sref="helpdesk({fun: 'myaccount'})" ui-sref-active="fun-list__link-active">My Account</a></md-list-item>
   <md-list-item class="fun-list__list-item"><a class="fun-list__link" ui-sref="helpdesk({fun: 'logout'})" ui-sref-active="fun-list__link-active">Sign Out</a></md-list-item>
 </md-list>

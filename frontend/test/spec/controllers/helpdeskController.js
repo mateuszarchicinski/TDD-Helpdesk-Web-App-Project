@@ -3,7 +3,8 @@
 
 describe('Controllers: helpdeskController', function () {
     var helpdeskController,
-        sinonSpyOnToggle;
+        sinonSpyOnToggle,
+        scope;
 
     beforeEach(module('app'));
 
@@ -17,8 +18,12 @@ describe('Controllers: helpdeskController', function () {
         });
     }));
 
-    beforeEach(inject(function ($controller) {
-        helpdeskController = $controller('helpdeskController');
+    beforeEach(inject(function ($controller, $rootScope) {
+        scope = $rootScope.$new();
+
+        helpdeskController = $controller('helpdeskController', {
+            $scope: scope
+        });
     }));
 
     it('ctrl.toggleSidenav should be a function', function () {
@@ -31,13 +36,9 @@ describe('Controllers: helpdeskController', function () {
         expect(sinonSpyOnToggle).to.have.been.calledOnce;
     });
 
-    it('ctrl.funUrlTemplate should be a function', function () {
-        expect(helpdeskController.funUrlTemplate).to.be.a('function');
-    });
-
-    it('ctrl.funUrlTemplate() should return boolean or string', function () {
-        var value = helpdeskController.funUrlTemplate();
-
-        expect(typeof value === 'boolean' || typeof value === 'string' ? true : false).to.be.true;
+    it('$scope.fun should be an object with properties templateUrl and current.templateUrl', function () {
+        expect(scope.fun).to.be.an('object');
+        expect(scope.fun).to.have.property('templateUrl');
+        expect(scope.fun).to.have.deep.property('current.templateUrl');
     });
 });

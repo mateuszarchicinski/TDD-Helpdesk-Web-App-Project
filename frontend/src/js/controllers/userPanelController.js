@@ -1,4 +1,4 @@
-app.controller('userPanelController', ['$scope', 'appState', function ($scope, appState) {
+app.controller('userPanelController', ['$scope', '$state', function ($scope, $state) {
     $scope.user = {
         firstName: 'Mateusz',
         lastName: 'Archiciński',
@@ -6,12 +6,14 @@ app.controller('userPanelController', ['$scope', 'appState', function ($scope, a
     };
 
     this.userAccount = function () {
-        console.log('Fn userAccount!');
+        $state.go('helpdesk', {
+            fun: 'myaccount'
+        });
     };
 
     this.userLogOut = function () {
-        console.log('Fn userLogOut!');
-
-        appState.setAuthorized(false);
+        $state.go('helpdesk', {
+            fun: 'logout'
+        });
     };
 }]);

@@ -39,8 +39,6 @@ app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProv
 }).run(['urlParams', '$rootScope', '$state', function (urlParams, $rootScope, $state) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
-        console.log('Event:', '$stateChangeStart');
-
         if (toState.redirectTo) {
             event.preventDefault();
 
