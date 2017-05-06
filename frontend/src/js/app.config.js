@@ -20,8 +20,8 @@ app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProv
         url: baseUrl + 'register',
         templateUrl: getTemplateUrl('register'),
         controller: 'registerController as RC'
-    }).state('readme', {
-        url: baseUrl + 'helpdesk',
+    }).state('helpdesk', {
+        url: baseUrl + 'helpdesk/:fun',
         templateUrl: getTemplateUrl('helpdesk'),
         controller: 'helpdeskController as HC'
     });
