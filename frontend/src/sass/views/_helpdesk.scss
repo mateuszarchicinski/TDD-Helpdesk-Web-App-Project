@@ -3,11 +3,23 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
+// __sidenav
+$sidenav__background-color: $primary-color-dark !default;
+
+
 .helpdesk-view {
     &__container {
         min-height: calc(100vh - 65px);
     }
+    &__icon-button {
+        @include sprite-image($menu-white);
+        background-position: -44px 4px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
     &__sidenav {
         width: 320px;
+        background-color: $sidenav__background-color;
     }
 }

@@ -42,3 +42,14 @@ $ui-view__ng-leave-active__opacity: 0 !default;
         }
     }
 }
+
+
+// Authorized
+.authorized {
+    .main-wrapper {
+        [ui-view] {
+            width: 100%;
+            position: absolute;
+        }
+    }
+}
