@@ -36,9 +36,9 @@ describe('Controllers: helpdeskController', function () {
         expect(sinonSpyOnToggle).to.have.been.calledOnce;
     });
 
-    it('$scope.fun should be an object with properties templateUrl and current.templateUrl', function () {
-        expect(scope.fun).to.be.an('object');
-        expect(scope.fun).to.have.property('templateUrl');
-        expect(scope.fun).to.have.deep.property('current.templateUrl');
+    it('$scope.userServices should be an object with properties templateUrl and current.templateUrl', function () {
+        expect(scope.userServices).to.be.an('object');
+        expect(scope.userServices).to.have.property('templateUrl');
+        expect(scope.userServices).to.have.deep.property('current.templateUrl');
     });
 });

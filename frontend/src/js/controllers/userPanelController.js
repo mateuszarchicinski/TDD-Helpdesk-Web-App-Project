@@ -7,13 +7,13 @@ app.controller('userPanelController', ['$scope', '$state', function ($scope, $st
 
     this.userAccount = function () {
         $state.go('helpdesk', {
-            fun: 'myaccount'
+            service: 'myaccount'
         });
     };
 
     this.userLogOut = function () {
         $state.go('helpdesk', {
-            fun: 'logout'
+            service: 'logout'
         });
     };
 }]);

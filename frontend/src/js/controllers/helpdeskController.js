@@ -3,12 +3,12 @@ app.controller('helpdeskController', ['$mdSidenav', '$scope', '$state', function
         $mdSidenav('left').toggle();
     };
 
-    var userFun = {
-        templateUrl: false,
+    var userServices = {
+        templateUrl: 'components/_adminServices',
         current: {
-            templateUrl: $state.params.fun === 'myaccount' ? 'components/functionalities/sources/_myAccount' : 'components/functionalities/sources/_dashboard'
+            templateUrl: $state.params.service === 'myaccount' ? '_myAccountService' : '_dashboardService'
         }
     };
 
-    $scope.fun = userFun;
+    $scope.userServices = userServices;
 }]);

@@ -9,7 +9,7 @@ app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProv
         baseUrl = '/' + langValue + '/';
 
     var getTemplateUrl = function (nameFile) {
-        return 'views/' + langValue + '/' + nameFile + '.html';
+        return 'views/' + langValue + '/_' + nameFile + '.html';
     };
 
     $stateProvider.state('login', {
@@ -21,7 +21,7 @@ app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProv
         templateUrl: getTemplateUrl('register'),
         controller: 'registerController as RC'
     }).state('helpdesk', {
-        url: baseUrl + 'helpdesk/:fun',
+        url: baseUrl + 'helpdesk/:service',
         templateUrl: getTemplateUrl('helpdesk'),
         controller: 'helpdeskController as HC'
     });

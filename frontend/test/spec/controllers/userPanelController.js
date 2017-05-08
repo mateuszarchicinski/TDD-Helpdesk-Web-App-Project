@@ -36,11 +36,11 @@ describe('Controllers: userPanelController', function () {
         expect(userPanelController.userAccount).to.be.a('function');
     });
 
-    it('ctrl.userAccount() should call $state.go("helpdesk", {fun: "myaccount"}) once', function () {
+    it('ctrl.userAccount() should call $state.go("helpdesk", {service: "myaccount"}) once', function () {
         userPanelController.userAccount();
 
         expect(state.go).to.always.have.been.calledWith('helpdesk', {
-            fun: 'myaccount'
+            service: 'myaccount'
         });
     });
 
@@ -49,11 +49,11 @@ describe('Controllers: userPanelController', function () {
     });
 
 
-    it('ctrl.userLogOut() should call $state.go("helpdesk", {fun: "logout"}) once', function () {
+    it('ctrl.userLogOut() should call $state.go("helpdesk", {service: "logout"}) once', function () {
         userPanelController.userLogOut();
 
         expect(state.go).to.always.have.been.calledWith('helpdesk', {
-            fun: 'logout'
+            service: 'logout'
         });
     });
 });
