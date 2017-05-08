@@ -1,0 +1,28 @@
+//~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* SERVICE *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+// __toolbar
+$service-view__toolbar__color: $primary-text-color !default;
+
+
+.service-view {
+    &__toolbar,
+    &__toolbar._md {
+        background-color: transparent;
+        color: $service-view__toolbar__color;
+    }
+    &__toolbar-tools {
+        transition: .15s padding-left linear;
+        @media screen and (max-width: $break-point__1) {
+            padding-left: 80px;
+        }
+    }
+    &__toolbar,
+    &__toolbar._md,
+    &__toolbar-tools {
+        min-height: 68px;
+        height: 68px;
+    }
+}

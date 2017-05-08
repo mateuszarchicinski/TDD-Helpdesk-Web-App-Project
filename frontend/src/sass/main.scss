@@ -54,8 +54,12 @@
     @import 'components/icons/htmlSymbols-Entities';
 
 
-    // *--------- FUNCTIONALITIES ---------*
-    @import 'components/functionalities';
+    // *--------- FORMS ---------*
+    @import 'components/forms/register';
+
+
+    // *--------- LISTS ---------*
+    @import 'components/lists/services';
 
 
     // *--------- LINKS ---------*
@@ -94,6 +98,10 @@
 
     // *--------- HELPDESK ---------*
     @import 'views/helpdesk';
+
+
+    // *--------- SERVICE ---------*
+    @import 'views/service';
 
 
 // ---------------------
