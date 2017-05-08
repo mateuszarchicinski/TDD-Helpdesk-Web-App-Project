@@ -39,7 +39,7 @@ describe('Controllers: userPanelController', function () {
     it('ctrl.userAccount() should call $state.go("helpdesk", {service: "myaccount"}) once', function () {
         userPanelController.userAccount();
 
-        expect(state.go).to.always.have.been.calledWith('helpdesk', {
+        expect(state.go).to.have.been.calledWith('helpdesk', {
             service: 'myaccount'
         });
     });
@@ -52,7 +52,7 @@ describe('Controllers: userPanelController', function () {
     it('ctrl.userLogOut() should call $state.go("helpdesk", {service: "logout"}) once', function () {
         userPanelController.userLogOut();
 
-        expect(state.go).to.always.have.been.calledWith('helpdesk', {
+        expect(state.go).to.have.been.calledWith('helpdesk', {
             service: 'logout'
         });
     });

@@ -6,6 +6,4 @@ app.controller('mainController', ['appState', function (appState) {
     this.authorizedClass = function () {
         return appState.isAuthorized() ? 'authorized' : 'unauthorized';
     };
-
-    appState.setAuthorized(true);
 }]);

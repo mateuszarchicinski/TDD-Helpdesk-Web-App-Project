@@ -12,7 +12,10 @@ app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProv
         return 'views/' + langValue + '/_' + nameFile + '.html';
     };
 
-    $stateProvider.state('login', {
+    $stateProvider.state('root', {
+        url: '/',
+        controller: 'rootController as RC'
+    }).state('login', {
         url: baseUrl + 'login',
         templateUrl: getTemplateUrl('login'),
         controller: 'loginController as LC'
@@ -23,7 +26,8 @@ app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProv
     }).state('helpdesk', {
         url: baseUrl + 'helpdesk/:service',
         templateUrl: getTemplateUrl('helpdesk'),
-        controller: 'helpdeskController as HC'
+        controller: 'helpdeskController as HC',
+        authRequired: true
     });
 
     $urlRouterProvider.otherwise('/');
@@ -36,13 +40,13 @@ app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProv
 
 }]).constant('APP_CONFIG', {
     languages: ['pl', 'en'] // First element is a default value of language
-}).run(['urlParams', '$rootScope', '$state', function (urlParams, $rootScope, $state) {
+}).run(['$rootScope', 'appState', '$state', function ($rootScope, appState, $state) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
-        if (toState.redirectTo) {
+        if (!appState.isAuthorized() && toState.authRequired) {
             event.preventDefault();
 
-            $state.go(toState.redirectTo, toParams);
+            $state.go('root', {});
         }
     });
 
