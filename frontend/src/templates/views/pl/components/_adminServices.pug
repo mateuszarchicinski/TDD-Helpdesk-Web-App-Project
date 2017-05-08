@@ -1,0 +1,7 @@
+//-
+    PL - Admin Services
+
+//Admin Services
+each obj, property in data.section.helpdesk.services.admin
+        md-list-item(class="services-list__list-item")
+            a(ui-sref="helpdesk({service: '" + property + "'})" ui-sref-active="services-list__link-active" class="services-list__link") #{obj.name}

@@ -71,18 +71,36 @@
                                 "maxLength": "To jest za długie!"
                             }
                         },
+                        "termsConditions": [
+                            "Klikając na Zarejestruj się, zgadzasz się z",
+                            "zasadami & warunkami",
+                            "i",
+                            "polityką prywatności"
+                        ],
                         "submitBtn": "Zarejestruj się"
                     },
                     "copy": [
-                        "Klikając na Zarejestruj się, zgadzasz się z",
-                        "zasadami & warunkami",
-                        "i",
-                        "polityką prywatności",
                         "Posiadasz już konto?",
                         "Zaloguj się"
                     ]
                 },
-                "helpdesk": {},
+                "helpdesk": {
+                    "services": {
+                        "dashboard": {
+                            "name": "Panel główny",
+                            "fullName": "Panel główny - fullName"
+                        },
+                        "myaccount": {
+                            "name": "Moje konto",
+                            "fullName": "Moje konto - fullName"
+                        },
+                        "logout": {
+                            "name": "Wyloguj się"
+                        },
+                        "assistant": {},
+                        "admin": {}
+                    }
+                },
                 "modules": {
                     "userPanel": {
                         "ariaLabels": [
@@ -92,24 +110,7 @@
                             "Moje konto",
                             "Wyloguj się"
                         ]
-                    },
-                    "fun": {
-                        "dashboard": {
-                            "name": "Panel główny",
-                            "fullName": "",
-                            "description": ""
-                        },
-                        "myaccount": {
-                            "name": "Moje konto",
-                            "fullName": "",
-                            "description": ""
-                        },
-                        "logout": {
-                            "name": "Wyloguj się"
-                        }
-                    },
-                    "assistant": {},
-                    "admin": {}
+                    }
                 }
             },
             "footer": {
@@ -187,18 +188,36 @@
                                 "maxLength": "That's too long!"
                             }
                         },
+                        "termsConditions": [
+                            "By clicking on Sign up, you agree to",
+                            "terms & conditions",
+                            "and",
+                            "privacy policy"
+                        ],
                         "submitBtn": "Sign Up"
                     },
                     "copy": [
-                        "By clicking on Sign up, you agree to",
-                        "terms & conditions",
-                        "and",
-                        "privacy policy",
                         "Already have an account?",
                         "Sign in"
                     ]
                 },
-                "helpdesk": {},
+                "helpdesk": {
+                    "services": {
+                        "dashboard": {
+                            "name": "Dashboard",
+                            "fullName": "Dashboard - fullName"
+                        },
+                        "myaccount": {
+                            "name": "My Account",
+                            "fullName": "My Account - fullName"
+                        },
+                        "logout": {
+                            "name": "Sign Out"
+                        },
+                        "assistant": {},
+                        "admin": {}
+                    }
+                },
                 "modules": {
                     "userPanel": {
                         "ariaLabels": [
@@ -208,24 +227,7 @@
                             "My Account",
                             "Sign Out"
                         ]
-                    },
-                    "fun": {
-                        "dashboard": {
-                            "name": "Dashboard",
-                            "fullName": "",
-                            "description": ""
-                        },
-                        "myaccount": {
-                            "name": "My Account",
-                            "fullName": "",
-                            "description": ""
-                        },
-                        "logout": {
-                            "name": "Sign Out"
-                        }
-                    },
-                    "assistant": {},
-                    "admin": {}
+                    }
                 }
             },
             "footer": {

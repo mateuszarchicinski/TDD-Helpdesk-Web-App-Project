@@ -1,0 +1,52 @@
+
+<!--Register View-->
+<section class="form-view" layout="row" layout-align="center">
+  <div class="md-whiteframe-z1 form-view__container" flex-xs="100" layout="column">
+    <md-toolbar>
+      <header class="md-toolbar-tools">
+        <h2>Zarejestruj się</h2>
+      </header>
+    </md-toolbar>
+    <md-content layout-padding="layout-padding">
+            <form class="register-form RF" name="registerForm" novalidate="novalidate" layout="column">
+              <md-input-container>
+                <label for="RFFN">Imię</label>
+                <input id="RFFN" name="firstName" ng-model="firstName" type="text" required="required" pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus="autofocus"/>
+                <div ng-messages="registerForm.firstName.$error" role="alert">
+                  <div ng-message="required">To jest wymagane!</div>
+                  <div ng-message="pattern">To nie jest poprawne imię!</div>
+                </div>
+              </md-input-container>
+              <md-input-container>
+                <label for="RFE">Adres email</label>
+                <input id="RFE" name="email" ng-model="email" type="email" required="required"/>
+                <div ng-messages="registerForm.email.$error" role="alert">
+                  <div ng-message="email">To nie jest poprawny adres email!</div>
+                  <div ng-message="required">To jest wymagane!</div>
+                </div>
+              </md-input-container>
+              <md-input-container>
+                <label for="RFP">Hasło</label>
+                <input id="RFP" name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+                <div ng-messages="registerForm.password.$error" role="alert">
+                  <div ng-message="required">To jest wymagane!</div>
+                  <div ng-message="minlength">To jest za krótkie!</div>
+                  <div ng-message="maxlength">To jest za długie!</div>
+                </div>
+              </md-input-container>
+              <md-input-container>
+                <label for="RFCP">Potwierdź hasło</label>
+                <input id="RFCP" name="confirmPassword" ng-model="confirmPassword" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+                <div ng-messages="registerForm.confirmPassword.$error" role="alert">
+                  <div ng-message="required">To jest wymagane!</div>
+                  <div ng-message="minlength">To jest za krótkie!</div>
+                  <div ng-message="maxlength">To jest za długie!</div>
+                </div>
+              </md-input-container>
+              <p class="register-form__terms-conditions text-center text-muted"><small>Klikając na Zarejestruj się, zgadzasz się z <a ng-href="#" rel="help">zasadami &amp; warunkami</a> i <a ng-href="#" rel="help">polityką prywatności</a>.</small></p>
+              <md-button class="btn btn-primary" type="submit" ng-click="registerForm.$invalid || RC.registerForm.submit($event)">Zarejestruj się</md-button>
+            </form>
+      <p class="text-center text-muted"><small>Posiadasz już konto? <a ng-href="#" rel="help">Zaloguj się</a></small></p>
+    </md-content>
+  </div>
+</section>

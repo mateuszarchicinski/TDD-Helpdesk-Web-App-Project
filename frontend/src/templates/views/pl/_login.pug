@@ -1,0 +1,18 @@
+//-
+    PL - Login
+
+//Login View
+section(layout="row" layout-align="center" class="form-view")
+    div(flex-xs="100" layout="column" class="md-whiteframe-z1 form-view__container")
+        md-toolbar
+            header.md-toolbar-tools
+                h2 #{data.section.login.headline}
+        md-content(layout-padding)
+            include ../../components/forms/_login
+        md-divider
+        md-content(layout-padding)
+            p(class="text-center text-muted")
+                small #{data.section.login.copy[2]}
+            div(layout="row")
+                md-button(flex="50" class="btn btn-facebook") Facebook
+                md-button(flex="50" class="btn btn-google") Google

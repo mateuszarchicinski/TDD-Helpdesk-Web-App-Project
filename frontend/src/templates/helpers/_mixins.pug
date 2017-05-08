@@ -1,0 +1,67 @@
+//-
+    Mixins
+
+//- Login Form
+mixin loginForm(name, shortName, ctrlAs, data)
+    form(name=name novalidate layout="column" class="login-form " + shortName)
+        md-input-container
+            label(for=shortName + "E")= data.email.value
+            input(id=shortName + "E" name="email" ng-model="email" type="email" required autofocus)
+            div(ng-messages=name + ".email.$error" role="alert")
+                div(ng-message="email")= data.email.errors.email
+                div(ng-message="required")= data.email.errors.required
+        md-input-container
+            label(for=shortName + "P")= data.password.value
+            input(id=shortName + "P" name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
+            div(ng-messages=name + ".password.$error" role="alert")
+                div(ng-message="required")= data.password.errors.required
+                div(ng-message="minlength")= data.password.errors.minLength
+                div(ng-message="maxlength")= data.password.errors.maxLength
+        md-button(type="submit" ng-click=name + ".$invalid || " + ctrlAs + "." + name + ".submit($event)" class="btn btn-primary")= data.submitBtn
+
+//- Register Form
+mixin registerForm(name, shortName, ctrlAs, data)
+    form(name=name novalidate layout="column" class="register-form " + shortName)
+        md-input-container
+            label(for=shortName + "FN")= data.name.value
+            input(id=shortName + "FN" name="firstName" ng-model="firstName" type="text" required pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus)
+            div(ng-messages=name + ".firstName.$error" role="alert")
+                div(ng-message="required")= data.name.errors.required
+                div(ng-message="pattern")= data.name.errors.pattern
+        md-input-container
+            label(for=shortName + "E")= data.email.value
+            input(id=shortName + "E" name="email" ng-model="email" type="email" required)
+            div(ng-messages=name + ".email.$error" role="alert")
+                div(ng-message="email")= data.email.errors.email
+                div(ng-message="required")= data.email.errors.required
+        md-input-container
+            label(for=shortName + "P")= data.password.value
+            input(id=shortName + "P" name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
+            div(ng-messages=name + ".password.$error" role="alert")
+                div(ng-message="required")= data.password.errors.required
+                div(ng-message="minlength")= data.password.errors.minLength
+                div(ng-message="maxlength")= data.password.errors.maxLength
+        md-input-container
+            label(for=shortName + "CP")= data.confirmPassword.value
+            input(id=shortName + "CP" name="confirmPassword" ng-model="confirmPassword" type="password" required ng-minlength="8" ng-maxlength="25")
+            div(ng-messages=name + ".confirmPassword.$error" role="alert")
+                div(ng-message="required")= data.confirmPassword.errors.required
+                div(ng-message="minlength")= data.confirmPassword.errors.minLength
+                div(ng-message="maxlength")= data.confirmPassword.errors.maxLength
+        p(class="register-form__terms-conditions text-center text-muted")
+            small #{data.termsConditions[0]} 
+                a(ng-href="#" rel="help") #{data.termsConditions[1]}
+                |  #{data.termsConditions[2]} 
+                a(ng-href="#" rel="help") #{data.termsConditions[3]}
+                | .
+        md-button(type="submit" ng-click=name + ".$invalid || " + ctrlAs + "." + name + ".submit($event)" class="btn btn-primary")= data.submitBtn
+
+//- Service View
+mixin serviceView(controller, modifierClass, data)
+    div(ng-controller=controller class="service-view " + modifierClass)
+        md-toolbar(class="service-view__toolbar")
+            header.md-toolbar-tools(class="service-view__toolbar-tools")
+                h2= data.fullName || data.name
+        md-content(layout-padding)
+            if block
+                block

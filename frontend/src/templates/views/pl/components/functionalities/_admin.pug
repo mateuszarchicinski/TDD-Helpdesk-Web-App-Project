@@ -1,7 +1,0 @@
-//-
-    PL - Admin
-
-//Admin fun~
-each obj, property in data.section.modules.admin
-        md-list-item(class="fun-list__list-item")
-            a(ui-sref="helpdesk({fun: '" + property + "'})" ui-sref-active="fun-list__link-active" class="fun-list__link") #{obj.name}
