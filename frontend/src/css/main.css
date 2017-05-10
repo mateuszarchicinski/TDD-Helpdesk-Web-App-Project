@@ -24055,9 +24055,6 @@ html[lang="en"] {
 .form-view__container {
   width: 360px; }
 
-.helpdesk-view__container {
-  min-height: calc(100vh - 65px); }
-
 .helpdesk-view__icon-button {
   background-image: url(../images/sprite.png);
   background-position: -44px 4px;
@@ -24067,6 +24064,7 @@ html[lang="en"] {
 
 .helpdesk-view__sidenav {
   width: 280px;
+  min-height: calc(100vh - 65px);
   background-color: #00796b; }
 
 .service-view__toolbar, .service-view__toolbar._md {

@@ -9,9 +9,7 @@ $hv__sidenav__background-color: $primary-color-dark !default;
 
 
 .helpdesk-view {
-    &__container {
-        min-height: calc(100vh - 65px);
-    }
+    &__container {}
     &__icon-button {
         @include sprite-image($menu-white);
         background-position: -44px 4px;
@@ -21,6 +19,7 @@ $hv__sidenav__background-color: $primary-color-dark !default;
     }
     &__sidenav {
         width: $hv__sidenav__width;
+        min-height: calc(100vh - 65px);
         background-color: $hv__sidenav__background-color;
     }
 }
