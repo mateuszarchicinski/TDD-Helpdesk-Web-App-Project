@@ -493,7 +493,8 @@ gulp.task('copy', () => {
         `!${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/images/{sprites_sources,sprites_sources/**/*}`,
         `${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/*.png`,
         `${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/*.xml`,
-        `${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/*.ico`
+        `${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/*.ico`,
+        `${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/*.json`
     ],
     {
         base: PROJECT_CONFIG.DIRECTORY.WORK_DIR
