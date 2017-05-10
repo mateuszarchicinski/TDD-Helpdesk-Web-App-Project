@@ -36,4 +36,8 @@ describe('Controllers: loginController', function () {
 
         expect(eventMock.preventDefault).to.have.been.calledOnce;
     });
+
+    it('ctrl.loginVia should be a function', function () {
+        expect(loginController.loginVia).to.be.a('function');
+    });
 });

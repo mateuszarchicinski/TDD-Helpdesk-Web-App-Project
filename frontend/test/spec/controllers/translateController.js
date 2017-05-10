@@ -53,7 +53,7 @@ describe('Controllers: translateController', function () {
 
         expect(urlParams.rightPath).to.have.been.calledOnce;
 
-        expect(window.location.href).to.match(/^en.*/);
+        expect(window.location.href).to.match(/^\/en.*/);
     });
 
     it('ctrl.translate(langCode) called with the same language of current state should not call window.location.href', function () {

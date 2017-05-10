@@ -5,15 +5,11 @@ app.controller('userPanelController', ['$scope', '$state', function ($scope, $st
         imageSource: 'images/icons/person_white.png'
     };
 
-    this.userAccount = function () {
+    var userGo = function (service) {
         $state.go('helpdesk', {
-            service: 'myaccount'
+            service: service
         });
     };
 
-    this.userLogOut = function () {
-        $state.go('helpdesk', {
-            service: 'logout'
-        });
-    };
+    this.userGo = userGo;
 }]);

@@ -32,25 +32,20 @@ describe('Controllers: userPanelController', function () {
         expect(scope.user).to.have.property('imageSource');
     });
 
-    it('ctrl.userAccount should be a function', function () {
-        expect(userPanelController.userAccount).to.be.a('function');
+    it('ctrl.userGo should be a function', function () {
+        expect(userPanelController.userGo).to.be.a('function');
     });
 
-    it('ctrl.userAccount() should call $state.go("helpdesk", {service: "myaccount"}) once', function () {
-        userPanelController.userAccount();
+    it('ctrl.userGo() should call $state.go("helpdesk", {service: "myaccount"}) once', function () {
+        userPanelController.userGo('myaccount');
 
         expect(state.go).to.have.been.calledWith('helpdesk', {
             service: 'myaccount'
         });
     });
 
-    it('ctrl.userLogOut should be a function', function () {
-        expect(userPanelController.userLogOut).to.be.a('function');
-    });
-
-
-    it('ctrl.userLogOut() should call $state.go("helpdesk", {service: "logout"}) once', function () {
-        userPanelController.userLogOut();
+    it('ctrl.userGo() should call $state.go("helpdesk", {service: "logout"}) once', function () {
+        userPanelController.userGo('logout');
 
         expect(state.go).to.have.been.calledWith('helpdesk', {
             service: 'logout'

@@ -3,7 +3,8 @@ app.controller('translateController', ['urlParams', '$window', function (urlPara
 
     this.translate = function (langCode) {
         if (this.language !== langCode) {
-            $window.location.href = langCode + urlParams.rightPath();
+            $window.location.href = '/' + langCode + urlParams.rightPath();
+
         }
     };
 }]);

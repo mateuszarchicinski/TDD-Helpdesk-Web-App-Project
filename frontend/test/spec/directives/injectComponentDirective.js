@@ -9,7 +9,7 @@ describe('Directives: injectComponentDirective', function () {
     beforeEach(function () {
         module('app');
 
-        inject(function ($templateCache, $rootScope, $compile) {
+        inject(function ($templateCache, $compile, $rootScope) {
             $templateCache.put('views/pl/something.html', '<div>Something</div>');
             compile = $compile;
 

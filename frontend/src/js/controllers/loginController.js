@@ -3,7 +3,9 @@ app.controller('loginController', ['appState', function (appState) {
 
     loginForm.submit = function (evt) {
         evt.preventDefault();
+    };
 
+    this.loginVia = function (provider) {
         appState.setAuthorized(true);
     };
 }]);
