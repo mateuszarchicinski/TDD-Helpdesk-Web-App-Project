@@ -11,4 +11,4 @@ section(layout="row" layout-align="center" class="form-view")
             include ../../components/forms/_register
             p(class="text-center text-muted")
                 small #{data.section.register.copy[0]} 
-                    a(ng-href="#" rel="help") #{data.section.register.copy[1]}
+                    a(ui-sref="login") #{data.section.register.copy[1]}

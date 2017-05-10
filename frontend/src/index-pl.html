@@ -12,7 +12,7 @@
     <!--Phone Numbers Detection-->
     <meta name="format-detection" content="telephone=no">
     <!--Search Engine Optimization Sources-->
-    <title>Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT</title>
+    <title>Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Mateusz Archiciński">
@@ -22,6 +22,8 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="tile-1200x630px.png">
     <meta name="robots" content="index, follow, noodp, noydir">
+    <!--Web application manifest which provides information about an application-->
+    <link rel="manifest" href="manifest.json">
     <!--Icon Sources-->
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!--Google Chrome - Theme Color-->
@@ -56,8 +58,6 @@
     <script src="js/models/appStateFactory.js"></script>
     <!--Application Services-->
     <script src="js/services/urlParamsProvider.js"></script>
-    <!--Application Directives-->
-    <script src="js/directives/injectComponentDirective.js"></script>
     <!--Application Controllers-->
     <script src="js/controllers/mainController.js"></script>
     <script src="js/controllers/translateController.js"></script>
@@ -68,6 +68,9 @@
     <script src="js/controllers/helpdeskController.js"></script>
     <script src="js/controllers/dashboardController.js"></script>
     <script src="js/controllers/myAccountController.js"></script>
+    <!--Application Directives-->
+    <script src="js/directives/injectComponentDirective.js"></script>
+    <script src="js/directives/validateEqualsDirective.js"></script>
     <!--endbuild-->
     <!--[if lt IE 8]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.</p><![endif]-->
     <main class="{{MC.authorizedClass()}}" ng-controller="mainController as MC">
@@ -79,7 +82,7 @@
             <li><a class="language-settings__link" ng-click="TC.translate('en')" ng-class="{'language-settings__link-active': TC.language === 'en'}" ng-href="#" rel="help">en</a></li>
           </ul>
         </div>
-        <h1 class="main-header__title"><span class="hide">Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT</span><img class="main-header__brand-logo" src="images/logo/HD logo.png" alt="Helpdesk Logo"></h1>
+        <h1 class="main-header__title"><span class="hide">Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT</span><img class="main-header__brand-logo" src="images/logo/HD-Logo.png" alt="Helpdesk Logo"></h1>
         <inject-component condition="MC.isAuthorized()" include="'modules/_userPanel'"></inject-component>
       </header>
       <!--Main Wrapper-->

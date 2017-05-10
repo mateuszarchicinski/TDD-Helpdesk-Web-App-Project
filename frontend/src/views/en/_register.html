@@ -36,17 +36,16 @@
               </md-input-container>
               <md-input-container>
                 <label for="RFCP">Confirm password</label>
-                <input id="RFCP" name="confirmPassword" ng-model="confirmPassword" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+                <input id="RFCP" name="confirmPassword" ng-model="confirmPassword" type="password" required="required" validate-equals="password"/>
                 <div ng-messages="registerForm.confirmPassword.$error" role="alert">
                   <div ng-message="required">This is required!</div>
-                  <div ng-message="minlength">That's too short!</div>
-                  <div ng-message="maxlength">That's too long!</div>
+                  <div ng-message="validateEquals">Please match the passwords!</div>
                 </div>
               </md-input-container>
-              <p class="register-form__terms-conditions text-center text-muted"><small>By clicking on Sign up, you agree to <a ng-href="#" rel="help">terms &amp; conditions</a> and <a ng-href="#" rel="help">privacy policy</a>.</small></p>
+              <p class="register-form__terms-conditions text-center text-muted"><small>By clicking on Sign up, you agree to <a ng-click="RC.showDialog('terms&amp;conditions')" ng-href="#" rel="help">terms &amp; conditions</a> and <a ng-click="RC.showDialog('privacyPolicy')" ng-href="#" rel="help">privacy policy</a>.</small></p>
               <md-button class="btn btn-primary" type="submit" ng-click="registerForm.$invalid || RC.registerForm.submit($event)">Sign Up</md-button>
             </form>
-      <p class="text-center text-muted"><small>Already have an account? <a ng-href="#" rel="help">Sign in</a></small></p>
+      <p class="text-center text-muted"><small>Already have an account? <a ui-sref="login">Sign in</a></small></p>
     </md-content>
   </div>
 </section>

@@ -2,14 +2,14 @@
     "lang": {
         "pl": {
             "lang": "pl",
-            "title": "Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT",
+            "title": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT",
             "description": "",
             "keywords": "",
             "author": "Mateusz Archiciński",
             "ogTitle": "",
             "ogDescription": "",
             "header": {
-                "headline": "Helpdesk - Pomoc w rozwiązywaniu problemów z dziedziny IT"
+                "headline": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT"
             },
             "section": {
                 "login": {
@@ -67,8 +67,7 @@
                             "value": "Potwierdź hasło",
                             "errors": {
                                 "required": "To jest wymagane!",
-                                "minLength": "To jest za krótkie!",
-                                "maxLength": "To jest za długie!"
+                                "validateEquals": "Proszę dopasować hasła!"
                             }
                         },
                         "termsConditions": [
@@ -115,18 +114,28 @@
             },
             "footer": {
                 "author": "Mateusz Archiciński"
+            },
+            "dialogs": {
+                "termsConditions": {
+                    "ariaLabel": "Nowe okno z opisem zasad i warunków",
+                    "headline": "Zasady i warunki"
+                },
+                "privacyPolicy": {
+                    "ariaLabel": "Nowe okno z opisem polityki prywatności",
+                    "headline": "Polityka prywatności"
+                }
             }
         },
         "en": {
             "lang": "en",
-            "title": "Helpdesk - Help in solving IT problems",
+            "title": "Helpdesk Application - Help in solving IT problems",
             "description": "",
             "keywords": "",
             "author": "Mateusz Archiciński",
             "ogTitle": "",
             "ogDescription": "",
             "header": {
-                "headline": "Helpdesk - Help in solving IT problems"
+                "headline": "Helpdesk Application - Help in solving IT problems"
             },
             "section": {
                 "login": {
@@ -184,8 +193,7 @@
                             "value": "Confirm password",
                             "errors": {
                                 "required": "This is required!",
-                                "minLength": "That's too short!",
-                                "maxLength": "That's too long!"
+                                "validateEquals": "Please match the passwords!"
                             }
                         },
                         "termsConditions": [
@@ -232,6 +240,16 @@
             },
             "footer": {
                 "author": "Mateusz Archiciński"
+            },
+            "dialogs": {
+                "termsConditions": {
+                    "ariaLabel": "New window with description about terms & conditions",
+                    "headline": "Terms & Conditions"
+                },
+                "privacyPolicy": {
+                    "ariaLabel": "New window with description about privacy policy",
+                    "headline": "Privacy Policy"
+                }
             }
         }
     }

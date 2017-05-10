@@ -14,5 +14,5 @@ section(layout="row" layout-align="center" class="form-view")
             p(class="text-center text-muted")
                 small #{data.section.login.copy[2]}
             div(layout="row")
-                md-button(flex="50" class="btn btn-facebook") Facebook
-                md-button(flex="50" class="btn btn-google") Google
+                md-button(ng-click="LC.loginVia('facebook')" flex="50" class="btn btn-facebook") Facebook
+                md-button(ng-click="LC.loginVia('google')" flex="50" class="btn btn-google") Google
