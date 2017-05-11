@@ -5,7 +5,7 @@ module.exports = {
         'pl', // First element is default value of language
         'en'
     ],
-    BASE_URL: 'http://localhost:3000/', // Adds tag <base href="BASE_URL"> inside <head> only when a variable is not empty.
+    BASE_URL: '/', // Adds tag <base href="BASE_URL"> inside <head> only when a variable is not empty.
     HOST: '', // Production host of your domain which is required for tags <meta property="og:url content="HOST"> and <meta property="og:image" content="HOST + tile-1200x630px.png">.
     THEME_COLOR: '#009688', // Google Chrome - Theme Color
     CONFIG_FILE: 'project.config.js',
