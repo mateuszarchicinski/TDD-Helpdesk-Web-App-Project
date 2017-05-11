@@ -8,12 +8,14 @@
     "eslint": "eslint src/js/**/*.js test/spec/**/*.js || true",
     "dev": "gulp default",
     "test": "gulp js:eslint && gulp js:test",
-    "prod": "gulp build --option advanced --upload"
+    "prod": "gulp build --option advanced --upload",
+    "material-tools": "material-tools -c material-tools.config.json"
   },
   "author": "Mateusz Archiciński",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "angular-material-tools": "^1.0.0-beta.6",
     "bower": "^1.8.0",
     "browser-sync": "^2.18.8",
     "chai": "^3.5.0",
@@ -37,6 +39,7 @@
     "gulp-sass": "^3.0.0",
     "gulp-sass-lint": "^1.3.2",
     "gulp-sourcemaps": "^1.9.1",
+    "gulp-strip-css-comments": "^1.2.0",
     "gulp-tinify": "^1.0.2",
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",

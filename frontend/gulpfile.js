@@ -349,10 +349,13 @@ gulp.task('html', () => {
     })
     .pipe($.plumber())
     .pipe($.useref()) // https://github.com/jonkemp/gulp-useref#usage
+    .pipe($.if('*.css', $.stripCssComments({
+        preserve: false
+    }))) // https://github.com/sindresorhus/strip-css-comments#options
     .pipe($.if('*.css', $.cleanCss())) // https://github.com/jakubpawlowicz/clean-css#--------
     .pipe($.if('*.js', $.uglify({
         output: {
-            max_line_len: 50000
+            max_line_len: false
         }
     }))) // {preserveComments: 'license'} ~ https://github.com/terinjokes/gulp-uglify#options
     .pipe(gulp.dest(`${PROJECT_CONFIG.DIRECTORY.DIST_DIR}/`));
