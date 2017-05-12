@@ -1,7 +1,7 @@
 'use strict';
 
 
-describe('Models: appStateFactory', function () {
+describe('Services: appStateFactory', function () {
     var appState;
 
     beforeEach(function () {

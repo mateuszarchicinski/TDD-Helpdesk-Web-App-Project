@@ -1,7 +1,7 @@
 app.factory('appState', ['urlParams', function (urlParams) {
     var appState = {
         language: urlParams.currentLanguage(),
-        authorized: null
+        authorized: false
     };
 
     var getter = function (property) {
@@ -9,15 +9,13 @@ app.factory('appState', ['urlParams', function (urlParams) {
     };
 
     var setAuthorized = function (boolean) {
-        if (typeof boolean !== 'boolean') {
-            boolean = false;
+        if (typeof boolean === 'boolean' && appState.authorized !== boolean) {
+            appState.authorized = boolean;
         }
-
-        appState.authorized = boolean;
     };
 
     var isAuthorized = function () {
-        return appState.authorized ? true : false;
+        return appState.authorized;
     };
 
     return {

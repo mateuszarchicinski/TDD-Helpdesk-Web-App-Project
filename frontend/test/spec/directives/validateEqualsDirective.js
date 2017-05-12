@@ -3,8 +3,7 @@
 
 describe('Directives: validateEqualsDirective', function () {
     var compile,
-        scope,
-        validateEquals;
+        scope;
 
     beforeEach(function () {
         module('app');
@@ -15,15 +14,15 @@ describe('Directives: validateEqualsDirective', function () {
             scope = $rootScope.$new();
             scope.password = 'THE_SAME_PASSWORD';
 
-            validateEquals = compile('<form name="registerForm"><input name="password" ng-model="password"><input name="confirmPassword" ng-model="confirmPassword" validate-equals="password"></form>')(scope);
+            compile('<form name="registerForm"><input name="password" ng-model="password"><input name="confirmPassword" ng-model="confirmPassword" validate-equals="password"></form>')(scope);
         });
     });
 
-    it('registerForm.confirmPassword.$validators should have property validateEquals which is a function', function () {
+    it('should add new property validateEquals <function> to $validators object', function () {
         expect(scope.registerForm.confirmPassword.$validators).to.have.property('validateEquals').that.is.a('function');
     });
 
-    it('should not attach {validateEquals: true} to registerForm.confirmPassword.$error', function () {
+    it('should not add new error property {validateEquals: true} to errors object', function () {
         scope.confirmPassword = 'THE_SAME_PASSWORD';
 
         scope.$digest();
@@ -31,7 +30,7 @@ describe('Directives: validateEqualsDirective', function () {
         expect(scope.registerForm.confirmPassword.$error).to.deep.equal({});
     });
 
-    it('should attach {validateEquals: true} to registerForm.confirmPassword.$error', function () {
+    it('should add new error property {validateEquals: true} to errors object', function () {
         scope.confirmPassword = 'NOT_THE_SAME_PASSWORD';
 
         scope.$digest();

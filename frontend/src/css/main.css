@@ -322,8 +322,10 @@ html[lang="en"] {
 
 .helpdesk-view__sidenav {
   width: 280px;
-  min-height: calc(100vh - 65px);
   background-color: #00796b; }
+
+.helpdesk-view__container, .helpdesk-view__sidenav {
+  min-height: calc(100vh - 65px); }
 
 .service-view__toolbar, .service-view__toolbar._md {
   background-color: transparent;

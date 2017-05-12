@@ -3,7 +3,11 @@
 
 (function () {
 
-    var routes = [
+    var appConfig = {};
+
+    appConfig.languages = ['pl', 'en']; // First element is a default value of language
+
+    appConfig.routes = [ // Routes list, each of them will be added automatically
         {
             name: 'root',
             url: '/',
@@ -30,6 +34,23 @@
             authRequired: true
         }
     ];
+
+    appConfig.restFullAPI = { // Defaults values: {baseUrl: '/', login: {url: 'auth/login'}, register: {url: 'auth/register'}}
+        baseUrl: '',
+        login: {
+            url: ''
+        },
+        register: {
+            url: ''
+        }
+    };
+
+    appConfig.tokenConfig = { // Defaults values: {prefix: 'HDA', name: 'userToken', header: 'Authorization', type: 'Bearer'}
+        prefix: '',
+        name: '',
+        header: '',
+        type: ''
+    };
 
     app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$mdThemingProvider', function (urlParamsProvider, APP_CONFIG, $stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
@@ -66,10 +87,7 @@
             .primaryPalette('teal')
             .accentPalette('amber');
 
-    }]).constant('APP_CONFIG', {
-        languages: ['pl', 'en'], // First element is a default value of language
-        routes: routes
-    }).run(['$rootScope', '$state', 'appState', function ($rootScope, $state, appState) {
+    }]).constant('APP_CONFIG', appConfig).run(['$rootScope', '$state', 'appState', function ($rootScope, $state, appState) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
             if (!appState.isAuthorized() && toState.authRequired) {

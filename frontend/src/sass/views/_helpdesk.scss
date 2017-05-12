@@ -19,7 +19,10 @@ $hv__sidenav__background-color: $primary-color-dark !default;
     }
     &__sidenav {
         width: $hv__sidenav__width;
-        min-height: calc(100vh - 65px);
         background-color: $hv__sidenav__background-color;
+    }
+    &__container,
+    &__sidenav {
+        min-height: calc(100vh - 65px);
     }
 }
