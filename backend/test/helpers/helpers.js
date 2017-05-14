@@ -69,5 +69,12 @@ module.exports = {
             middlewares: 'default,default',
             controller: 'loginController'
         }
+    },
+    USER_MODEL: { // Used in test/models/user.js
+        EXAMPLE_DATA: {
+            firstName: 'Mateusz',
+            email: 'ma@ma.pl',
+            password: 'aaaaaaaa'
+        }
     }
 };

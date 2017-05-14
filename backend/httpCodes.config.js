@@ -5,6 +5,9 @@ module.exports = {
         PERMANENT: 301, // Default status code for all redirect pages without property 'statusCode'.
         TEMPORARY: 302 // Default status code for all error handler redirects.
     },
+    CREATED: 201,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
     SUPPORTED_ERRORS: [ // All supported errors need to be defined in pages.config.js and have his own configuration object.
         500, // First element is default variable - Is returned in all otherwise cases of error, which hasn't defined.
         404
