@@ -3,13 +3,18 @@
 
 describe('Controllers: loginController', function () {
     var loginController,
-        eventMock;
+        eventMock,
+        scope;
 
     beforeEach(function () {
         module('app');
 
-        inject(function ($controller) {
-            loginController = $controller('loginController');
+        inject(function ($controller, $rootScope) {
+            scope = $rootScope.$new();
+
+            loginController = $controller('loginController', {
+                $scope: scope
+            });
 
             eventMock = {
                 preventDefault: function () {}

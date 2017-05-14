@@ -4,13 +4,18 @@
 describe('Controllers: registerController', function () {
     var registerController,
         eventMock,
-        mdDialog;
+        mdDialog,
+        scope;
 
     beforeEach(function () {
         module('app');
 
-        inject(function ($controller, $mdDialog) {
-            registerController = $controller('registerController');
+        inject(function ($controller, $mdDialog, $rootScope) {
+            scope = $rootScope.$new();
+
+            registerController = $controller('registerController', {
+                $scope: scope
+            });
 
             eventMock = {
                 preventDefault: function () {}
