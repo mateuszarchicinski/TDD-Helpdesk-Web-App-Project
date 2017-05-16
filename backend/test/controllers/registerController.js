@@ -5,27 +5,16 @@
 const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon');
+const helpers = require('../helpers/helpers');
 
 
 // NODE MODULES & MOCKS
 const mocks = require('node-mocks-http');
 const reqMock = mocks.createRequest();
 const resMock = mocks.createResponse();
-const nextMock = () => {};
 const errMock = {
-    message: 'Something like error message!'
-};
-const userMock = {
-    firstName: 'Aa',
-    email: 'a@a',
-    password: 'aaaaaaaa',
-    toJSON: () => {
-        const user = userMock;
-
-        delete user.toJSON;
-
-        return user;
-    }
+    message: 'User validation failed',
+    name: 'ValidationError'
 };
 
 
@@ -44,9 +33,15 @@ const userModel = mongoose.models.User ? mongoose.model('User') : mongoose.model
 describe('Controllers:', () => {
 
     describe('registerController.js', () => {
+        let nextMock,
+            userMock;
+
         beforeEach(() => {
+            userMock = helpers.USER_MODEL.MOCK();
+
             sinon.spy(resMock, 'status');
             sinon.spy(resMock, 'json');
+            nextMock = sinon.spy();
 
             sinon.stub(userModel.prototype, 'save');
         });
@@ -54,6 +49,7 @@ describe('Controllers:', () => {
         afterEach(() => {
             resMock.status.restore();
             resMock.json.restore();
+            nextMock = null;
 
             userModel.prototype.save.restore();
         });
@@ -75,10 +71,22 @@ describe('Controllers:', () => {
             registerController(reqMock, resMock, nextMock);
 
             expect(resMock.status).to.have.been.calledWith(400);
-            expect(resMock.json).to.have.been.calledWith(errMock);
+            expect(resMock.json).to.have.been.calledWith({
+                message: errMock.message
+            });
         });
 
-        it('ctrl with valid sreq.body properties should call res with status 201 <number> and json {name: "Aa", email: "a@a", password: "aaaaaaaa"} <object>', () => {
+        it('ctrl in case of user.save() error should call next(err)', () => {
+            reqMock.body = userMock;
+
+            userModel.prototype.save.yields({});
+
+            registerController(reqMock, resMock, nextMock);
+
+            expect(nextMock).to.have.been.calledWith({});
+        });
+
+        it('ctrl with valid req.body properties should call res with status 201 <number> and json {name: "Aa", email: "a@a", password: "aaaaaaaa"} <object>', () => {
             reqMock.body = userMock;
 
             userModel.prototype.save.yields(null, userMock);

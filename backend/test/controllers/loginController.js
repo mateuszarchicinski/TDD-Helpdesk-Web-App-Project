@@ -5,6 +5,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon');
+const helpers = require('../helpers/helpers');
 
 
 // NODE MODULES & MOCKS
@@ -38,26 +39,7 @@ describe('Controllers:', () => {
             userMock;
 
         beforeEach(() => {
-            userMock = {
-                firstName: 'Aa',
-                email: 'a@a',
-                password: 'aaaaaaaa',
-                err: null,
-                toJSON: () => {
-                    const user = userMock;
-
-                    delete user.toJSON;
-                    delete user.comparePasswords;
-
-                    return user;
-                },
-                comparePasswords: (password, callback) => {
-                    const err = userMock.err;
-                    const status = userMock.password === password;
-
-                    return callback(err, status);
-                }
-            };
+            userMock = helpers.USER_MODEL.MOCK();
 
             sinon.spy(resMock, 'status');
             sinon.spy(resMock, 'json');
@@ -105,7 +87,7 @@ describe('Controllers:', () => {
         });
 
         it('ctrl in case of user.comparePasswords() error should call next(err)', () => {
-            userMock.err = errMock;
+            userMock.errCompare = errMock;
             reqMock.body = userMock;
 
             userModel.find.yields(null, [userMock]);

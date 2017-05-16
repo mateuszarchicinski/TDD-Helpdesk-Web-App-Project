@@ -95,6 +95,17 @@ describe('Models: user.js', () => {
                 });
             });
         });
+
+        it('new user object should contain properties created and updated', (done) => {
+            userModel.findOne({
+                email: helpers.USER_MODEL.EXAMPLE_DATA.email
+            }, (err, user) => {
+                expect(user).to.have.property('created');
+                expect(user).to.have.property('updated');
+
+                done();
+            });
+        });
     });
 
 
@@ -111,7 +122,10 @@ describe('Models: user.js', () => {
             const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA).toJSON();
             const userEqual = helpers.USER_MODEL.EXAMPLE_DATA;
 
+            userEqual._id = user._id;
+
             delete userEqual.password;
+            delete userEqual.active_tokens;
 
             expect(user).to.deep.equal(userEqual);
         });

@@ -2,6 +2,7 @@
 const mongoose = require('../services/mongoose');
 const bcrypt = require('bcrypt');
 const mongooseUniqueValidator = require('mongoose-unique-validator');
+const mongooseTimestamps = require('mongoose-timestamp');
 
 
 const userSchema = new mongoose.Schema({
@@ -11,13 +12,19 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        lowercase: true,
         required: true,
         unique: true
     },
     password: {
         type: String,
         required: true
-    }
+    },
+    active: {
+        type: Boolean,
+        default: false
+    },
+    active_tokens: [String]
 }, {
     versionKey: false
 });
@@ -26,8 +33,8 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.toJSON = function () {
     const user = this.toObject();
 
-    delete user._id;
     delete user.password;
+    delete user.active_tokens;
 
     return user;
 };
@@ -57,7 +64,12 @@ userSchema.pre('save', function (next) {
 });
 
 
+// PLUGINS
 userSchema.plugin(mongooseUniqueValidator);
+userSchema.plugin(mongooseTimestamps, {
+    createdAt: 'created',
+    updatedAt: 'updated'
+});
 
 
 module.exports = {

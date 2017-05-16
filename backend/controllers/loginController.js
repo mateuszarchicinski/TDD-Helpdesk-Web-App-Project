@@ -1,12 +1,10 @@
-/* eslint no-unused-vars: ["error", { "args": "none" }] */
-
-
 // HTTP CODES CONFIG
 const HTTP_CODES_CONFIG = require('../app.config').HTTP_CODES_CONFIG;
 
 
 // APP SERVICES
 const mongoose = require('../services/mongoose');
+const tokenHandler = require('../services/tokenHandler');
 
 
 // APP MODELS
@@ -52,7 +50,30 @@ module.exports = function (req, res, next) {
                 });
             }
 
-            res.status(HTTP_CODES_CONFIG.SUCCESS).json(user.toJSON());
+            const newToken = tokenHandler.encode({
+                sub: user._id,
+                email: user.email,
+                device: req.headers['user-agent']
+            });
+
+            user.active_tokens.push(newToken);
+
+            user.save((err, user) => {
+                if (err) {
+                    if (err.name === 'ValidationError') {
+                        return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
+                            message: err.message
+                        });
+                    }
+
+                    return next(err);
+                }
+
+                const loggedUser = user.toJSON();
+                loggedUser.token = newToken;
+
+                res.status(HTTP_CODES_CONFIG.SUCCESS).json(loggedUser);
+            });
         });
     });
 };

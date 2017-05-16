@@ -74,7 +74,53 @@ module.exports = {
         EXAMPLE_DATA: {
             firstName: 'Mateusz',
             email: 'ma@ma.pl',
-            password: 'aaaaaaaa'
+            password: 'aaaaaaaa',
+            active: false,
+            active_tokens: [
+                'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0',
+                'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0'
+            ]
+        },
+        MOCK: () => { // Used in test/controllers/registerController.js && test/controllers/loginController.js
+            const mock = {
+                _id: '591b3b379efa9b282cb763bd',
+                firstName: 'Aa',
+                email: 'a@a',
+                password: 'aaaaaaaa',
+                active: false,
+                active_tokens: [],
+                token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0',
+                errCompare: null,
+                errSave: null
+            };
+
+            mock.toJSON = () => {
+                const user = mock;
+
+                delete user.active_tokens;
+                delete user.token;
+                delete user.toJSON;
+                delete user.comparePasswords;
+                delete user.save;
+
+                return user;
+            };
+
+            mock.comparePasswords = (password, callback) => {
+                const err = mock.errCompare;
+                const status = mock.password === password;
+
+                return callback(err, status);
+            };
+
+            mock.save = (callback) => {
+                const err = mock.errSave;
+                const user = mock;
+
+                return callback(err, user);
+            };
+
+            return mock;
         }
     }
 };

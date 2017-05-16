@@ -14,6 +14,10 @@ module.exports = {
     ],
     angular: [ // Angular mod routes:
         {
+            url: '/test',
+            controller: 'test'
+        },
+        {
             url: '/auth/login',
             method: 'post',
             controller: 'loginController'
