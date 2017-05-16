@@ -16,6 +16,12 @@ module.exports = {
             }
         }
     },
+    AUTH: { // Authentication config
+        APP_TOKEN: {
+            SECRET: 'YOUR_UNIQUE_JWT_TOKEN_SECRET',
+            EXPIRES: 7 // days
+        }
+    },
     APP_CONFIG: 'app.config.js',
     HTTP_CODES_CONFIG: require('./httpCodes.config.js'),
     ROUTES_CONFIG: require('./routes.config.js'),
