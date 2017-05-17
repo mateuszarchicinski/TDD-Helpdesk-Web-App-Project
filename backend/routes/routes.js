@@ -15,7 +15,14 @@ module.exports = {
     angular: [ // Angular mod routes:
         {
             url: '/test',
+            middlewares: 'ensureAuthentication',
             controller: 'test'
+        },
+        {
+            url: '/auth/logout',
+            method: 'post',
+            middlewares: 'ensureAuthentication',
+            controller: 'logoutController'
         },
         {
             url: '/auth/login',
