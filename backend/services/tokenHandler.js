@@ -26,7 +26,16 @@ const tokenEncode = (object) => {
 
 
 const tokenDecode = (token) => {
-    return jwt.decode(token, APP_CONFIG.AUTH.APP_TOKEN.SECRET);
+    const payload = jwt.decode(token, APP_CONFIG.AUTH.APP_TOKEN.SECRET);
+
+    const isValid = () => {
+        return payload.exp > moment().unix();
+    };
+
+    return {
+        payload: payload,
+        isValid: isValid
+    };
 };
 
 

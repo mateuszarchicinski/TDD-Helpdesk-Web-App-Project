@@ -9,6 +9,10 @@ const sinon = require('sinon');
 
 // NODE MODULES & MOCKS
 const jwt = require('jwt-simple');
+const objectMock = {
+    sub: 12345,
+    email: 'a@a'
+};
 
 
 // APP SERVICES
@@ -17,16 +21,6 @@ const tokenHandler = require('../../services/tokenHandler');
 
 describe('Services:', () => {
     describe('tokenHandler.js', () => {
-        beforeEach(() => {
-            sinon.spy(jwt, 'encode');
-            sinon.spy(jwt, 'decode');
-        });
-
-        afterEach(() => {
-            jwt.encode.restore();
-            jwt.decode.restore();
-        });
-
         it('is an object which contains encode and decode methods', () => {
             expect(tokenHandler).to.be.an('object');
             expect(tokenHandler.encode).to.be.a('function');
@@ -34,28 +28,52 @@ describe('Services:', () => {
         });
 
         it('method tokenHandler.encode(subject) should call jwt.encode(payload, secret) once', () => {
+            sinon.spy(jwt, 'encode');
+
             tokenHandler.encode({});
 
             expect(jwt.encode).to.have.been.calledOnce;
+
+            jwt.encode.restore();
         });
 
         it('method tokenHandler.decode(token) should call jwt.decode(token) once', () => {
+            sinon.spy(jwt, 'decode');
+
             tokenHandler.decode('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0');
 
             expect(jwt.decode).to.have.been.calledOnce;
+
+            jwt.decode.restore();
         });
 
-        it('method tokenHandler.decode(token) should return an object with the same subject which was encoded in token', () => {
-            const object = {
-                sub: 12345,
-                email: 'a@a'
-            };
-            const encodedToken = tokenHandler.encode(object);
-            const decodedToken = tokenHandler.decode(encodedToken);
+        it('method tokenHandler.decode(token) should return an object with the same payload which was encoded in token', () => {
+            const encodedToken = tokenHandler.encode(objectMock);
+            const payload = tokenHandler.decode(encodedToken).payload;
 
-            Object.keys(object).forEach((key) => {
-                expect(decodedToken[key]).to.equal(object[key]);
+            Object.keys(objectMock).forEach((key) => {
+                expect(payload[key]).to.equal(objectMock[key]);
             });
+        });
+
+        it('method of decoded token isValid() should return true', () => {
+            const encodedToken = tokenHandler.encode(objectMock);
+            const isValid = tokenHandler.decode(encodedToken).isValid();
+
+            expect(isValid).to.be.true;
+        });
+
+        it('method of decoded token isValid() should return false', () => {
+            sinon.stub(jwt, 'decode').returns({
+                exp: 1
+            });
+
+            const encodedToken = tokenHandler.encode(objectMock);
+            const isValid = tokenHandler.decode(encodedToken).isValid();
+
+            expect(isValid).to.be.false;
+
+            jwt.decode.restore();
         });
     });
 });
