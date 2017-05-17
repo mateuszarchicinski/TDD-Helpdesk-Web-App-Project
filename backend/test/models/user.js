@@ -129,6 +129,30 @@ describe('Models: user.js', () => {
 
             expect(user).to.deep.equal(userEqual);
         });
+
+        it('method user.isActiveToken(token_existing) should return true', () => {
+            const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA);
+            user.active_tokens.push('token');
+
+            expect(user.isActiveToken('token')).to.be.true;
+        });
+
+        it('method user.isActiveToken(token_not_existing) should return false', () => {
+            const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA);
+
+            expect(user.isActiveToken('token')).to.be.false;
+        });
+
+        it('method user.removeToken(token) should remove selected token correctly', () => {
+            const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA);
+            user.active_tokens.push('token');
+
+            expect(user.active_tokens).to.contains('token');
+
+            user.removeToken('token');
+
+            expect(user.active_tokens).to.not.contains('token');
+        });
     });
 
 });

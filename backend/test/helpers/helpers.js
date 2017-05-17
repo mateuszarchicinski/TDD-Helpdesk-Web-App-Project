@@ -77,7 +77,6 @@ module.exports = {
             password: 'aaaaaaaa',
             active: false,
             active_tokens: [
-                'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0',
                 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0'
             ]
         },
@@ -99,8 +98,12 @@ module.exports = {
 
                 delete user.active_tokens;
                 delete user.token;
+                delete user.errCompare;
+                delete user.errSave;
                 delete user.toJSON;
                 delete user.comparePasswords;
+                delete user.isActiveToken;
+                delete user.removeToken;
                 delete user.save;
 
                 return user;
@@ -113,11 +116,67 @@ module.exports = {
                 return callback(err, status);
             };
 
+            mock.isActiveToken = (token) => {
+                return mock.active_tokens.includes(token);
+            };
+
+            mock.removeToken = (token) => {
+                const array = mock.active_tokens;
+                const index = array.indexOf(token);
+
+                if (index !== -1) {
+                    array.splice(index, 1);
+                }
+            };
+
             mock.save = (callback) => {
                 const err = mock.errSave;
                 const user = mock;
 
                 return callback(err, user);
+            };
+
+            return mock;
+        }
+    },
+    TOKEN_HANDLER: {
+        MOCK: (reqMock) => {
+            const mock = {
+                encoded: reqMock.headers.authorization.split(' ')[1],
+                payload: {
+                    sub: '591b3b379efa9b282cb763bd',
+                    email: 'a@a',
+                    device: reqMock.headers['user-agent']
+                },
+                v: null
+            };
+
+            mock.isValid = () => {
+                return mock.v;
+            };
+
+            return mock;
+        }
+    },
+    ERRORS: {
+        MOCK: () => {
+            const mock = {
+                normal: {
+                    message: 'Something like error message!'
+                },
+                unauthorized: {
+                    message: 'You are not authorized!'
+                },
+                expires: {
+                    message: 'Your token has expired.'
+                },
+                validation: {
+                    message: 'User validation failed',
+                    name: 'ValidationError'
+                },
+                usernotfound: {
+                    message: 'User not found.'
+                }
             };
 
             return mock;

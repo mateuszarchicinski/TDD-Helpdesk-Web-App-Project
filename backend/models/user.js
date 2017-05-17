@@ -45,6 +45,21 @@ userSchema.methods.comparePasswords = function (password, callback) {
 };
 
 
+userSchema.methods.isActiveToken = function (token) {
+    return this.active_tokens.includes(token);
+};
+
+
+userSchema.methods.removeToken = function (token) {
+    const array = this.active_tokens;
+    const index = array.indexOf(token);
+
+    if (index !== -1) {
+        array.splice(index, 1);
+    }
+};
+
+
 userSchema.pre('save', function (next) {
     const user = this;
 
