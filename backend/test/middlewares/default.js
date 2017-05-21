@@ -1,18 +1,23 @@
 'use strict';
 
 
-// CHAI SETUP & HELPERS
+// CHAI & SINON
 const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
-
 chai.use(sinonChai);
 
 
 // NODE MODULES
 const mocks = require('node-mocks-http');
-const reqMock = mocks.createRequest();
+const reqMock = mocks.createRequest({
+    protocol: 'https',
+    hostname: 'localhost-hostname',
+    headers: {
+        host: 'localhost-host'
+    }
+});
 const resMock = mocks.createResponse();
 
 
@@ -26,15 +31,15 @@ describe('Middlewares:', () => {
         let nextMock;
 
         beforeEach(() => {
+            sinon.spy(resMock, 'redirect');
             nextMock = sinon.spy();
 
             defMiddleware(reqMock, resMock, nextMock);
         });
 
         afterEach(() => {
-
+            resMock.redirect.restore();
             nextMock = null;
-
         });
 
         it('is a function', () => {
@@ -61,22 +66,57 @@ describe('Middlewares:', () => {
 
         });
 
-        it('req.createFullUrl(path) with path as string or number should return correct url value (string)', () => {
+        it('req.createFullUrl(path) with path as string or number should return correct url value <string>', () => {
             const stringMock = 'stringMock';
             const numberMock = 100;
 
+            // environment: unknown
             // string
-            expect(reqMock.createFullUrl(stringMock)).to.equal(`undefined://undefined/${stringMock}`);
+            expect(reqMock.createFullUrl(stringMock)).to.equal(`https://localhost-host/${stringMock}`);
 
             // number
-            expect(reqMock.createFullUrl(numberMock)).to.equal(`undefined://undefined/${numberMock}`);
+            expect(reqMock.createFullUrl(numberMock)).to.equal(`https://localhost-host/${numberMock}`);
 
             // both equal
             expect(reqMock.createFullUrl(stringMock)).to.equal(reqMock.createFullUrl(`/${stringMock}`));
             expect(reqMock.createFullUrl(numberMock)).to.equal(reqMock.createFullUrl(`/${numberMock}`));
 
+
+            // environment: production
+            process.env.NODE_ENV = 'production';
+
+            // string
+            expect(reqMock.createFullUrl(stringMock)).to.equal(`https://localhost-hostname/${stringMock}`);
+
+            // number
+            expect(reqMock.createFullUrl(numberMock)).to.equal(`https://localhost-hostname/${numberMock}`);
+
+            // both equal
+            expect(reqMock.createFullUrl(stringMock)).to.equal(reqMock.createFullUrl(`/${stringMock}`));
+            expect(reqMock.createFullUrl(numberMock)).to.equal(reqMock.createFullUrl(`/${numberMock}`));
+
+            delete process.env.NODE_ENV;
+
             // is a string
             expect(reqMock.createFullUrl(stringMock)).to.be.a('string');
+        });
+
+        it('res.redirectTo() should call res.redirect(status, path) correctly', () => {
+            resMock.redirectTo();
+
+            expect(resMock.redirect).to.have.been.calledWith(301, 'https://localhost-host');
+        });
+
+        it('res.redirectTo(path) should call res.redirect(status, path) correctly', () => {
+            resMock.redirectTo('en/dashboard');
+
+            expect(resMock.redirect).to.have.been.calledWith(301, 'https://localhost-host/en/dashboard');
+        });
+
+        it('res.redirectTo(path, status) should call res.redirect(status, path) correctly', () => {
+            resMock.redirectTo('/en/dashboard', 302);
+
+            expect(resMock.redirect).to.have.been.calledWith(302, 'https://localhost-host/en/dashboard');
         });
     });
 
