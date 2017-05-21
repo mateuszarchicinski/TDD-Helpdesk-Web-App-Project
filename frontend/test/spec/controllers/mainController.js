@@ -3,15 +3,22 @@
 
 describe('Controllers: mainController', function () {
     var mainController,
-        appState;
+        appStateMock;
 
     beforeEach(function () {
         module('app');
 
-        inject(function ($controller, _appState_) {
-            appState = _appState_;
+        inject(function ($controller) {
+            appStateMock = {
+                authorized: false,
+                isAuthorized: function () {
+                    return this.authorized;
+                }
+            };
 
-            mainController = $controller('mainController');
+            mainController = $controller('mainController', {
+                appState: appStateMock
+            });
         });
     });
 
@@ -24,14 +31,12 @@ describe('Controllers: mainController', function () {
     });
 
     it('ctrl.authorizedClass() should return class: authorized', function () {
-        appState.setAuthorized(true);
+        appStateMock.authorized = true;
 
         expect(mainController.authorizedClass()).to.equal('authorized');
     });
 
     it('ctrl.authorizedClass() should return class: unauthorized', function () {
-        appState.setAuthorized(false);
-
         expect(mainController.authorizedClass()).to.equal('unauthorized');
     });
 });

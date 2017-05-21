@@ -2,30 +2,36 @@
 
 
 describe('Controllers: loginController', function () {
-    var loginController,
-        eventMock,
-        scope;
+    var eventMock,
+        authMock,
+        scope,
+        loginController;
 
     beforeEach(function () {
         module('app');
 
         inject(function ($controller, $rootScope) {
-            scope = $rootScope.$new();
-
-            loginController = $controller('loginController', {
-                $scope: scope
-            });
-
             eventMock = {
                 preventDefault: function () {}
             };
+            authMock = {
+                login: function () {},
+                loginVia: function () {}
+            };
 
             sinon.spy(eventMock, 'preventDefault');
-        });
-    });
+            sinon.spy(authMock, 'login');
+            sinon.spy(authMock, 'loginVia');
 
-    afterEach(function () {
-        eventMock.preventDefault.restore();
+            scope = $rootScope.$new();
+            scope.email = 'a@a';
+            scope.password = 'aaaaaaaa';
+
+            loginController = $controller('loginController', {
+                auth: authMock,
+                $scope: scope
+            });
+        });
     });
 
     it('ctrl.loginForm should be an object', function () {
@@ -40,6 +46,15 @@ describe('Controllers: loginController', function () {
         loginController.loginForm.submit(eventMock);
 
         expect(eventMock.preventDefault).to.have.been.calledOnce;
+    });
+
+    it('ctrl.loginForm.submit() should call auth.login(user) with correct user object as argument', function () {
+        loginController.loginForm.submit(eventMock);
+
+        expect(authMock.login).to.have.been.calledWith({
+            email: 'a@a',
+            password: 'aaaaaaaa'
+        });
     });
 
     it('ctrl.loginVia should be a function', function () {

@@ -1,10 +1,10 @@
-app.controller('registerController', ['$mdDialog', 'urlParams', '$scope', '$http', function ($mdDialog, urlParams, $scope, $http) {
+app.controller('registerController', ['auth', '$scope', '$mdDialog', 'urlParams', function (auth, $scope, $mdDialog, urlParams) {
     var registerForm = this.registerForm = {};
 
     registerForm.submit = function (evt) {
         evt.preventDefault();
 
-        $http.post('http://localhost:4848/auth/register', {
+        auth.register({
             firstName: $scope.firstName,
             email: $scope.email,
             password: $scope.password

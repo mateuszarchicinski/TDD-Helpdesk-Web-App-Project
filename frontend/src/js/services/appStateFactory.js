@@ -1,26 +1,8 @@
-app.factory('appState', ['urlParams', function (urlParams) {
+app.factory('appState', ['urlParams', 'authToken', function (urlParams, authToken) {
     var appState = {
-        language: urlParams.currentLanguage(),
-        authorized: false
+        language: urlParams.currentLanguage,
+        isAuthorized: authToken.isAuthenticated
     };
 
-    var getter = function (property) {
-        return appState[property];
-    };
-
-    var setAuthorized = function (boolean) {
-        if (typeof boolean === 'boolean' && appState.authorized !== boolean) {
-            appState.authorized = boolean;
-        }
-    };
-
-    var isAuthorized = function () {
-        return appState.authorized;
-    };
-
-    return {
-        language: getter('language'),
-        setAuthorized: setAuthorized,
-        isAuthorized: isAuthorized
-    };
+    return appState;
 }]);

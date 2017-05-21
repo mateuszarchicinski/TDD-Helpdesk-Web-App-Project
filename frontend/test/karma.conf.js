@@ -32,6 +32,7 @@ module.exports = function (config) {
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-animate/angular-animate.js',
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-aria/angular-aria.js',
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-messages/angular-messages.js',
+            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-md5/angular-md5.js',
 
             // angular material
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/angular-material/angular-material.js',

@@ -35,24 +35,24 @@
         }
     ];
 
-    appConfig.restFullAPI = { // Defaults values: {baseUrl: '/', login: {url: 'auth/login'}, register: {url: 'auth/register'}}
-        baseUrl: '',
-        login: {
-            url: ''
-        },
-        register: {
-            url: ''
+    appConfig.apiConfig = { // Default values: {baseUrl: '/', loginUrl: 'auth/login', registerUrl: 'auth/register', loginVia: {facebookUrl: 'auth/facebook',  googleUrl: 'auth/google'}}
+        baseUrl: 'http://localhost:4848/',
+        loginUrl: '',
+        registerUrl: '',
+        loginVia: {
+            facebookUrl: '',
+            googleUrl: ''
         }
     };
 
-    appConfig.tokenConfig = { // Defaults values: {prefix: 'HDA', name: 'userToken', header: 'Authorization', type: 'Bearer'}
+    appConfig.tokenConfig = { // Default values: {prefix: 'HDA', name: 'userToken', header: 'Authorization', type: 'Bearer'}
         prefix: '',
         name: '',
         header: '',
         type: ''
     };
 
-    app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$mdThemingProvider', function (urlParamsProvider, APP_CONFIG, $stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
+    app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$mdThemingProvider', function (urlParamsProvider, APP_CONFIG, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
 
         urlParamsProvider.languages = APP_CONFIG.languages;
 
@@ -83,6 +83,8 @@
 
         $locationProvider.html5Mode(true);
 
+        $httpProvider.interceptors.push('authInterceptor');
+
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
             .accentPalette('amber');
@@ -91,6 +93,14 @@
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
             if (!appState.isAuthorized() && toState.authRequired) {
+                event.preventDefault();
+
+                $state.go('root');
+            }
+        });
+
+        $rootScope.$on('Unautorized', function (event, data) {
+            if (!appState.isAuthorized() && $state.current.authRequired) {
                 event.preventDefault();
 
                 $state.go('root');

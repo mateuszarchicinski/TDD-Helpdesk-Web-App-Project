@@ -15,10 +15,6 @@ describe('Controllers: rootController', function () {
         sinon.spy(state, 'go');
     }));
 
-    afterEach(function () {
-        state.go.restore();
-    });
-
     it('should call $state.go() once', function () {
         rootController.redirectTo();
 

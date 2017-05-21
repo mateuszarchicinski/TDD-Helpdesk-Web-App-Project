@@ -1,16 +1,14 @@
-app.controller('loginController', ['appState', '$scope', '$http', function (appState, $scope, $http) {
+app.controller('loginController', ['auth', '$scope', function (auth, $scope) {
     var loginForm = this.loginForm = {};
 
     loginForm.submit = function (evt) {
         evt.preventDefault();
 
-        $http.post('http://localhost:4848/auth/login', {
+        auth.login({
             email: $scope.email,
             password: $scope.password
         });
     };
 
-    this.loginVia = function (provider) {
-        appState.setAuthorized(true);
-    };
+    this.loginVia = auth.loginVia;
 }]);

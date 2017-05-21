@@ -12,23 +12,17 @@ describe('Services: appStateFactory', function () {
         });
     });
 
-    it('appState.language should return a string', function () {
-        expect(appState.language).to.be.a('string');
+    it('appState should return an object with methods language and isAuthorized', function () {
+        expect(appState).to.be.an('object');
+        expect(appState).to.have.property('language').that.is.a('function');
+        expect(appState).to.have.property('isAuthorized').that.is.a('function');
     });
 
-    it('appState.isAuthorized() should return false', function () {
-        expect(appState.isAuthorized()).to.be.false;
+    it('appState.language() should return a string', function () {
+        expect(appState.language()).to.be.a('string');
     });
 
-    it('appState.setAuthorized(true) should change property authorized to true', function () {
-        appState.setAuthorized(true);
-
-        expect(appState.isAuthorized()).to.be.true;
-    });
-
-    it('appState.setAuthorized(false) should change property authorized to false', function () {
-        appState.setAuthorized(true);
-
-        expect(appState.isAuthorized()).to.be.true;
+    it('appState.isAuthorized() should return a boolean', function () {
+        expect(appState.isAuthorized()).to.be.a('boolean');
     });
 });
