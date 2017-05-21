@@ -14,7 +14,7 @@ const userModelName = 'User';
 const userModel = mongoose.models[userModelName] ? mongoose.model(userModelName) : mongoose.model(userModelName, require('../models/user').schema);
 
 
-// Register Controller
+// Logout Controller
 module.exports = function (req, res, next) {
     const reqUser = req.user || {};
 

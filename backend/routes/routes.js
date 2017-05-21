@@ -19,6 +19,10 @@ module.exports = {
             controller: 'test'
         },
         {
+            url: '/verification/email',
+            controller: 'emailVerification'
+        },
+        {
             url: '/auth/logout',
             method: 'post',
             middlewares: 'ensureAuthentication',

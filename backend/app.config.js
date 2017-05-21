@@ -22,6 +22,12 @@ module.exports = {
             EXPIRES: 7 // days
         }
     },
+    SMTP: { // Smtp using ---> https://nodemailer.com/smtp/
+        HOST: '',
+        PORT: 465,
+        USER: '',
+        PASSWORD: ''
+    },
     APP_CONFIG: 'app.config.js',
     HTTP_CODES_CONFIG: require('./httpCodes.config.js'),
     ROUTES_CONFIG: require('./routes.config.js'),

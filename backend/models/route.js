@@ -1,17 +1,16 @@
 // NODE MODULES
 const mongoose = require('../services/mongoose');
-const mongooseUniqueValidator = require('mongoose-unique-validator');
 
 
 // ROUTES CONFIG
-const ROUTES_CONFIG = require('../app.config').ROUTES_CONFIG;
+const APP_CONFIG = require('../app.config');
+const ROUTES_CONFIG = APP_CONFIG.ROUTES_CONFIG;
 
 
 const routeSchema = new mongoose.Schema({
     url: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     method: {
         type: String,
@@ -46,7 +45,31 @@ routeSchema.methods.getController = function () {
 };
 
 
-routeSchema.plugin(mongooseUniqueValidator);
+routeSchema.pre('save', function (next) {
+    const self = this;
+    const routeModelName = `${APP_CONFIG.MODE}Route`;
+    const routeModel = mongoose.models[routeModelName] ? mongoose.model(routeModelName) : mongoose.model('Route');
+
+    routeModel.find({
+        url: self.url,
+        method: self.method
+    }, [], {
+        limit: 1
+    }, (err, users) => {
+        if (err) {
+            return next(err);
+        }
+
+        if (users.length === 1) {
+            return next(new Error({
+                message: `Can not save route with url: ${self.url} and method: ${self.method}`,
+                reason: 'The route was duplicated'
+            }));
+        }
+
+        next();
+    });
+});
 
 
 module.exports = {

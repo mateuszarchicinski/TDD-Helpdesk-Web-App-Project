@@ -3,7 +3,9 @@ const HTTP_CODES_CONFIG = require('../app.config').HTTP_CODES_CONFIG;
 
 
 // APP SERVICES
+const alertHandler = require('../services/alertHandler');
 const mongoose = require('../services/mongoose');
+const sendMail = require('../services/sendMail');
 const tokenHandler = require('../services/tokenHandler');
 
 
@@ -34,6 +36,12 @@ module.exports = function (req, res, next) {
 
             return next(err);
         }
+
+        sendMail(user, {
+            type: 'verificationEmail'
+        }).catch((err) => {
+            alertHandler('error', err);
+        });
 
         const newToken = tokenHandler.encode({
             sub: user._id,
