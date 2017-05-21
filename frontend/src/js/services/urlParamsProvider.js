@@ -1,17 +1,30 @@
 app.provider('urlParams', ['$windowProvider', function ($windowProvider) {
-    var self = this,
-        location = $windowProvider.$get().location,
-        langValue = location.pathname.split('/')[1];
+    var self = this;
 
-    var currentLanguage = function currentLanguage() {
-        return self.languages.indexOf(langValue) === -1 ? self.languages[0] : langValue;
-    };
+    function getParams() {
+        var window = $windowProvider.$get();
 
-    var rightPath = function () {
+        return {
+            location: window.location,
+            langValue: window.location.pathname.split('/')[1]
+        };
+    }
+
+    function currentLanguage() {
+        var lang = getParams().langValue;
+
+        return self.languages.indexOf(lang) === -1 ? self.languages[0] : lang;
+    }
+
+    function rightPath() {
+        var location = getParams().location;
+
         return location.pathname.substring(currentLanguage().length + 1) + location.search;
-    };
+    }
 
     this.languages = '';
+
+    this.currentLanguage = currentLanguage;
 
     this.$get = function () {
         return {

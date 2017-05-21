@@ -2,10 +2,12 @@
 
 
 describe('Services: urlParamsProvider', function () {
-    var urlParams;
+    var APP_CONFIG,
+        urlParams,
+        windowMock;
 
     beforeEach(module(function ($provide) {
-        var windowMock = {
+        windowMock = {
             location: {
                 pathname: '/en/something',
                 search: '?search'
@@ -15,13 +17,13 @@ describe('Services: urlParamsProvider', function () {
         $provide.value('$window', windowMock);
     }));
 
-    beforeEach(function () {
-        module('app');
+    beforeEach(module('app'));
 
-        inject(function (_urlParams_) {
-            urlParams = _urlParams_;
-        });
-    });
+    beforeEach(inject(function (_APP_CONFIG_, _urlParams_) {
+        APP_CONFIG = _APP_CONFIG_;
+
+        urlParams = _urlParams_;
+    }));
 
     it('urlParams.currentLanguage() should return a string', function () {
         expect(urlParams.currentLanguage()).to.be.a('string');
@@ -29,6 +31,12 @@ describe('Services: urlParamsProvider', function () {
 
     it('urlParams.currentLanguage() should return current language code', function () {
         expect(urlParams.currentLanguage()).to.equal('en');
+    });
+
+    it('urlParams.currentLanguage() should return default language code', function () {
+        windowMock.location.pathname = 'something';
+
+        expect(urlParams.currentLanguage()).to.equal(APP_CONFIG.languages[0]);
     });
 
     it('urlParams.rightPath() should return a string', function () {
