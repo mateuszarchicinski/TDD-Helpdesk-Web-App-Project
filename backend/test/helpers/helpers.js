@@ -1,5 +1,15 @@
-//Herlpers - Here put all your needed variables & functions for unit testing
-module.exports = {
+/*!
+ *
+ * Herlpers - Here put all your needed global variables & mocks for unit testing
+ *
+ */
+
+
+// NODE MODULES
+const sinonChai = require('sinon-chai');
+
+
+const helpers = {
     HOST: 'localhost', // Test server will be on address: http://localhost:5858
     PORT: 5848,
     MONGO_DB: { // MongoDB Config - mongodb://USER:PASSWORD@HOST:PORT/NAME
@@ -183,3 +193,15 @@ module.exports = {
         }
     }
 };
+
+
+// GLOBALS
+// HELPERS & CHAI & MOCHA & SINON
+global.helpers = helpers;
+global.chai = require('chai');
+global.expect = chai.expect;
+global.sinon = require('sinon');
+chai.use(sinonChai);
+
+
+module.exports = helpers;
