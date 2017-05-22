@@ -38,12 +38,6 @@ describe('Controllers: registerController', function () {
         });
     });
 
-    afterEach(function () {
-        eventMock.preventDefault.restore();
-
-        mdDialog.show.restore();
-    });
-
     it('ctrl.registerForm should be an object', function () {
         expect(registerController.registerForm).to.be.an('object');
     });

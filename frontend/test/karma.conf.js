@@ -48,13 +48,14 @@ module.exports = function (config) {
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/models/**/*.js',
 
             // application services
+            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/services/urlParamsProvider.js',
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/services/**/*.js',
-
-            // application directives
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/directives/**/*.js',
 
             // application controllers
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/controllers/**/*.js',
+
+            // application directives
+            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/directives/**/*.js',
 
             // application tests
             PROJECT_CONFIG.DIRECTORY.TEST_DIR + '/spec/**/*.js'

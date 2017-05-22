@@ -16,8 +16,6 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', 'authToken', '$state', functi
             authToken.setToken(user.token);
 
             $state.go('helpdesk');
-        }, function (err) {
-            console.log(err);
         });
     }
 

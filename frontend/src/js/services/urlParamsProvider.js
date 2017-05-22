@@ -22,7 +22,7 @@ app.provider('urlParams', ['$windowProvider', function ($windowProvider) {
         return location.pathname.substring(currentLanguage().length + 1) + location.search;
     }
 
-    this.languages = '';
+    this.languages = ['pl'];
 
     this.currentLanguage = currentLanguage;
 

@@ -12,7 +12,8 @@
             name: 'root',
             url: '/',
             controller: 'rootController as RC',
-            baseUrl: false
+            baseUrl: false,
+            otherwise: true
         },
         {
             name: 'login',
@@ -52,38 +53,61 @@
         type: ''
     };
 
-    app.config(['urlParamsProvider', 'APP_CONFIG', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$mdThemingProvider', function (urlParamsProvider, APP_CONFIG, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
+    app.config(['urlParamsProvider', 'routesInjectorProvider', 'APP_CONFIG', '$httpProvider', '$mdThemingProvider', function (urlParamsProvider, routesInjectorProvider, APP_CONFIG, $httpProvider, $mdThemingProvider) {
+
+        /*!
+         *
+         * urlParamsProvider Setup
+         *
+         * Reqiured:
+         * - languages property, which must be an array with languages codes e.g. ['pl', 'en']
+         *
+         */
 
         urlParamsProvider.languages = APP_CONFIG.languages;
 
-        var lang = urlParamsProvider.$get().currentLanguage(),
-            routes = APP_CONFIG.routes;
 
-        var getUrl = function (url) {
-            return '/' + lang + url;
-        };
+        /*!
+         *
+         * routesInjectorProvider Setup
+         *
+         * Required:
+         * - languagePrefix property, which must be a string with language code provided from current url address,
+         * - routes property, which must be an array with routes objects, an example below:
+         * [
+         *   {
+         *     name:         'root',                 - name of the route
+         *     url:          '/',                    - under that URL the route will be available
+         *     templateName: 'root',                 - it creates templateUrl property with correct language prefix and file extension e.g. 'views/LANGUAGE_PREFIX/_TEMPLATE_NAME.html'
+         *     controller:   'rootController as RC', - name of the controller which is already registered
+         *     baseUrl:      false,                  - if true then URL property is changed to '/LANGUAGE_PREFIX/URL'
+         *     authRequired: false                   - this informs app, that route requires user authorization
+         *     otherwise:    true                    - will redirects all unregistered routes to the route with property otherwise: true
+         *   }
+         * ]
+         *
+         */
 
-        var getTemplateUrl = function (templateName) {
-            return 'views/' + lang + '/_' + templateName + '.html';
-        };
+        routesInjectorProvider.inject({
+            languagePrefix: urlParamsProvider.currentLanguage(),
+            routes: APP_CONFIG.routes
+        });
 
-        for (var i in routes) {
-            if (routes[i].baseUrl !== false) {
-                routes[i].url = getUrl(routes[i].url);
-            }
 
-            if (routes[i].templateName) {
-                routes[i].templateUrl = getTemplateUrl(routes[i].templateName);
-            }
-
-            $stateProvider.state(routes[i]);
-        }
-
-        $urlRouterProvider.otherwise('/');
-
-        $locationProvider.html5Mode(true);
+        /*!
+         *
+         * $httpProvider Setup
+         *
+         */
 
         $httpProvider.interceptors.push('authInterceptor');
+
+
+        /*!
+         *
+         * $mdThemingProvider Setup
+         *
+         */
 
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
