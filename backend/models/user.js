@@ -10,6 +10,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    lastName: {
+        type: String
+    },
+    fullName: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    pictures: [String],
     email: {
         type: String,
         lowercase: true,
@@ -18,13 +28,32 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: function () {
+            return this.facebookId || this.googleId ? false : true;
+        }
+    },
+    isPassword: {
+        type: Boolean,
+        default: true
+    },
+    role: {
+        type: String,
+        default: 'user'
     },
     active: {
         type: Boolean,
         default: false
     },
-    active_tokens: [String]
+    active_tokens: [String],
+    locale: {
+        type: String
+    },
+    facebookId: {
+        type: String
+    },
+    googleId: {
+        type: String
+    }
 }, {
     versionKey: false
 });
@@ -35,6 +64,8 @@ userSchema.methods.toJSON = function () {
 
     delete user.password;
     delete user.active_tokens;
+    delete user.facebookId;
+    delete user.googleId;
 
     return user;
 };

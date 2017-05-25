@@ -3,55 +3,71 @@
 
 (function () {
 
-    var appConfig = {};
+    /*!
+     *
+     * Application Config
+     *
+     * Required:
+     * - 
+     *
+     */
 
-    appConfig.languages = ['pl', 'en']; // First element is a default value of language
-
-    appConfig.routes = [ // Routes list, each of them will be added automatically
-        {
-            name: 'root',
-            url: '/',
-            controller: 'rootController as RC',
-            baseUrl: false,
-            otherwise: true
+    var appConfig = {
+        languages: [
+            'pl',
+            'en'
+        ],
+        routes: [
+            {
+                name: 'root',
+                url: '/',
+                controller: 'rootController as RC',
+                baseUrl: false,
+                otherwise: true
+            },
+            {
+                name: 'login',
+                url: '/login',
+                templateName: 'login',
+                controller: 'loginController as LC'
+            },
+            {
+                name: 'register',
+                url: '/register',
+                templateName: 'register',
+                controller: 'registerController as RC'
+            },
+            {
+                name: 'helpdesk',
+                url: '/helpdesk/:service',
+                templateName: 'helpdesk',
+                controller: 'helpdeskController as HC',
+                authRequired: true
+            }
+        ],
+        apiConfig: {
+            baseUrl: 'http://localhost:4848/',
+            loginUrl: '',
+            registerUrl: '',
+            loginVia: {
+                facebookUrl: '',
+                googleUrl: ''
+            }
         },
-        {
-            name: 'login',
-            url: '/login',
-            templateName: 'login',
-            controller: 'loginController as LC'
+        tokenConfig: {
+            prefix: '',
+            name: '',
+            header: '',
+            type: ''
         },
-        {
-            name: 'register',
-            url: '/register',
-            templateName: 'register',
-            controller: 'registerController as RC'
+        facebook: {
+            clientId: '1041741079292895'
         },
-        {
-            name: 'helpdesk',
-            url: '/helpdesk/:service',
-            templateName: 'helpdesk',
-            controller: 'helpdeskController as HC',
-            authRequired: true
-        }
-    ];
-
-    appConfig.apiConfig = { // Default values: {baseUrl: '/', loginUrl: 'auth/login', registerUrl: 'auth/register', loginVia: {facebookUrl: 'auth/facebook',  googleUrl: 'auth/google'}}
-        baseUrl: 'http://localhost:4848/',
-        loginUrl: '',
-        registerUrl: '',
-        loginVia: {
-            facebookUrl: '',
-            googleUrl: ''
+        google: {
+            clientId: '682202059730-pkdrp02no3d8ueiecq4i7tqnnmqkrtoh.apps.googleusercontent.com'
         }
     };
 
-    appConfig.tokenConfig = { // Default values: {prefix: 'HDA', name: 'userToken', header: 'Authorization', type: 'Bearer'}
-        prefix: '',
-        name: '',
-        header: '',
-        type: ''
-    };
 
     app.config(['urlParamsProvider', 'routesInjectorProvider', 'APP_CONFIG', '$httpProvider', '$mdThemingProvider', function (urlParamsProvider, routesInjectorProvider, APP_CONFIG, $httpProvider, $mdThemingProvider) {
 
@@ -113,7 +129,34 @@
             .primaryPalette('teal')
             .accentPalette('amber');
 
-    }]).constant('APP_CONFIG', appConfig).run(['$rootScope', '$state', 'appState', function ($rootScope, $state, appState) {
+    }]).constant('APP_CONFIG', appConfig).run(['$window', '$rootScope', '$state', 'appState', function ($window, $rootScope, $state, appState) {
+
+        /*!
+         *
+         * To catch URL params from Facebook & Google login windows.
+         *
+         */
+
+        var params = $window.location.search.substring(1);
+
+        if (params && $window.opener && $window.opener.location.origin === $window.location.origin) {
+            var code = decodeURIComponent(params.split('=')[1]);
+
+            $window.opener.postMessage({
+                loginVia: true,
+                code: code
+            }, $window.location.origin);
+        }
+
+
+        /*!
+         *
+         * Event on $stateChangeStart - Emittet by UI-Router Module.
+         *
+         * Discription:
+         * - Is checking the user authorization to make sure that user have access to requested route.
+         *
+         */
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
             if (!appState.isAuthorized() && toState.authRequired) {
@@ -122,6 +165,15 @@
                 $state.go('root');
             }
         });
+
+
+        /*!
+         *
+         * Event on Unauthorized - Emittet by AuthInterceptorFactory.
+         *
+         * Discription:
+         * - Is doing the same as on $stateChangeStart event.
+         */
 
         $rootScope.$on('Unautorized', function (event, data) {
             if (!appState.isAuthorized() && $state.current.authRequired) {

@@ -6,6 +6,8 @@
 
 
 // NODE MODULES
+const chai = require('chai');
+const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
 
@@ -198,9 +200,9 @@ const helpers = {
 // GLOBALS
 // HELPERS & CHAI & MOCHA & SINON
 global.helpers = helpers;
-global.chai = require('chai');
+global.chai = chai;
 global.expect = chai.expect;
-global.sinon = require('sinon');
+global.sinon = sinon;
 chai.use(sinonChai);
 
 

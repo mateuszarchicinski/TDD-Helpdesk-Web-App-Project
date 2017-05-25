@@ -28,13 +28,14 @@ module.exports = function (req, res, next) {
             return next(err);
         }
 
-        if (users.length === 0) {
+        const user = users[0];
+
+        if (!user) {
             return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
                 message: 'User not found.'
             });
         }
 
-        const user = users[0];
         user.removeToken(reqUser.token);
 
         user.save((err, user) => {

@@ -19,6 +19,16 @@ module.exports = {
             controller: 'test'
         },
         {
+            url: '/auth/facebook',
+            method: 'post',
+            controller: 'facebookController'
+        },
+        {
+            url: '/auth/google',
+            method: 'post',
+            controller: 'googleController'
+        },
+        {
             url: '/verification/email',
             controller: 'emailVerification'
         },

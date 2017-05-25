@@ -31,13 +31,13 @@ module.exports = function (req, res, next) {
             return next(err);
         }
 
-        if (users.length === 0) {
+        const user = users[0];
+
+        if (!user || !user.isPassword) {
             return res.status(HTTP_CODES_CONFIG.UNAUTHORIZED).json({
                 message: 'You are not authorized!'
             });
         }
-
-        const user = users[0];
 
         user.comparePasswords(reqUser.password, (err, status) => {
             if (err) {
