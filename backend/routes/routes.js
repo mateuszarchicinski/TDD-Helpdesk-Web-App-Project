@@ -19,6 +19,11 @@ module.exports = {
             controller: 'test'
         },
         {
+            url: '/auth/user',
+            middlewares: 'ensureAuthentication',
+            controller: 'userController'
+        },
+        {
             url: '/auth/facebook',
             method: 'post',
             controller: 'facebookController'
