@@ -26,21 +26,21 @@ module.exports = function (config) {
         files: [
 
             // bower components
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/jquery/dist/jquery.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular/angular.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-ui-router/release/angular-ui-router.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-animate/angular-animate.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-aria/angular-aria.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-messages/angular-messages.js',
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-md5/angular-md5.js',
+            'bower_components/jquery/dist/jquery.js',
+            'bower_components/angular/angular.js',
+            'bower_components/angular-ui-router/release/angular-ui-router.js',
+            'bower_components/angular-animate/angular-animate.js',
+            'bower_components/angular-aria/angular-aria.js',
+            'bower_components/angular-messages/angular-messages.js',
+            'bower_components/angular-md5/angular-md5.js',
 
             // angular material
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/angular-material/angular-material.js',
+            'angular-material/angular-material.js',
 
             // mocks: angular
-            PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-mocks/angular-mocks.js',
 
-            // application initialize / configuration
+            // application initialize & configuration
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/app.js',
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/app.config.js',
 
@@ -57,7 +57,8 @@ module.exports = function (config) {
             // application directives
             PROJECT_CONFIG.DIRECTORY.WORK_DIR + '/js/directives/**/*.js',
 
-            // application tests
+            // application helpers & unit tests
+            PROJECT_CONFIG.DIRECTORY.TEST_DIR + '/spec/helpers.js',
             PROJECT_CONFIG.DIRECTORY.TEST_DIR + '/spec/**/*.js'
 
         ],
@@ -80,11 +81,11 @@ module.exports = function (config) {
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         specReporter: {
-            maxLogLines: 10,
-            suppressErrorSummary: false,
+            maxLogLines: 5,
+            suppressErrorSummary: true,
             suppressFailed: false,
-            suppressPassed: false,
-            suppressSkipped: false,
+            suppressPassed: true,
+            suppressSkipped: true,
             showSpecTiming: false
         },
         coverageReporter: {

@@ -1,5 +1,5 @@
 {
-    "destination": "./src/angular-material",
+    "destination": "./angular-material",
     "modules": [
         "button",
         "content",

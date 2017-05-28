@@ -96,6 +96,9 @@ Remember to set up your LANGUAGES in ${PROJECT_CONFIG.CONFIG_FILE} file.`
     
     // Serves static files from the directory, which is defined in a variable baseDir
     app.use('/', express.static(`${__dirname}/${baseDir}`));
+    // Serves static files: Bower components & Angular material
+    app.use('/bower_components', express.static(`${__dirname}/bower_components`));
+    app.use('/angular-material', express.static(`${__dirname}/angular-material`));
     
     
     // Handles all possible routes to send the appropriate HTML file
@@ -305,7 +308,7 @@ Remember to set up your LANGUAGES in ${PROJECT_CONFIG.CONFIG_FILE} file.`
     }))
     .pipe(wiredep({ // https://github.com/taptapship/wiredep#wiredep--
         exclude: ['animatewithsass', 'angular-mocks', 'bower_components/angular-material/angular-material.css'],
-        ignorePath: '../'
+        ignorePath: '../../'
     }))
     .pipe(gulp.dest(`${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/`));
     
