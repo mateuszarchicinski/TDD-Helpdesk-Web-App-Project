@@ -7,6 +7,6 @@ div(ng-controller="userPanelController as UPC" class="user-panel")
         md-button(ng-click="$mdMenu.open($event)" aria-label=data.section.modules.userPanel.ariaLabels[0] class="md-icon-button user-panel__icon-button")
         md-menu-content
             md-menu-item
-                md-button(ng-click="UPC.userGo('myaccount')") #{data.section.modules.userPanel.menuItems[0]}
+                md-button(ng-click="UPC.userGo('myAccount')") #{data.section.modules.userPanel.menuItems[0]}
             md-menu-item
                 md-button(ng-click="UPC.userGo('logout')") #{data.section.modules.userPanel.menuItems[1]}

@@ -347,6 +347,9 @@ html[lang="en"] {
 .helpdesk-view__container, .helpdesk-view__sidenav {
   min-height: calc(100vh - 65px); }
 
+.service-view__container {
+  position: relative; }
+
 .service-view__toolbar, .service-view__toolbar._md {
   background-color: transparent;
   color: #212121; }
@@ -423,47 +426,47 @@ body {
 .main-wrapper__container {
   position: relative; }
 
-.main-wrapper [ui-view].ng-enter, .main-wrapper [ui-view].ng-leave {
-  transition: 0.25s all ease; }
-
-.main-wrapper [ui-view].ng-enter {
-  opacity: 0;
-  -webkit-transform: scale3d(0.95, 0.95, 0.95);
-          transform: scale3d(0.95, 0.95, 0.95); }
-
-.main-wrapper [ui-view].ng-enter-active {
-  opacity: 1;
-  -webkit-transform: scale3d(1, 1, 1);
-          transform: scale3d(1, 1, 1); }
-
-.main-wrapper [ui-view].ng-leave {
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0); }
-
-.main-wrapper [ui-view].ng-leave-active {
-  opacity: 0; }
-
-.authorized .main-wrapper [ui-view] {
+.main-wrapper [ui-view=""],
+.main-wrapper [ui-view="service"] {
   width: 100%;
   position: absolute; }
+  .main-wrapper [ui-view=""].ng-enter, .main-wrapper [ui-view=""].ng-leave,
+  .main-wrapper [ui-view="service"].ng-enter,
+  .main-wrapper [ui-view="service"].ng-leave {
+    transition: 0.2s opacity linear, 0.2s -webkit-transform linear;
+    transition: 0.2s opacity linear, 0.2s transform linear;
+    transition: 0.2s opacity linear, 0.2s transform linear, 0.2s -webkit-transform linear; }
+  .main-wrapper [ui-view=""].ng-enter,
+  .main-wrapper [ui-view="service"].ng-enter {
+    opacity: 0;
+    -webkit-transform: scale3d(0.98, 0.98, 0.98);
+            transform: scale3d(0.98, 0.98, 0.98); }
+  .main-wrapper [ui-view=""].ng-enter-active,
+  .main-wrapper [ui-view="service"].ng-enter-active {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1); }
+  .main-wrapper [ui-view=""].ng-leave,
+  .main-wrapper [ui-view="service"].ng-leave {
+    opacity: 0;
+    -webkit-transform: scale3d(0, 0, 0);
+            transform: scale3d(0, 0, 0); }
 
 .main-footer {
-  padding: 25px 0 35px; }
-  .main-footer__copyright {
-    font-size: 0.8em;
-    font-weight: 400; }
-
-.authorized .main-footer {
   width: 280px;
   position: fixed;
   left: 0;
   bottom: 0;
   z-index: 100;
   padding: 0; }
-  .authorized .main-footer__paragraph {
-    color: #fff; }
+  .main-footer__copyright {
+    font-size: 0.8em;
+    font-weight: 400; }
   @media screen and (max-width: 959px) {
-    .authorized .main-footer {
+    .main-footer {
       display: none; } }
+
+.authorized .main-footer__paragraph {
+  color: #fff; }
 
 /*# sourceMappingURL=maps/main.css.map */

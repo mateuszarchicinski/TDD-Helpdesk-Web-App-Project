@@ -7,5 +7,6 @@ section(class="helpdesk-view")
         md-button(ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide" class="md-fab md-primary helpdesk-view__icon-button")
         md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation" class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav")
             include ../../components/lists/_services
-        div(flex)
-            inject-component(include="userServices.current.templateUrl")
+        div(flex class="service-view")
+            div(class="service-view__container")
+                div(ui-view="service")

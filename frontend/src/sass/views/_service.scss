@@ -8,6 +8,9 @@ $service-view__toolbar__color: $primary-text-color !default;
 
 
 .service-view {
+    &__container {
+        position: relative;
+    }
     &__toolbar,
     &__toolbar._md {
         background-color: transparent;

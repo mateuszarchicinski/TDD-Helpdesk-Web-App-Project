@@ -5,14 +5,16 @@
     <md-button class="md-fab md-primary helpdesk-view__icon-button" ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide"></md-button>
     <md-sidenav class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav" layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation">
       <md-list class="services-list md-body-1">
-        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk({service: 'dashboard'})" ui-sref-active="services-list__link-active">Dashboard</a></md-list-item>
+        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.dashboard" ui-sref-active="services-list__link-active">Dashboard</a></md-list-item>
         <inject-component include="userServices.templateUrl"></inject-component>
-        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk({service: 'myaccount'})" ui-sref-active="services-list__link-active">My Account</a></md-list-item>
-        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk({service: 'logout'})" ui-sref-active="services-list__link-active">Sign Out</a></md-list-item>
+        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.myAccount" ui-sref-active="services-list__link-active">My Account</a></md-list-item>
+        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.logout" ui-sref-active="services-list__link-active">Sign Out</a></md-list-item>
       </md-list>
     </md-sidenav>
-    <div flex="flex">
-      <inject-component include="userServices.current.templateUrl"></inject-component>
+    <div class="service-view" flex="flex">
+      <div class="service-view__container">
+        <div ui-view="service"></div>
+      </div>
     </div>
   </div>
 </section>

@@ -56,8 +56,8 @@ mixin registerForm(name, shortName, ctrlAs, data)
         md-button(type="submit" ng-click=name + ".$invalid || " + ctrlAs + "." + name + ".submit($event)" class="btn btn-primary")= data.submitBtn
 
 //- Service View
-mixin serviceView(controller, modifierClass, data)
-    div(ng-controller=controller class="service-view " + modifierClass)
+mixin serviceView(modifierClass, data)
+    div(class="service-view__" + modifierClass)
         md-toolbar(class="service-view__toolbar")
             header.md-toolbar-tools(class="service-view__toolbar-tools")
                 h2= data.fullName || data.name

@@ -3,9 +3,9 @@
 
 md-list(class="services-list md-body-1")
     md-list-item(class="services-list__list-item")
-        a(ui-sref="helpdesk({service: 'dashboard'})" ui-sref-active="services-list__link-active" class="services-list__link") #{data.section.helpdesk.services.dashboard.name}
+        a(ui-sref="helpdesk.dashboard" ui-sref-active="services-list__link-active" class="services-list__link") #{data.section.helpdesk.services.dashboard.name}
     inject-component(include="userServices.templateUrl")
     md-list-item(class="services-list__list-item")
-        a(ui-sref="helpdesk({service: 'myaccount'})" ui-sref-active="services-list__link-active" class="services-list__link") #{data.section.helpdesk.services.myaccount.name}
+        a(ui-sref="helpdesk.myAccount" ui-sref-active="services-list__link-active" class="services-list__link") #{data.section.helpdesk.services.myaccount.name}
     md-list-item(class="services-list__list-item")
-        a(ui-sref="helpdesk({service: 'logout'})" ui-sref-active="services-list__link-active" class="services-list__link") #{data.section.helpdesk.services.logout.name}
+        a(ui-sref="helpdesk.logout" ui-sref-active="services-list__link-active" class="services-list__link") #{data.section.helpdesk.services.logout.name}
