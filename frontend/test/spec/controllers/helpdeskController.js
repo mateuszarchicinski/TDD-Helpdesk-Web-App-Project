@@ -1,10 +1,14 @@
+/* global authMock, successRes, errorCallbackSpy, errorRes */
+
+
 'use strict';
 
 
 describe('Controllers: helpdeskController', function () {
     var helpdeskController,
         sinonSpyOnToggle,
-        scope;
+        scope,
+        userMock;
 
     beforeEach(module('app'));
 
@@ -21,9 +25,18 @@ describe('Controllers: helpdeskController', function () {
     beforeEach(inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
 
+        userMock = sinon.spy();
+        userMock.isUser = function () {
+            return true;
+        };
+
         helpdeskController = $controller('helpdeskController', {
-            $scope: scope
+            $scope: scope,
+            user: userMock,
+            auth: authMock
         });
+
+        sinon.stub(userMock, 'isUser');
     }));
 
     it('ctrl.toggleSidenav should be a function', function () {
@@ -40,5 +53,39 @@ describe('Controllers: helpdeskController', function () {
         expect(scope.userServices).to.be.an('object');
         expect(scope.userServices).to.have.property('templateUrl');
         expect(scope.userServices).to.have.deep.property('current.templateUrl');
+    });
+
+    it('ctrl.getResources should be a function', function () {
+        expect(helpdeskController.getResources).to.be.a('function');
+    });
+
+    it('ctrl.getResources() on success response should call user(res.data)', function () {
+        userMock.isUser.returns(false);
+        authMock.statusUser = true;
+
+        helpdeskController.getResources();
+
+        expect(authMock.user).to.have.been.calledOnce;
+        expect(userMock).to.have.been.calledWith(successRes.data);
+        expect(errorCallbackSpy).to.not.have.been.called;
+    });
+
+    it('ctrl.getResources() on error response should call errorCallback(err)', function () {
+        userMock.isUser.returns(false);
+        authMock.statusUser = false;
+
+        helpdeskController.getResources();
+
+        expect(authMock.user).to.have.been.calledOnce;
+        expect(userMock).to.not.have.been.called;
+        expect(errorCallbackSpy).to.have.been.calledWith(errorRes);
+    });
+
+    it('ctrl.getResources() should not call auth.user', function () {
+        userMock.isUser.returns(true);
+
+        helpdeskController.getResources();
+
+        expect(authMock.user).to.not.have.been.calledOnce;
     });
 });
