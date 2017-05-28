@@ -1,4 +1,4 @@
-app.factory('authInterceptor', ['authToken', '$rootScope', '$q', function (authToken, $rootScope, $q) {
+app.factory('authInterceptor', ['authToken', 'user', '$rootScope', '$q', function (authToken, user, $rootScope, $q) {
     var interceptor = {
         request: function (config) {
             var token = authToken.getToken();
@@ -18,6 +18,8 @@ app.factory('authInterceptor', ['authToken', '$rootScope', '$q', function (authT
         responseError: function (resErr) {
             if (resErr.status === 401 && resErr.statusText === 'Unauthorized' && authToken.isAuthenticated()) {
                 authToken.removeToken();
+
+                user.removeUser();
 
                 $rootScope.$emit('Unauthorized', resErr.data);
             }

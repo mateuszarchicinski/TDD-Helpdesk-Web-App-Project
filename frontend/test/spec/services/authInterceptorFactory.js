@@ -5,18 +5,21 @@ describe('Services: authInterceptorFactory', function () {
     var authInterceptor,
         configMock,
         authToken,
+        user,
         scope,
         q;
 
     beforeEach(module('app'));
 
-    beforeEach(inject(function (_authInterceptor_, _authToken_, $rootScope, $q) {
+    beforeEach(inject(function (_authInterceptor_, _authToken_, _user_, $rootScope, $q) {
         authInterceptor = _authInterceptor_;
 
         authToken = _authToken_;
+        user = _user_;
         scope = $rootScope.$new();
 
         sinon.spy(authToken, 'removeToken');
+        sinon.spy(user, 'removeUser');
         sinon.spy(scope, '$emit');
 
         q = $q;
@@ -26,6 +29,8 @@ describe('Services: authInterceptorFactory', function () {
         configMock = {
             headers: {}
         };
+
+        localStorage.clear();
     });
 
     it('authInterceptor should return an object with methods request, requestError, response, responseError', function () {
@@ -60,15 +65,18 @@ describe('Services: authInterceptorFactory', function () {
         expect(scope.$emit).to.not.have.been.calledOnce;
     });
 
-    it('authInterceptor.responseError({status: 401, statusText: "Unauthorized"}) should call authToken.removeToken() and $rootScope.$emit("Unauthorized", resErr.data)', function () {
+    it('authInterceptor.responseError({status: 401, statusText: "Unauthorized"}) should call authToken.removeToken(), user.removeUser() and $rootScope.$emit("Unauthorized", resErr.data)', function () {
         var resErrMock = {
             data: {},
             status: 401,
             statusText: 'Unauthorized'
         };
 
+        authToken.setToken('token');
+
         expect(authInterceptor.responseError(resErrMock)).to.deep.equal(q.reject(resErrMock));
         expect(authToken.removeToken).to.have.been.calledOnce;
+        expect(user.removeUser).to.have.been.calledOnce;
         expect(scope.$emit).to.not.have.been.calledWith('Unauthorized', resErrMock.data);
     });
 });

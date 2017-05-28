@@ -1,6 +1,12 @@
-app.controller('rootController', ['$state', function ($state) {
+app.controller('rootController', ['appState', '$state', function (appState, $state) {
     var redirectTo = this.redirectTo = function () {
-        $state.go('login');
+        var defaultState = 'login';
+
+        if (appState.isAuthorized()) {
+            defaultState = 'helpdesk.dashboard';
+        }
+
+        $state.go(defaultState);
     };
 
     redirectTo();

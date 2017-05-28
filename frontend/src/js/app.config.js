@@ -38,17 +38,52 @@
                 controller: 'registerController as RC'
             },
             {
+                abstract: true,
                 name: 'helpdesk',
-                url: '/helpdesk/:service',
+                url: '/helpdesk',
                 templateName: 'helpdesk',
                 controller: 'helpdeskController as HC',
                 authRequired: true
+            },
+            {
+                name: 'helpdesk.dashboard',
+                url: '/dashboard',
+                authRequired: true,
+                views: {
+                    'service': {
+                        templateName: 'dashboardService',
+                        controller: 'dashboardController as DC'
+                    }
+                }
+            },
+            {
+                name: 'helpdesk.myAccount',
+                url: '/myaccount',
+                authRequired: true,
+                views: {
+                    'service': {
+                        templateName: 'myAccountService',
+                        controller: 'myAccountController as MAC'
+                    }
+                }
+            },
+            {
+                name: 'helpdesk.logout',
+                url: '/logout',
+                authRequired: true,
+                views: {
+                    'service': {
+                        controller: 'logoutController as LC'
+                    }
+                }
             }
         ],
         apiConfig: {
             baseUrl: 'http://localhost:4848/',
-            loginUrl: '',
             registerUrl: '',
+            loginUrl: '',
+            logoutUrl: '',
+            userUrl: '',
             loginVia: {
                 facebookUrl: '',
                 googleUrl: ''
@@ -159,7 +194,7 @@
          */
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
-            if (!appState.isAuthorized() && toState.authRequired) {
+            if (toState.name !== 'root' && ((!appState.isAuthorized() && toState.authRequired) || (appState.isAuthorized() && !toState.authRequired))) {
                 event.preventDefault();
 
                 $state.go('root');
@@ -175,7 +210,7 @@
          * - Is doing the same as on $stateChangeStart event.
          */
 
-        $rootScope.$on('Unautorized', function (event, data) {
+        $rootScope.$on('Unauthorized', function (event, data) {
             if (!appState.isAuthorized() && $state.current.authRequired) {
                 event.preventDefault();
 

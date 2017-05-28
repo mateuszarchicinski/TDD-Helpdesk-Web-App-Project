@@ -45,6 +45,19 @@ describe('Services: routesInjectorProvider', function () {
                 url: '/testRoute2',
                 controller: 'testRoute2',
                 baseUrl: false
+            },
+            {
+                name: 'testRoute2.news',
+                url: '/news',
+                views: {
+                    one: {
+                        templateName: 'newOne',
+                        controller: 'newOneCtrl'
+                    },
+                    two: {
+                        controller: 'newTwoCtrl'
+                    }
+                }
             }
         ];
 
@@ -77,6 +90,24 @@ describe('Services: routesInjectorProvider', function () {
             url: '/testRoute2',
             controller: 'testRoute2',
             baseUrl: false
+        });
+
+        delete routesArrayMock[2].views.one.resolveAs;
+        delete routesArrayMock[2].views.two.resolveAs;
+
+        expect(routesArrayMock[2]).to.deep.equal({
+            name: 'testRoute2.news',
+            url: '/news',
+            views: {
+                one: {
+                    templateName: 'newOne',
+                    templateUrl: 'views/pl/_newOne.html',
+                    controller: 'newOneCtrl'
+                },
+                two: {
+                    controller: 'newTwoCtrl'
+                }
+            }
         });
     });
 

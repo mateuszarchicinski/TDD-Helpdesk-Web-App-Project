@@ -15,7 +15,11 @@ describe('Controllers: rootController', function () {
         sinon.spy(state, 'go');
     }));
 
-    it('should call $state.go() once', function () {
+    it('ctrl.redirectTo should be a function', function () {
+        expect(rootController.redirectTo).to.be.a('function');
+    });
+
+    it('ctrl.redirectTo() should call $state.go() once', function () {
         rootController.redirectTo();
 
         expect(state.go).to.have.been.calledOnce;
