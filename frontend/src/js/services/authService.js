@@ -6,32 +6,46 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
     var configSendRequest = {
         requests: {
             register: {
+                method: 'post',
                 url: apiConfig.registerUrl || 'auth/register'
             },
             login: {
+                method: 'post',
                 url: apiConfig.loginUrl || 'auth/login'
+            },
+            logout: {
+                method: 'post',
+                url: apiConfig.logoutUrl || 'auth/logout'
+            },
+            user: {
+                method: 'get',
+                url: apiConfig.userUrl || 'auth/user'
             }
         }
     };
 
     function sendRequest(user, type) {
-        var deferred = $q.defer(),
-            request = configSendRequest.requests[type];
+        return $q(function (resolve, reject) {
+            var request = configSendRequest.requests[type];
 
-        if (!request) {
-            return deferred.reject();
-        }
+            if (!request) {
+                return reject(false);
+            }
 
-        user = user || {};
-        user.password = md5.createHash(user.password);
+            if (!user) {
+                user = {
+                    message: 'User no found.'
+                };
+            } else {
+                user.password = md5.createHash(user.password);
+            }
 
-        $http.post(baseUrl + request.url, user).then(function (res) {
-            deferred.resolve(res);
-        }, function (err) {
-            deferred.reject(err);
+            $http[request.method](baseUrl + request.url, user).then(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
         });
-
-        return deferred.promise;
     }
 
 
@@ -131,6 +145,14 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
 
     this.login = function (user) {
         return sendRequest(user, 'login');
+    };
+
+    this.logout = function () {
+        return sendRequest(null, 'logout');
+    };
+
+    this.user = function () {
+        return sendRequest(null, 'user');
     };
 
     this.loginVia = loginVia;

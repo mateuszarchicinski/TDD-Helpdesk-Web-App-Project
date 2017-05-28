@@ -1,4 +1,4 @@
-app.controller('registerController', ['auth', '$scope', 'authToken', '$state', '$mdDialog', 'urlParams', function (auth, $scope, authToken, $state, $mdDialog, urlParams) {
+app.controller('registerController', ['auth', '$scope', 'authToken', 'user', '$state', '$mdDialog', 'urlParams', function (auth, $scope, authToken, user, $state, $mdDialog, urlParams) {
     var registerForm = this.registerForm = {};
 
     registerForm.submit = function (evt) {
@@ -17,13 +17,15 @@ app.controller('registerController', ['auth', '$scope', 'authToken', '$state', '
         if (token) {
             authToken.setToken(token);
 
-            $state.go('helpdesk');
+            user(res.data);
+
+            $state.go('helpdesk.dashboard');
         }
     }
 
-    function fnOnError(err) {
-        console.log(err);
-    }
+    /* eslint-disable */
+    function fnOnError(err) {}
+    /* eslint-enable */
 
 
     var showDialog = function (name) {

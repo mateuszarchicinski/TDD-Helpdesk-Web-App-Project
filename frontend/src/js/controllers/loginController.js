@@ -1,4 +1,4 @@
-app.controller('loginController', ['auth', '$scope', 'authToken', '$state', function (auth, $scope, authToken, $state) {
+app.controller('loginController', ['auth', '$scope', 'authToken', 'user', '$state', function (auth, $scope, authToken, user, $state) {
     var loginForm = this.loginForm = {};
 
     loginForm.submit = function (evt) {
@@ -26,11 +26,13 @@ app.controller('loginController', ['auth', '$scope', 'authToken', '$state', func
         if (token) {
             authToken.setToken(token);
 
-            $state.go('helpdesk');
+            user(res.data);
+
+            $state.go('helpdesk.dashboard');
         }
     }
 
-    function fnOnError(err) {
-        console.log(err);
-    }
+    /* eslint-disable */
+    function fnOnError(err) {}
+    /* eslint-enable */
 }]);

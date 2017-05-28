@@ -1,26 +1,28 @@
+/* global eventMock, authMock, successRes, errorCallbackSpy, errorRes */
+
+
 'use strict';
 
 
 describe('Controllers: registerController', function () {
-    var eventMock,
-        authMock,
-        scope,
+    var scope,
+        authToken,
+        userSpy,
+        state,
         registerController,
         mdDialog;
 
     beforeEach(function () {
         module('app');
 
-        inject(function ($rootScope, $controller, $mdDialog) {
-            eventMock = {
-                preventDefault: function () {}
-            };
-            authMock = {
-                register: function () {}
-            };
+        inject(function ($rootScope, _authToken_, $state, $controller, $mdDialog) {
+            authToken = _authToken_;
+            state = $state;
 
-            sinon.spy(eventMock, 'preventDefault');
-            sinon.spy(authMock, 'register');
+            sinon.spy(authToken, 'setToken');
+            userSpy = sinon.spy();
+            sinon.spy(state, 'go');
+
 
             scope = $rootScope.$new();
             scope.firstName = 'Mateusz';
@@ -29,7 +31,8 @@ describe('Controllers: registerController', function () {
 
             registerController = $controller('registerController', {
                 auth: authMock,
-                $scope: scope
+                $scope: scope,
+                user: userSpy
             });
 
             mdDialog = $mdDialog;
@@ -60,6 +63,37 @@ describe('Controllers: registerController', function () {
             email: 'a@a',
             password: 'aaaaaaaa'
         });
+    });
+
+    it('ctrl.registerForm.submit() on success response should save user token/user data & redirect to helpdesk state', function () {
+        authMock.statusReg = true;
+
+        registerController.registerForm.submit(eventMock);
+
+        expect(authToken.setToken).to.have.been.calledWith(successRes.data.token);
+        expect(userSpy).to.have.been.calledWith(successRes.data);
+        expect(state.go).to.have.been.calledWith('helpdesk.dashboard');
+    });
+
+    it('ctrl.registerForm.submit() on success response (without token) should do nothing', function () {
+        authMock.statusReg = true;
+        /* eslint-disable */
+        successRes = {
+            data: {}
+        };
+        /* eslint-enable */
+
+        registerController.registerForm.submit(eventMock);
+
+        expect(authToken.setToken).to.not.have.been.called;
+        expect(userSpy).to.not.have.been.called;
+        expect(state.go).to.not.have.been.called;
+    });
+
+    it('ctrl.registerForm.submit() on error response should call errorCallback(err)', function () {
+        registerController.registerForm.submit(eventMock);
+
+        expect(errorCallbackSpy).to.have.been.calledWith(errorRes);
     });
 
     it('ctrl.showDialog should be a function', function () {
