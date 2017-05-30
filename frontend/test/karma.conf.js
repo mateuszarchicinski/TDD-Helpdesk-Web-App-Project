@@ -33,6 +33,7 @@ module.exports = function (config) {
             'bower_components/angular-aria/angular-aria.js',
             'bower_components/angular-messages/angular-messages.js',
             'bower_components/angular-md5/angular-md5.js',
+            'bower_components/angular-breadcrumb/release/angular-breadcrumb.js',
 
             // angular material
             'angular-material/angular-material.js',

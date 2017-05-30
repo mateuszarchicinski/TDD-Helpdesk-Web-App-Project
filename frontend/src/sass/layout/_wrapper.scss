@@ -4,8 +4,8 @@
 
 
 // [ui-view]
-$ui-view__transition:   0.2s opacity linear,
-                        0.2s transform linear !default;
+$ui-view__transition : 0.2s opacity linear,
+0.2s transform linear !default;
 // .ng-enter
 $ui-view__ng-enter__opacity: 0 !default;
 $ui-view__ng-enter__transform: scale3d(.98, .98, .98) !default;
@@ -25,6 +25,10 @@ $ui-view__ng-leave__transform: scale3d(0, 0, 0) !default;
     [ui-view="service"] {
         width: 100%;
         position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
         &.ng-enter,
         &.ng-leave {
             transition: $ui-view__transition;

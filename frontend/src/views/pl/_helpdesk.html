@@ -7,13 +7,15 @@
       <md-list class="services-list md-body-1">
         <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.dashboard" ui-sref-active="services-list__link-active">Panel główny</a></md-list-item>
         <inject-component include="userServices.templateUrl"></inject-component>
+        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.reportIssue" ui-sref-active="services-list__link-active">Zgłoś problem</a></md-list-item>
+        <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.myIssues" ui-sref-active="services-list__link-active">Moje zgłoszenia</a></md-list-item>
         <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.myAccount" ui-sref-active="services-list__link-active">Moje konto</a></md-list-item>
         <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.logout" ui-sref-active="services-list__link-active">Wyloguj się</a></md-list-item>
       </md-list>
     </md-sidenav>
     <div class="service-view" flex="flex">
       <div class="service-view__container">
-        <div ui-view="service"></div>
+        <md-content class="ui-animate" ui-view="service"></md-content>
       </div>
     </div>
   </div>

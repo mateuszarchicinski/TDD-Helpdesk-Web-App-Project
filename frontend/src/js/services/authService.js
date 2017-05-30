@@ -17,8 +17,16 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
                 method: 'post',
                 url: apiConfig.logoutUrl || 'auth/logout'
             },
-            user: {
+            'user.read': {
                 method: 'get',
+                url: apiConfig.userUrl || 'auth/user'
+            },
+            'user.update': {
+                method: 'put',
+                url: apiConfig.userUrl || 'auth/user'
+            },
+            'user.delete': {
+                method: 'delete',
                 url: apiConfig.userUrl || 'auth/user'
             }
         }
@@ -33,11 +41,15 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
             }
 
             if (!user) {
-                user = {
-                    message: 'User no found.'
-                };
-            } else {
+                user = null;
+            }
+
+            if (user !== null && typeof user === 'object' && user.password) {
                 user.password = md5.createHash(user.password);
+
+                if (user.confirmPassword) {
+                    delete user.confirmPassword;
+                }
             }
 
             $http[request.method](baseUrl + request.url, user).then(function (res) {
@@ -151,8 +163,8 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
         return sendRequest(null, 'logout');
     };
 
-    this.user = function () {
-        return sendRequest(null, 'user');
+    this.user = function (type, user) {
+        return sendRequest(user, 'user.' + type);
     };
 
     this.loginVia = loginVia;

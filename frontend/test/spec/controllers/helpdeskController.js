@@ -29,6 +29,9 @@ describe('Controllers: helpdeskController', function () {
         userMock.isUser = function () {
             return true;
         };
+        userMock.getUser = function () {
+            return {};
+        };
 
         helpdeskController = $controller('helpdeskController', {
             $scope: scope,

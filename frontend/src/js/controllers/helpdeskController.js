@@ -15,13 +15,17 @@ app.controller('helpdeskController', ['$mdSidenav', '$scope', '$state', 'user', 
 
     var getResources = this.getResources = function () {
         if (!user.isUser()) {
-            auth.user().then(function (res) {
+            auth.user('read').then(function (res) {
                 user(res.data);
+
+                $scope.user = user.getUser();
                 /* eslint-disable */
             }, function (err) {
                 /* eslint-enable */
 
             });
+        } else {
+            $scope.user = user.getUser();
         }
     };
 

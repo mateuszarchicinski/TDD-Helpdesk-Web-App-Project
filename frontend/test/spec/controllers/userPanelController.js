@@ -25,30 +25,24 @@ describe('Controllers: userPanelController', function () {
         state.go.restore();
     });
 
-    it('$scope.user should be an object with properties firstName, lastName and imageSource', function () {
+    it('$scope.user should be an object with property pictures', function () {
         expect(scope.user).to.be.an('object');
-        expect(scope.user).to.have.property('firstName');
-        expect(scope.user).to.have.property('lastName');
-        expect(scope.user).to.have.property('imageSource');
+        expect(scope.user).to.have.property('pictures').that.is.deep.equal(['images/icons/person_white.png']);
     });
 
     it('ctrl.userGo should be a function', function () {
         expect(userPanelController.userGo).to.be.a('function');
     });
 
-    it('ctrl.userGo() should call $state.go("helpdesk", {service: "myaccount"}) once', function () {
-        userPanelController.userGo('myaccount');
+    it('ctrl.userGo("myAccount") should call $state.go("helpdesk.myAccount") once', function () {
+        userPanelController.userGo('myAccount');
 
-        expect(state.go).to.have.been.calledWith('helpdesk', {
-            service: 'myaccount'
-        });
+        expect(state.go).to.have.been.calledWith('helpdesk.myAccount');
     });
 
-    it('ctrl.userGo() should call $state.go("helpdesk", {service: "logout"}) once', function () {
+    it('ctrl.userGo("logout") should call $state.go("helpdesk.logout") once', function () {
         userPanelController.userGo('logout');
 
-        expect(state.go).to.have.been.calledWith('helpdesk', {
-            service: 'logout'
-        });
+        expect(state.go).to.have.been.calledWith('helpdesk.logout');
     });
 });

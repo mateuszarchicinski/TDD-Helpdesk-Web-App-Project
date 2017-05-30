@@ -9,13 +9,15 @@ $hv__sidenav__background-color: $primary-color-dark !default;
 
 
 .helpdesk-view {
-    &__container {}
+    &__container {
+        position: relative;
+    }
     &__icon-button {
         @include sprite-image($menu-white);
         background-position: -44px 4px;
         position: absolute;
         left: 0;
-        top: 0;
+        top: 51px;
     }
     &__sidenav {
         width: $hv__sidenav__width;

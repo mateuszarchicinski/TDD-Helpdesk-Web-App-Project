@@ -112,6 +112,12 @@ $strong__font-weight: $font-weight__bold !default;
     &-center {
         text-align: center !important;
     }
+    &-left {
+        text-align: left !important;
+    }
+    &-right {
+        text-align: right !important;
+    }
 // sass-lint:enable no-important
     &-hidden {
         @include no-text;

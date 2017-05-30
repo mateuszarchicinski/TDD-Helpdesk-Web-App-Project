@@ -87,17 +87,104 @@
                     "services": {
                         "dashboard": {
                             "name": "Panel główny",
-                            "fullName": "Panel główny - fullName"
+                            "fullName": "Panel główny"
+                        },
+                        "reportIssue": {
+                            "name": "Zgłoś problem",
+                            "fullName": "Zgłoś problem"
+                        },
+                        "myIssues": {
+                            "name": "Moje zgłoszenia",
+                            "fullName": "Moje zgłoszenia"
                         },
                         "myaccount": {
                             "name": "Moje konto",
-                            "fullName": "Moje konto - fullName"
+                            "fullName": "Moje konto"
                         },
                         "logout": {
                             "name": "Wyloguj się"
                         },
                         "assistant": {},
                         "admin": {}
+                    }
+                },
+                "myaccount": {
+                    "userInformation": {
+                        "headline": "Twoje informacje osbowe",
+                        "form": {
+                            "name": {
+                                "value": "Imię",
+                                "errors": {
+                                    "required": "To jest wymagane!",
+                                    "pattern": "To nie jest poprawne imię!"
+                                }
+                            },
+                            "lastName": {
+                                "value": "Nazwisko",
+                                "errors": {
+                                    "required": "To jest wymagane!",
+                                    "pattern": "To nie jest poprawne nazwisko!"
+                                }
+                            },
+                            "gender": {
+                                "value": "Płeć",
+                                "male": "Mężczyzna",
+                                "female": "Kobieta",
+                                "errors": {
+                                    "required": "To jest wymagane!"
+                                }
+                            },
+                            "email": {
+                                "value": "Adres email",
+                                "errors": {
+                                    "email": "To nie jest poprawny adres email!",
+                                    "required": "To jest wymagane!"
+                                }
+                            },
+                            "password": {
+                                "value": "Nowe hasło",
+                                "errors": {
+                                    "required": "To jest wymagane!",
+                                    "minLength": "To jest za krótkie!",
+                                    "maxLength": "To jest za długie!"
+                                }
+                            },
+                            "confirmPassword": {
+                                "value": "Potwierdź nowe hasło",
+                                "errors": {
+                                    "required": "To jest wymagane!",
+                                    "validateEquals": "Proszę dopasować hasła!"
+                                }
+                            },
+                            "submitBtn": "Uaktualnij konto",
+                            "deleteBtn": "Usuń konto"
+                        }
+                    },
+                    "accountInformation": {
+                        "headline": "Informacje o koncie",
+                        "password": {
+                            "value": "Hasło:",
+                            "info": {
+                                "success": "ustawione",
+                                "error": "brak"
+                            }
+                        },
+                        "role": {
+                            "value": "Uprawnienia:",
+                            "user": "użytkownika",
+                            "assistant": "asystenta",
+                            "admin": "admina"
+                        },
+                        "active": {
+                            "value": "Konto aktywowane:",
+                            "info": {
+                                "success": "tak",
+                                "error": "nie"
+                            }
+                        },
+                        "locale": {
+                            "value": "Lokalizacja:"
+                        }
                     }
                 },
                 "modules": {
@@ -213,17 +300,104 @@
                     "services": {
                         "dashboard": {
                             "name": "Dashboard",
-                            "fullName": "Dashboard - fullName"
+                            "fullName": "Dashboard"
+                        },
+                        "reportIssue": {
+                            "name": "Report Issue",
+                            "fullName": "Report Issue"
+                        },
+                        "myIssues": {
+                            "name": "My Issues",
+                            "fullName": "My Issues"
                         },
                         "myaccount": {
                             "name": "My Account",
-                            "fullName": "My Account - fullName"
+                            "fullName": "My Account"
                         },
                         "logout": {
                             "name": "Sign Out"
                         },
                         "assistant": {},
                         "admin": {}
+                    }
+                },
+                "myaccount": {
+                    "userInformation": {
+                        "headline": "Your personal information",
+                        "form": {
+                            "name": {
+                                "value": "First name",
+                                "errors": {
+                                    "required": "This is required!",
+                                    "pattern": "This is not a correct first name!"
+                                }
+                            },
+                            "lastName": {
+                                "value": "Last name",
+                                "errors": {
+                                    "required": "This is required!",
+                                    "pattern": "This is not a correct last name!"
+                                }
+                            },
+                            "gender": {
+                                "value": "Gender",
+                                "male": "Man",
+                                "female": "Woman",
+                                "errors": {
+                                    "required": "This is required!"
+                                }
+                            },
+                            "email": {
+                                "value": "Email address",
+                                "errors": {
+                                    "email": "This is not an correct email address!",
+                                    "required": "This is required!"
+                                }
+                            },
+                            "password": {
+                                "value": "New password",
+                                "errors": {
+                                    "required": "This is required!",
+                                    "minLength": "That's too short!",
+                                    "maxLength": "That's too long!"
+                                }
+                            },
+                            "confirmPassword": {
+                                "value": "Confirm new password",
+                                "errors": {
+                                    "required": "This is required!",
+                                    "validateEquals": "Please match the passwords!"
+                                }
+                            },
+                            "submitBtn": "Update Account",
+                            "deleteBtn": "Delete Account"
+                        }
+                    },
+                    "accountInformation": {
+                        "headline": "Account Information",
+                        "password": {
+                            "value": "Password:",
+                            "info": {
+                                "success": "is set",
+                                "error": "no"
+                            }
+                        },
+                        "role": {
+                            "value": "Permisions:",
+                            "user": "user",
+                            "assistant": "assistant",
+                            "admin": "admin"
+                        },
+                        "active": {
+                            "value": "Account activated:",
+                            "info": {
+                                "success": "yes",
+                                "error": "no"
+                            }
+                        },
+                        "locale": {
+                            "value": "Localization:"
+                        }
                     }
                 },
                 "modules": {

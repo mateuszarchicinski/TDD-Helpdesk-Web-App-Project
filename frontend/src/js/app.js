@@ -4,4 +4,4 @@
 'use strict';
 
 
-var app = angular.module('app', ['ui.router', 'ngMaterial', 'ngMessages', 'angular-md5']);
+var app = angular.module('app', ['ui.router', 'ngMaterial', 'ngMessages', 'angular-md5', 'ncy-angular-breadcrumb']);

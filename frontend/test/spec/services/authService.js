@@ -16,6 +16,7 @@ describe('Services: authService', function () {
             firstName: 'Mateusz',
             email: 'a@a',
             password: 'aaaaaaaa',
+            confirmPassword: 'aaaaaaaa',
             token: 'token'
         };
 
@@ -27,6 +28,8 @@ describe('Services: authService', function () {
 
         sinon.spy(http, 'post');
         sinon.spy(http, 'get');
+        sinon.spy(http, 'put');
+        sinon.spy(http, 'delete');
         sinon.spy(window, 'open');
         sinon.spy(window, 'addEventListener');
     }));
@@ -84,21 +87,29 @@ describe('Services: authService', function () {
     it('auth.logout() should call $http.post(url, user) with correct arguments', function () {
         auth.logout();
 
-        expect(http.post).to.have.been.calledWith('http://localhost:4848/auth/logout', {
-            message: 'User no found.'
-        });
+        expect(http.post).to.have.been.calledWith('http://localhost:4848/auth/logout', null);
     });
 
-    it('auth.user() should return an instance of $q', function () {
+    it('auth.user("read/update/delete") should return an instance of $q', function () {
         expect(auth.user()).to.be.instanceof(q);
     });
 
-    it('auth.user() should call $http.post(url, user) with correct arguments', function () {
-        auth.user();
+    it('auth.user("read") should call $http.get(url, user) with correct arguments', function () {
+        auth.user('read', userMock);
 
-        expect(http.get).to.have.been.calledWith('http://localhost:4848/auth/user', {
-            message: 'User no found.'
-        });
+        expect(http.get).to.have.been.calledWith('http://localhost:4848/auth/user', userMock);
+    });
+    
+    it('auth.user("update") should call $http.put(url, user) with correct arguments', function () {
+        auth.user('update', userMock);
+
+        expect(http.put).to.have.been.calledWith('http://localhost:4848/auth/user', userMock);
+    });
+    
+    it('auth.user("delete") should call $http.delete(url, user) with correct arguments', function () {
+        auth.user('delete', userMock);
+
+        expect(http.delete).to.have.been.calledWith('http://localhost:4848/auth/user', userMock);
     });
 
     it('auth.loginVia(provider) should return an instance of $q', function () {

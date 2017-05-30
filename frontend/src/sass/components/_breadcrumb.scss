@@ -1,0 +1,20 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* BREADCRUMB *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+.breadcrumb {
+    list-style: none;
+    padding: 16px;
+    margin: 0;
+    li {
+        display: inline;
+        font-size: 0.8em;
+        &:not(:last-child) {
+            @include after {
+                content: "\002F";
+                margin: 0 15px;
+            }
+        }
+    }
+}

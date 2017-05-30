@@ -7,6 +7,8 @@
 $btn__color: $color__white !default;
 // .btn-primary
 $btn-primary__background-color: $accent-color !default;
+// .btn-warn
+$btn-warn__background-color: $warn-color !default;
 // .btn-facebook
 $btn-facebook__background-color: $color__facebook !default;
 // .btn-google
@@ -15,11 +17,18 @@ $btn-google__background-color: $color__google !default;
 
 .btn {
     color: $btn__color;
+    padding: 0 15px;
     &-primary,
     &-primary:not([disabled]):hover,
     &-primary:not([disabled]).md-focused,
     &-primary[disabled] {
         background-color: $btn-primary__background-color;
+    }
+    &-warn,
+    &-warn:not([disabled]):hover,
+    &-warn:not([disabled]).md-focused,
+    &-warn[disabled] {
+        background-color: $btn-warn__background-color;
     }
     &-facebook,
     &-facebook:not([disabled]):hover,

@@ -53,6 +53,7 @@
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-md5/angular-md5.js"></script>
+    <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
     <!--endbower-->
     <!--Angular Material-->
     <script src="angular-material/angular-material.js"></script>
@@ -77,6 +78,8 @@
     <script src="js/controllers/registerController.js"></script>
     <script src="js/controllers/helpdeskController.js"></script>
     <script src="js/controllers/dashboardController.js"></script>
+    <script src="js/controllers/report_issue.js"></script>
+    <script src="js/controllers/my_issues.js"></script>
     <script src="js/controllers/myAccountController.js"></script>
     <script src="js/controllers/logoutController.js"></script>
     <!--Application Directives-->
@@ -99,7 +102,7 @@
       <!--Main Wrapper-->
       <div class="main-wrapper">
         <div class="main-wrapper__container">
-          <div ui-view=""></div>
+          <div class="ui-animate" ui-view=""></div>
         </div>
       </div>
       <!--Main Footer-->

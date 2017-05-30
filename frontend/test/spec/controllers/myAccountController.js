@@ -2,11 +2,16 @@
 
 
 describe('Controllers: myAccountController', function () {
-    var myAccountController;
+    var scope,
+        myAccountController;
 
     beforeEach(module('app'));
 
-    beforeEach(inject(function ($controller) {
-        myAccountController = $controller('myAccountController');
+    beforeEach(inject(function ($rootScope, $controller) {
+        scope = $rootScope.$new();
+
+        myAccountController = $controller('myAccountController', {
+            $scope: scope
+        });
     }));
 });

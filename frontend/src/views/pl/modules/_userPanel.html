@@ -1,5 +1,5 @@
 
-<div class="user-panel" ng-controller="userPanelController as UPC"><img class="user-panel__user-image" ng-src="{{user.imageSource}}" alt="{{user.firstName}} {{user.lastName}}"/>
+<div class="user-panel" ng-controller="userPanelController as UPC"><img class="user-panel__user-image" ng-src="{{user.pictures[0]}}" alt="{{user.firstName}} {{user.lastName}}"/><span class="md-body-1 user-panel__user-fullname" ng-if="user.fullName">Hi, {{user.fullName}}!</span>
   <md-menu md-position-mode="right bottom">
     <md-button class="md-icon-button user-panel__icon-button" ng-click="$mdMenu.open($event)" aria-label="Menu użytkownika - Więcej"></md-button>
     <md-menu-content>

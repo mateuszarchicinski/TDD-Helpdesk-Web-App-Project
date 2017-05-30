@@ -54,17 +54,51 @@
                         templateName: 'dashboardService',
                         controller: 'dashboardController as DC'
                     }
+                },
+                ncyBreadcrumb: {
+                    label: 'Dashboard'
+                }
+            },
+            {
+                name: 'helpdesk.reportIssue',
+                url: '/report-issue',
+                authRequired: true,
+                views: {
+                    'service': {
+                        templateName: 'report_issue_service',
+                        controller: 'report_issue as RI'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'Report Issue'
+                }
+            },
+            {
+                name: 'helpdesk.myIssues',
+                url: '/my-issues',
+                authRequired: true,
+                views: {
+                    'service': {
+                        templateName: 'my_issues_service',
+                        controller: 'my_issues as MI'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'My Issues'
                 }
             },
             {
                 name: 'helpdesk.myAccount',
-                url: '/myaccount',
+                url: '/my-account',
                 authRequired: true,
                 views: {
                     'service': {
                         templateName: 'myAccountService',
                         controller: 'myAccountController as MAC'
                     }
+                },
+                ncyBreadcrumb: {
+                    label: 'My Account'
                 }
             },
             {
@@ -75,6 +109,9 @@
                     'service': {
                         controller: 'logoutController as LC'
                     }
+                },
+                ncyBreadcrumb: {
+                    skip: true
                 }
             }
         ],

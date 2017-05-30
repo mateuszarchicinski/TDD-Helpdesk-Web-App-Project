@@ -17,6 +17,9 @@ $user-image__background-color: $accent-color !default;
         background-color: $user-image__background-color;
         border-radius: 50%;
     }
+    &__user-fullname {
+        margin-left: 10px;
+    }
     &__icon-button {
         @include sprite-image($more_vert_black);
         background-position: -4px -52px;

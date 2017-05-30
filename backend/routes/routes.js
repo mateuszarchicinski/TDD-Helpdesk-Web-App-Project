@@ -20,6 +20,18 @@ module.exports = {
         },
         {
             url: '/auth/user',
+            method: 'delete',
+            middlewares: 'ensureAuthentication',
+            controller: 'userController'
+        },
+        {
+            url: '/auth/user',
+            method: 'put',
+            middlewares: 'ensureAuthentication',
+            controller: 'userController'
+        },
+        {
+            url: '/auth/user',
             middlewares: 'ensureAuthentication',
             controller: 'userController'
         },

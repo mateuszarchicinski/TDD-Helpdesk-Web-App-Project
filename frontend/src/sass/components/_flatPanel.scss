@@ -1,0 +1,37 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* FLAT PANEL *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+// .flat-panel
+$flat-panel__background-color: $color__white !default;
+$flat-panel__color: $primary-text-color !default;
+// .flat-panel__header::after
+$flat-panel__header__border-bottom: 1px solid $divider-color !default;
+
+
+.flat-panel {
+    background-color: $flat-panel__background-color;
+    color: $flat-panel__color;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    &:nth-child(n+2) {
+        margin-left: 20px;
+        @media screen and (max-width: $break-point__1) {
+            margin: 0;
+        }
+    }
+    &__toolbar,
+    &__toolbar._md,
+    &__body {
+        background-color: transparent;
+        color: inherit;
+    }
+    &__header {
+        border-bottom: $flat-panel__header__border-bottom;
+    }
+    &__item-list,
+    &__item-list._md {
+        padding: 0;
+    }
+}

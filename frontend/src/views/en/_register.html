@@ -8,7 +8,7 @@
       </header>
     </md-toolbar>
     <md-content layout-padding="layout-padding">
-            <form class="register-form RF" name="registerForm" novalidate="novalidate" layout="column">
+            <form class="register-form RF" name="registerForm" novalidate="novalidate" layout="column" ng-submit="registerForm.$invalid || RC.registerForm.submit($event)">
               <md-input-container>
                 <label for="RFFN">First name</label>
                 <input id="RFFN" name="firstName" ng-model="firstName" type="text" required="required" pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus="autofocus"/>
@@ -43,7 +43,7 @@
                 </div>
               </md-input-container>
               <p class="register-form__terms-conditions text-center text-muted"><small>By clicking on Sign up, you agree to <a ng-click="RC.showDialog('terms&amp;conditions')" ng-href="#" rel="help">terms &amp; conditions</a> and <a ng-click="RC.showDialog('privacyPolicy')" ng-href="#" rel="help">privacy policy</a>.</small></p>
-              <md-button class="btn btn-primary" type="submit" ng-click="registerForm.$invalid || RC.registerForm.submit($event)">Sign Up</md-button>
+              <md-button class="btn btn-primary" type="submit">Sign Up</md-button>
             </form>
       <p class="text-center text-muted"><small>Already have an account? <a ui-sref="login">Sign in</a></small></p>
     </md-content>

@@ -29,7 +29,7 @@ $brand-logo__margin: 0 0 0 ($sidenav__width - 96px)/2 !default;
         background: $main-header__background-color;
         position: relative;
         display: flex;
-        z-index: 100;
+        z-index: 10;
         padding: 0 8px;
         > * {
             flex: 1;
