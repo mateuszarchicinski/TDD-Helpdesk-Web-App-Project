@@ -52,10 +52,8 @@ describe('Controllers: helpdeskController', function () {
         expect(sinonSpyOnToggle).to.have.been.calledOnce;
     });
 
-    it('$scope.userServices should be an object with properties templateUrl and current.templateUrl', function () {
-        expect(scope.userServices).to.be.an('object');
-        expect(scope.userServices).to.have.property('templateUrl');
-        expect(scope.userServices).to.have.deep.property('current.templateUrl');
+    it('$scope should have property servicesTmpUrl which is a string', function () {
+        expect(scope).to.have.property('servicesTmpUrl').that.is.a('string');
     });
 
     it('ctrl.getResources should be a function', function () {

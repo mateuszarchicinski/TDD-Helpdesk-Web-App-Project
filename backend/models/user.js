@@ -1,11 +1,12 @@
 // NODE MODULES
 const mongoose = require('../services/mongoose');
+const schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const mongooseUniqueValidator = require('mongoose-unique-validator');
 const mongooseTimestamps = require('mongoose-timestamp');
 
 
-const userSchema = new mongoose.Schema({
+const userSchema = new schema({
     firstName: {
         type: String,
         required: true
@@ -53,7 +54,13 @@ const userSchema = new mongoose.Schema({
     },
     googleId: {
         type: String
-    }
+    },
+    issues: [
+        {
+            type: schema.Types.ObjectId,
+            ref: 'Issue'
+        }
+    ]
 }, {
     versionKey: false
 });
@@ -81,13 +88,26 @@ userSchema.methods.isActiveToken = function (token) {
 };
 
 
-userSchema.methods.removeToken = function (token) {
-    const array = this.active_tokens;
-    const index = array.indexOf(token);
+function removeItem(item, array) {
+    const index = array.indexOf(item);
 
     if (index !== -1) {
         array.splice(index, 1);
     }
+}
+
+
+userSchema.methods.removeToken = function (token) {
+    const array = this.active_tokens;
+
+    removeItem(token, array);
+};
+
+
+userSchema.methods.removeIssue = function (issue) {
+    const array = this.issues;
+
+    removeItem(issue, array);
 };
 
 

@@ -2,11 +2,11 @@
 <!--Helpdesk View-->
 <section class="helpdesk-view">
   <div class="helpdesk-view__container" layout="row">
-    <md-button class="md-fab md-primary helpdesk-view__icon-button" ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide"></md-button>
+    <md-button class="md-fab md-primary icon-nav-medium helpdesk-view__icon-nav-medium" ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide"></md-button>
     <md-sidenav class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav" layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation">
       <md-list class="services-list md-body-1">
         <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.dashboard" ui-sref-active="services-list__link-active">Dashboard</a></md-list-item>
-        <inject-component include="userServices.templateUrl"></inject-component>
+        <inject-component include="servicesTmpUrl"></inject-component>
         <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.reportIssue" ui-sref-active="services-list__link-active">Report Issue</a></md-list-item>
         <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.myIssues" ui-sref-active="services-list__link-active">My Issues</a></md-list-item>
         <md-list-item class="services-list__list-item"><a class="services-list__link" ui-sref="helpdesk.myAccount" ui-sref-active="services-list__link-active">My Account</a></md-list-item>

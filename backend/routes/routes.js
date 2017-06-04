@@ -19,6 +19,54 @@ module.exports = {
             controller: 'test'
         },
         {
+            url: '/auth/note',
+            method: 'post',
+            middlewares: 'ensureAuthentication',
+            controller: 'noteController'
+        },
+        {
+            url: '/auth/issues/:role',
+            method: 'get',
+            middlewares: 'ensureAuthentication',
+            controller: 'issuesController'
+        },
+        {
+            url: '/auth/issues',
+            method: 'get',
+            middlewares: 'ensureAuthentication',
+            controller: 'issuesController'
+        },
+        {
+            url: '/auth/issue/:id',
+            method: 'delete',
+            middlewares: 'ensureAuthentication',
+            controller: 'issueController'
+        },
+        {
+            url: '/auth/issue',
+            method: 'put',
+            middlewares: 'ensureAuthentication',
+            controller: 'issueController'
+        },
+        {
+            url: '/auth/issue',
+            method: 'post',
+            middlewares: 'ensureAuthentication',
+            controller: 'issueController'
+        },
+        {
+            url: '/auth/issue/:id',
+            method: 'get',
+            middlewares: 'ensureAuthentication',
+            controller: 'issueController'
+        },
+        {
+            url: '/auth/users',
+            method: 'get',
+            middlewares: 'ensureAuthentication',
+            controller: 'usersController'
+        },
+        {
             url: '/auth/user',
             method: 'delete',
             middlewares: 'ensureAuthentication',
@@ -31,7 +79,7 @@ module.exports = {
             controller: 'userController'
         },
         {
-            url: '/auth/user',
+            url: ['/auth/user', '/auth/user/:id'],
             middlewares: 'ensureAuthentication',
             controller: 'userController'
         },

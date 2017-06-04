@@ -1,3 +1,9 @@
+.white-bg {
+  background-color: #fff; }
+
+.white-color {
+  color: #fff; }
+
 /* Fonts: Roboto */
 @font-face {
   font-family: "Roboto";
@@ -145,8 +151,8 @@
 strong {
   font-weight: 500; }
 
-/****
 .icon {
+  /****
     display: inline-block;
     &-dashboard {
         &__white {
@@ -172,8 +178,23 @@ strong {
             @include sprite($exit-to-app-black);
         }
     }
-}
-****/
+    ****/ }
+  .icon-menu-small {
+    background-image: url(../images/sprite.png);
+    background-position: -88px -136px;
+    width: 24px;
+    height: 24px; }
+  .icon-menu-medium {
+    background-image: url(../images/sprite.png);
+    background-position: 0px -68px;
+    width: 48px;
+    height: 48px; }
+  .icon-nav-medium {
+    background-image: url(../images/sprite.png);
+    background-position: -68px 0px;
+    width: 48px;
+    height: 48px; }
+
 /****
 .arrow-right {
     @include before {
@@ -260,6 +281,30 @@ strong {
     border-bottom: 1px solid #bdbdbd; }
   .flat-panel__item-list, .flat-panel__item-list._md {
     padding: 0; }
+  .flat-panel__search-by {
+    width: 50%; }
+
+.table {
+  width: 100%;
+  background-color: #fff;
+  border-collapse: collapse; }
+  .table-hover tbody tr {
+    transition: 0.1s background-color linear; }
+    .table-hover tbody tr:hover {
+      background-color: #dffffb; }
+  .table th {
+    font-size: 0.8em;
+    font-weight: 400;
+    text-transform: uppercase;
+    border-bottom: 1px solid #bdbdbd; }
+  .table td {
+    font-size: 0.85em;
+    font-weight: 300; }
+  .table th,
+  .table td {
+    height: 58px;
+    text-align: left;
+    padding: 8px 15px; }
 
 a {
   text-decoration: none;
@@ -271,6 +316,8 @@ a {
     color: #009688; }
   a:active {
     color: #00796b; }
+  a.no-link {
+    color: inherit; }
 
 .btn {
   color: #fff;
@@ -376,9 +423,8 @@ html[lang="en"] {
 .helpdesk-view__container {
   position: relative; }
 
-.helpdesk-view__icon-button {
-  background-image: url(../images/sprite.png);
-  background-position: -44px 4px;
+.helpdesk-view__icon-nav-medium {
+  background-position: -64px 4px;
   position: absolute;
   left: 0;
   top: 51px; }
@@ -407,6 +453,84 @@ html[lang="en"] {
 .service-view__toolbar, .service-view__toolbar._md, .service-view__toolbar-tools {
   min-height: 68px;
   height: 68px; }
+
+.my-issues__container {
+  width: 70%;
+  padding: 0 5px; }
+  @media screen and (max-width: 959px) {
+    .my-issues__container {
+      width: auto; } }
+
+.my-issues__header {
+  padding: 10px 0; }
+
+.my-issues__body {
+  padding: 15px 0; }
+
+.menu__icon-menu-small {
+  background-position: -80px -128px; }
+
+.menu__icon-menu-medium {
+  background-position: -4px -72px; }
+
+.menu__link-menu {
+  width: 100%;
+  height: 100%;
+  line-height: 48px;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  padding: 0 16px; }
+
+.search-wrapper {
+  height: 54px; }
+
+.search-input {
+  padding: 8px 15px;
+  border: 0; }
+  .search-input:focus {
+    outline: 0; }
+
+.issue-details__header, .issue-notes__header, .issue-note__header {
+  border-bottom: 1px solid #bdbdbd; }
+
+.issue-details__heading, .issue-notes__heading, .issue-note__heading {
+  margin: 0.2em 0; }
+
+.issue-details__subject, .issue-notes__subject, .issue-note__subject {
+  margin-left: 8px; }
+
+.issue-details__container, .issue-notes__container {
+  width: 95%; }
+
+@media screen and (max-width: 959px) {
+  .issue-details, .issue-note {
+    margin-bottom: 25px; } }
+
+.issue-notes {
+  margin-top: 25px; }
+  .issue-notes__list {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .issue-notes__list-item {
+      margin-bottom: 25px; }
+      .issue-notes__list-item:last-child {
+        margin-bottom: 0; }
+
+.issue-note__container {
+  width: 80%; }
+
+.no-padding {
+  padding: 0; }
+
+.no-margin {
+  margin: 0; }
+
+.user-avatar {
+  background-color: #ffc107;
+  border-radius: 50%; }
 
 *,
 *::before,

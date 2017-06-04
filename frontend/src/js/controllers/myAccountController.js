@@ -9,7 +9,14 @@ app.controller('myAccountController', ['auth', '$scope', 'user', 'authToken', '$
         updatedUser.fullName = updatedUser.firstName + ' ' + updatedUser.lastName;
         updatedUser.isPassword = !updatedUser.isPassword && updatedUser.password ? true : updatedUser.isPassword;
 
-        auth.user('update', updatedUser).then(function (res) {
+        auth.user('update', {
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            fullName: updatedUser.fullName,
+            gender: updatedUser.gender,
+            password: updatedUser.password,
+            isPassword: updatedUser.isPassword
+        }).then(function (res) {
             user.removeUser();
             user(res.data);
 

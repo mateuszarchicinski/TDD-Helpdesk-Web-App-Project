@@ -101,11 +101,185 @@
                             "name": "Moje konto",
                             "fullName": "Moje konto"
                         },
+                        "issue": {
+                            "name": "Zgłoszenie",
+                            "fullName": "Zgłoszenie"
+                        },
+                        "user": {
+                            "name": "Użytkownik",
+                            "fullName": "Użytkownik"
+                        },
                         "logout": {
                             "name": "Wyloguj się"
                         },
-                        "assistant": {},
-                        "admin": {}
+                        "assistant": {
+                            "reportedIssues": {
+                                "name": "Zgłoszone problemy",
+                                "fullName": "Zgłoszone problemy"
+                            }
+                        },
+                        "admin": {
+                            "users": {
+                                "name": "Użytkownicy",
+                                "fullName": "Użytkownicy"
+                            },
+                            "reportedIssues": {
+                                "name": "Zgłoszone problemy",
+                                "fullName": "Zgłoszone problemy"
+                            }
+                        }
+                    }
+                },
+                "reportIssue": {
+                    "headline": "Opisz swój problem i wyślij wiadomość",
+                    "form": {
+                        "subject": {
+                            "value": "Temat:",
+                            "errors": {
+                                "required": "To jest wymagane!"
+                            }
+                        },
+                        "category": {
+                            "value": "Kategoria",
+                            "software": "Oprogramowanie komputerowe",
+                            "hardware": "Sprzęt komputerowy",
+                            "errors": {
+                                "required": "To jest wymagane!"
+                            }
+                        },
+                        "description": {
+                            "value": "Opis:",
+                            "errors": {
+                                "required": "To jest wymagane!",
+                                "maxlength": "To jest za długie!"
+                            }
+                        },
+                        "submitBtn": "Wyślij wiadomość"
+                    }
+                },
+                "myIssues": {
+                    "header": {
+                        "search": {
+                            "placeholder": "Wyszukaj po nazwie tematu..."
+                        }
+                    },
+                    "body": {
+                        "table": {
+                            "thead": {
+                                "lp": "Lp",
+                                "subject": "Temat",
+                                "category": "Kategoria",
+                                "status": "Status",
+                                "postDate": "Data zgłoszenia"
+                            },
+                            "body": {
+                                "category": {
+                                    "software": "Oprogramowanie komputerowe",
+                                    "hardware": "Sprzęt komputerowy"
+                                },
+                                "status": {
+                                    "new": "Nowe",
+                                    "inProgress": "W trakcie",
+                                    "resolved": "Rozwiązane"
+                                }
+                            },
+                            "menu": {
+                                "ariaLabel": "Zgłoszenie - Więcej",
+                                "openBtn": "Otwórz",
+                                "deleteBtn": "Usuń"
+                            }
+                        }
+                    }
+                },
+                "issue": {
+                    "details": {
+                        "subject": {
+                            "copy": [
+                                "Dodano dnia",
+                                "przez"
+                            ]
+                        },
+                        "category": {
+                            "value": "Kategoria",
+                            "software": "Oprogramowanie komputerowe",
+                            "hardware": "Sprzęt komputerowy"
+                        },
+                        "status": {
+                            "value": "Status",
+                            "new": "Nowe",
+                            "inProgress": "W trakcie",
+                            "resolved": "Rozwiązane"
+                        },
+                        "description": {
+                            "value": "Opis"
+                        }
+                    },
+                    "notes": {
+                        "subject": {
+                            "copy": [
+                                "Uaktualniono dnia",
+                                "przez"
+                            ]
+                        },
+                        "status": {
+                            "value": "Zmieniono status zgłoszenia na",
+                            "new": "nowe",
+                            "inProgress": "w trakcie",
+                            "resolved": "rozwiązane"
+                        }
+                    },
+                    "note": {
+                        "headline": "Dodaj nową notkę",
+                        "form": {
+                            "status": {
+                                "value": "Status",
+                                "new": "Nowe",
+                                "inProgress": "W trakcie",
+                                "resolved": "Rozwiązane",
+                                "errors": {
+                                    "required": "To jest wymagane!"
+                                }
+                            },
+                            "description": {
+                                "value": "Opis",
+                                "errors": {
+                                    "required": "To jest wymagane!",
+                                    "maxlength": "To jest za długie!"
+                                }
+                            },
+                            "submitBtn": "Dodaj notkę"
+                        }
+                    }
+                },
+                "users": {
+                    "header": {
+                        "search": {
+                            "placeholder": "Search by user email..."
+                        }
+                    },
+                    "body": {
+                        "table": {
+                            "thead": {
+                                "lp": "Lp",
+                                "firstName": "First name",
+                                "lastName": "Last name",
+                                "fullName": " Full name",
+                                "gender": "Gender",
+                                "email": "Email",
+                                "isPassword": "Password set",
+                                "role": "Role",
+                                "active": "Activated",
+                                "locale": "Lokalizacja"
+                            },
+                            "body": {
+                                
+                            },
+                            "menu": {
+                                "ariaLabel": "User - More",
+                                "openBtn": "Open",
+                                "deleteBtn": "Delete"
+                            }
+                        }
                     }
                 },
                 "myaccount": {
@@ -314,11 +488,185 @@
                             "name": "My Account",
                             "fullName": "My Account"
                         },
+                        "issue": {
+                            "name": "Issue",
+                            "fullName": "Issue"
+                        },
+                        "user": {
+                            "name": "Użytkownik",
+                            "fullName": "Użytkownik"
+                        },
                         "logout": {
                             "name": "Sign Out"
                         },
-                        "assistant": {},
-                        "admin": {}
+                        "assistant": {
+                            "reportedIssues": {
+                                "name": "Reported Issues",
+                                "fullName": "Reported Issues"
+                            }
+                        },
+                        "admin": {
+                            "users": {
+                                "name": "Users",
+                                "fullName": "Users"
+                            },
+                            "reportedIssues": {
+                                "name": "Reported Issues",
+                                "fullName": "Reported Issues"
+                            }
+                        }
+                    }
+                },
+                "reportIssue": {
+                    "headline": "Describe your problem and send message",
+                    "form": {
+                        "subject": {
+                            "value": "Subject:",
+                            "errors": {
+                                "required": "This is required!"
+                            }
+                        },
+                        "category": {
+                            "value": "Category",
+                            "software": "Software",
+                            "hardware": "Hardware",
+                            "errors": {
+                                "required": "This is required!"
+                            }
+                        },
+                        "description": {
+                            "value": "Discription:",
+                            "errors": {
+                                "required": "This is required!",
+                                "maxlength": "That's too long!"
+                            }
+                        },
+                        "submitBtn": "Send message"
+                    }
+                },
+                "myIssues": {
+                    "header": {
+                        "search": {
+                            "placeholder": "Search by subject name..."
+                        }
+                    },
+                    "body": {
+                        "table": {
+                            "thead": {
+                                "lp": "Lp",
+                                "subject": "Subject",
+                                "category": "Category",
+                                "status": "Status",
+                                "postDate": "Issue date"
+                            },
+                            "body": {
+                                "category": {
+                                    "software": "Software",
+                                    "hardware": "Hardware"
+                                },
+                                "status": {
+                                    "new": "New",
+                                    "inProgress": "In progress",
+                                    "resolved": "Resolved"
+                                }
+                            },
+                            "menu": {
+                                "ariaLabel": "Issue - More",
+                                "openBtn": "Open",
+                                "deleteBtn": "Delete"
+                            }
+                        }
+                    }
+                },
+                "issue": {
+                    "details": {
+                        "subject": {
+                            "copy": [
+                                "Added on date",
+                                "by"
+                            ]
+                        },
+                        "category": {
+                            "value": "Category",
+                            "software": "Software",
+                            "hardware": "Hardware"
+                        },
+                        "status": {
+                            "value": "Status",
+                            "new": "New",
+                            "inProgress": "In progress",
+                            "resolved": "Resolved"
+                        },
+                        "description": {
+                            "value": "Description"
+                        }
+                    },
+                    "notes": {
+                        "subject": {
+                            "copy": [
+                                "Updated on day",
+                                "by"
+                            ]
+                        },
+                        "status": {
+                            "value": "Issue status changed to",
+                            "new": "new",
+                            "inProgress": "in progress",
+                            "resolved": "resolved"
+                        }
+                    },
+                    "note": {
+                        "headline": "Add a new note",
+                        "form": {
+                            "status": {
+                                "value": "Status",
+                                "new": "New",
+                                "inProgress": "In progress",
+                                "resolved": "Resolved",
+                                "errors": {
+                                    "required": "This is required!"
+                                }
+                            },
+                            "description": {
+                                "value": "Description",
+                                "errors": {
+                                    "required": "This is required!",
+                                    "maxlength": "That's too long!"
+                                }
+                            },
+                            "submitBtn": "Add note"
+                        }
+                    }
+                },
+                "users": {
+                    "header": {
+                        "search": {
+                            "placeholder": "Search by user email..."
+                        }
+                    },
+                    "body": {
+                        "table": {
+                            "thead": {
+                                "lp": "Lp",
+                                "firstName": "First name",
+                                "lastName": "Last name",
+                                "fullName": " Full name",
+                                "gender": "Gender",
+                                "email": "Email",
+                                "isPassword": "Password set",
+                                "role": "Role",
+                                "active": "Activated",
+                                "locale": "Localzation"
+                            },
+                            "body": {
+                                
+                            },
+                            "menu": {
+                                "ariaLabel": "User - More",
+                                "openBtn": "Open",
+                                "deleteBtn": "Delete"
+                            }
+                        }
                     }
                 },
                 "myaccount": {

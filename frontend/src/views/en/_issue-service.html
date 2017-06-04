@@ -1,0 +1,89 @@
+
+<div class="service-view__issue">
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <md-toolbar class="service-view__toolbar">
+    <header class="md-toolbar-tools service-view__toolbar-tools">
+      <h2>Issue</h2>
+    </header>
+  </md-toolbar>
+  <md-content layout-padding="layout-padding">
+    <div layout-gt-sm="layout-gt-sm" layout-wrap="layout-wrap">
+      <div class="issue-details" flex-gt-sm="50" layout="layout" layout-align="center">
+        <div class="issue-details__container">
+          <div class="md-body-1 md-whiteframe-z1 white-bg">
+            <header class="issue-details__header" layout-padding="layout-padding">
+              <div layout="layout" layout-align="start center"><img class="user-avatar" ng-src="{{issue._createdBy.pictures[0] || 'images/icons/person_white.png'}}" alt="{{issue._createdBy.fullName}}"/>
+                <div class="issue-details__subject">
+                  <h3 class="md-title issue-note__heading">{{issue.subject}}</h3>
+                  <p class="no-margin">Added on date: {{IC.formatDate(issue.postDate)}} by {{issue._createdBy.fullName}}.</p>
+                </div>
+              </div>
+              <div>
+                <p class="no-margin"><strong>Category:</strong> <span ng-if="issue.category === 'software'">Software</span><span ng-if="issue.category === 'hardware'">Hardware</span></p>
+                <p class="no-margin"><strong>Status:</strong> <span ng-if="issue.status === 'new'">New</span><span ng-if="issue.status === 'in progress'">In progress</span><span ng-if="issue.status === 'resolved'">Resolved</span></p>
+              </div>
+            </header>
+            <div layout-padding="layout-padding">
+              <p class="no-margin"><strong>Opis:</strong><br/>{{issue.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="issue-note" flex-gt-sm="50" layout="layout" layout-align="center">
+        <div class="issue-note__container">
+          <div class="md-whiteframe-z1 white-bg">
+            <header class="issue-note__header" layout-padding="layout-padding">
+              <h3 class="md-title issue-note__heading">Add a new note</h3>
+            </header>
+            <div layout-padding="layout-padding">
+              <form name="noteForm" novalidate="novalidate" layout="column" ng-submit="noteForm.$invalid || IC.noteForm.submit($event)">
+                <md-input-container>
+                  <label for="IFS">Status:</label>
+                  <md-select id="IFS" name="status" ng-model="status" required="required">
+                    <md-option value="new">New</md-option>
+                    <md-option value="in progress">In progress</md-option>
+                    <md-option value="resolved">Resolved</md-option>
+                  </md-select>
+                  <div class="md-errors-spacer"></div>
+                  <div ng-messages="noteForm.status.$error" role="alert">
+                    <div ng-message="required">This is required!</div>
+                  </div>
+                </md-input-container>
+                <md-input-container>
+                  <label for="IFD">Description:</label>
+                  <textarea id="IFD" name="description" ng-model="description" type="text" rows="2" required="required" md-maxlength="200" md-no-asterisk="md-no-asterisk"></textarea>
+                  <div ng-messages="noteForm.description.$error" role="alert">
+                    <div ng-message="required">This is required!</div>
+                    <div ng-message="md-maxlength">That's too long!</div>
+                  </div>
+                </md-input-container>
+                <md-button class="btn btn-primary" type="submit">Add note</md-button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="issue-notes" flex-gt-sm="50" layout="layout" layout-align="center">
+        <div class="issue-notes__container">
+          <ul class="md-body-1 issue-notes__list">
+            <li class="issue-notes__list-item" ng-repeat="note in issue.notes">
+              <div class="md-whiteframe-z1 white-bg">
+                <header class="issue-notes__header" layout-padding="layout-padding">
+                  <div layout="layout" layout-align="start center"><img class="user-avatar" ng-src="{{note._createdBy.pictures[0] || 'images/icons/person_white.png'}}" alt="{{note._createdBy.fullName}}"/>
+                    <h4 class="issue-note__heading issue-notes__subject">Updated on day: {{IC.formatDate(note.postDate)}} by {{note._createdBy.fullName}}.</h4>
+                  </div>
+                  <div ng-if="::note.status !== issue.status">
+                    <p class="no-margin">Issue status changed to <strong ng-if="::note.status === 'new'">new</strong><strong ng-if="::note.status === 'in progress'">in progress</strong><strong ng-if="::note.status === 'resolved'">resolved</strong>.</p>
+                  </div>
+                </header>
+                <div layout-padding="layout-padding">
+                  <p class="no-margin">{{note.description}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </md-content>
+</div>

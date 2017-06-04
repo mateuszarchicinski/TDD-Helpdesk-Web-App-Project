@@ -12,9 +12,8 @@ $hv__sidenav__background-color: $primary-color-dark !default;
     &__container {
         position: relative;
     }
-    &__icon-button {
-        @include sprite-image($menu-white);
-        background-position: -44px 4px;
+    &__icon-nav-medium {
+        background-position: -64px 4px;
         position: absolute;
         left: 0;
         top: 51px;

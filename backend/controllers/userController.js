@@ -18,48 +18,45 @@ const userModel = mongoose.models[userModelName] ? mongoose.model(userModelName)
 module.exports = function (req, res, next) {
     const reqUser = req.user || {};
 
+    // METHOD: GET / READ
     if (req.method === 'GET') {
-        res.status(HTTP_CODES_CONFIG.SUCCESS).json(reqUser);
-    }
-
-    if (req.method === 'PUT') {
-        userModel.find({
-            _id: reqUser._id,
-            email: reqUser.email
-        }, [], {
-            limit: 1
-        }, (err, users) => {
-            if (err) {
-                return next(err);
-            }
-
-            const user = users[0];
-
-            Object.keys(req.body).forEach((key) => {
-                if (user[key] !== req.body[key]) {
-                    user[key] = req.body[key];
-                }
-            });
-
-            user.save((err, user) => {
+        if (req.params.id) {
+            userModel.find({
+                _id: req.params.id
+            }, [], {
+                limit: 1
+            }, (err, users) => {
                 if (err) {
                     return next(err);
                 }
 
-                res.status(HTTP_CODES_CONFIG.SUCCESS).json(user.toJSON());
+                res.status(HTTP_CODES_CONFIG.SUCCESS).json(users[0].toJSON());
             });
-        });
+        } else {
+            res.status(HTTP_CODES_CONFIG.SUCCESS).json(reqUser.toJSON());
+        }
     }
 
-    if (req.method === 'DELETE') {
-        userModel.findOneAndRemove({
-            _id: reqUser._id,
-            email: reqUser.email
-        }, (err) => {
+    // METHOD: PUT / UPDATE
+    if (req.method === 'PUT') {
+        Object.keys(req.body).forEach((key) => {
+            if (reqUser[key] !== req.body[key]) {
+                reqUser[key] = req.body[key];
+            }
+        });
+
+        reqUser.save((err, user) => {
             if (err) {
                 return next(err);
             }
 
+            res.status(HTTP_CODES_CONFIG.SUCCESS).json(user.toJSON());
+        });
+    }
+
+    // METHOD: DELETE
+    if (req.method === 'DELETE') {
+        reqUser.remove((err, user) => {
             res.status(HTTP_CODES_CONFIG.SUCCESS).end();
         });
     }

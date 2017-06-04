@@ -28,7 +28,7 @@ include ../../helpers/_mixins
                             div(ng-message="pattern")= userInformation.form.lastName.errors.pattern
                     md-input-container
                         label(for="UFG")= userInformation.form.gender.value
-                        md-select(if="UFG" name="gender" ng-model="user.gender" required)
+                        md-select(id="UFG" name="gender" ng-model="user.gender" required)
                             md-option(value="male")= userInformation.form.gender.male
                             md-option(value="female")= userInformation.form.gender.female
                         div(class="md-errors-spacer")

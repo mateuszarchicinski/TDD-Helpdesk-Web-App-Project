@@ -38,7 +38,8 @@ module.exports = function (req, res, next) {
         }
 
         sendMail(user, {
-            type: 'verificationEmail'
+            type: 'verificationEmail',
+            redirectUri: req.createFullUrl()
         }).catch((err) => {
             alertHandler('error', err);
         });

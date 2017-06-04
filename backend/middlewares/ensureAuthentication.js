@@ -77,7 +77,7 @@ module.exports = function (req, res, next) {
         const user = users[0];
 
         if (token.isValid() && user.isActiveToken(token.encoded)) {
-            req.user = user.toJSON();
+            req.user = user;
             req.user.token = token.encoded;
 
             next();

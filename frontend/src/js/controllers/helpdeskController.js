@@ -3,22 +3,14 @@ app.controller('helpdeskController', ['$mdSidenav', '$scope', '$state', 'user', 
         $mdSidenav('left').toggle();
     };
 
-    var userServices = {
-        templateUrl: 'components/_adminServices',
-        current: {
-            templateUrl: $state.params.service === 'myaccount' ? '_myAccountService' : '_dashboardService'
-        }
-    };
-
-    $scope.userServices = userServices;
-
-
     var getResources = this.getResources = function () {
         if (!user.isUser()) {
             auth.user('read').then(function (res) {
                 user(res.data);
 
                 $scope.user = user.getUser();
+                
+                $scope.servicesTmpUrl = $scope.user.role !== 'user' ? 'components/_' + $scope.user.role + 'Services' : false;
                 /* eslint-disable */
             }, function (err) {
                 /* eslint-enable */
@@ -26,6 +18,8 @@ app.controller('helpdeskController', ['$mdSidenav', '$scope', '$state', 'user', 
             });
         } else {
             $scope.user = user.getUser();
+            
+            $scope.servicesTmpUrl = $scope.user.role !== 'user' ? 'components/_' + $scope.user.role + 'Services' : false;
         }
     };
 

@@ -1,0 +1,79 @@
+//~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* ISSUE *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~//
+
+
+// .issue- details / notes / note __wrapper
+$issue__wrapper__backround-color: $color__white !default;
+// __header
+$issue__header__border-bottom: 1px solid $divider-color !default;
+
+
+.issue {
+    &-details,
+    &-notes,
+    &-note {
+        &__header {
+            border-bottom: $issue__header__border-bottom;
+        }
+        &__heading {
+            margin: 0.2em 0;
+        }
+        &__subject {
+            margin-left: 8px;
+        }
+    }
+    &-details,
+    &-notes {
+        &__container {
+            width: 95%;
+        }
+    }
+    &-details,
+    &-note {
+        @media screen and (max-width: $break-point__1) {
+            margin-bottom: 25px;
+        }
+    }
+    &-notes {
+        margin-top: 25px;
+        &__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            &-item {
+                margin-bottom: 25px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    &-note {
+        &__container {
+            width: 80%;
+        }
+    }
+}
+
+
+.no-padding {
+    padding: 0;
+}
+
+
+.no-margin {
+    margin: 0;
+}
+
+
+// .user-avatar
+$user-avatar__background-color: $accent-color !default;
+
+
+.user {
+    &-avatar {
+        background-color: $user-avatar__background-color;
+        border-radius: 50%;
+    }
+}

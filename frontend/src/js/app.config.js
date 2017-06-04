@@ -78,13 +78,115 @@
                 url: '/my-issues',
                 authRequired: true,
                 views: {
-                    'service': {
+                    service: {
                         templateName: 'my_issues_service',
                         controller: 'my_issues as MI'
                     }
                 },
                 ncyBreadcrumb: {
                     label: 'My Issues'
+                }
+            },
+            {
+                name: 'helpdesk.myIssues.issue',
+                url: '/:_id',
+                authRequired: true,
+                views: {
+                    'service@helpdesk': {
+                        templateName: 'issue-service',
+                        controller: 'issueCtrl as IC'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'Issue: {{issue._id}}'
+                },
+                params: {
+                    _id: null,
+                    _createdBy: null,
+                    postDate: null,
+                    subject: null,
+                    category: null,
+                    description: null,
+                    status: null,
+                    notes: null
+                }
+            },
+            {
+                name: 'helpdesk.reportedIssues',
+                url: '/reported-issues',
+                authRequired: true,
+                views: {
+                    service: {
+                        templateName: 'reported-issues',
+                        controller: 'reportedIssuesCtrl as RIC'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'Reported Issues'
+                }
+            },
+            {
+                name: 'helpdesk.reportedIssues.issue',
+                url: '/:_id',
+                authRequired: true,
+                views: {
+                    'service@helpdesk': {
+                        templateName: 'issue-service',
+                        controller: 'issueCtrl as IC'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'Issue: {{issue._id}}'
+                },
+                params: {
+                    _id: null,
+                    _createdBy: null,
+                    postDate: null,
+                    subject: null,
+                    category: null,
+                    description: null,
+                    status: null,
+                    notes: null
+                }
+            },
+            {
+                name: 'helpdesk.users',
+                url: '/users',
+                authRequired: true,
+                views: {
+                    service: {
+                        templateName: 'users',
+                        controller: 'usersCtrl as UC'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'Users'
+                }
+            },
+            {
+                name: 'helpdesk.users.user',
+                url: '/:_id',
+                authRequired: true,
+                views: {
+                    'service@helpdesk': {
+                        templateName: 'user',
+                        controller: 'userCtrl as UC'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'User: {{UC.user._id}}'
+                },
+                params: {
+                    _id: null,
+                    firstName: null,
+                    lastName: null,
+                    fullName: null,
+                    gender: null,
+                    email: null,
+                    isPassword: null,
+                    role: null,
+                    active: null,
+                    locale: null
                 }
             },
             {
@@ -116,11 +218,14 @@
             }
         ],
         apiConfig: {
-            baseUrl: 'http://localhost:4848/',
+            baseUrl: 'http://192.168.1.21:4848/',
             registerUrl: '',
             loginUrl: '',
             logoutUrl: '',
             userUrl: '',
+            issueUrl: '',
+            issuesUrl: '',
+            noteUrl: '',
             loginVia: {
                 facebookUrl: '',
                 googleUrl: ''

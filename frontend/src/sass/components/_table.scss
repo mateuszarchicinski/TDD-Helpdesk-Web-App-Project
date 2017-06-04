@@ -1,0 +1,44 @@
+//~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* TABLE *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~//
+
+
+// .table
+$table__background-color: $color__white !default;
+// .table tbody tr
+$table__tbody-tr__background-color: lighten($primary-color-dark, 70%) !default;
+// .table th
+$table__th__border-bottom: 1px solid $divider-color !default;
+
+
+.table {
+    width: 100%;
+    background-color: $table__background-color;
+    border-collapse: collapse;
+    &-hover {
+        tbody {
+            tr {
+                transition: 0.1s background-color linear;
+                &:hover {
+                    background-color: $table__tbody-tr__background-color;
+                }
+            }
+        }
+    }
+    th {
+        font-size: 0.8em;
+        font-weight: 400;
+        text-transform: uppercase;
+        border-bottom: $table__th__border-bottom;
+    }
+    td {
+        font-size: 0.85em;
+        font-weight: 300;
+    }
+    th,
+    td {
+        height: 58px;
+        text-align: left;
+        padding: 8px 15px;
+    }
+}

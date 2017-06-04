@@ -65,6 +65,10 @@
     @import 'components/flatPanel';
 
 
+    // *--------- TABLE ---------*
+    @import 'components/table';
+
+
     // *--------- LINKS ---------*
     @import 'components/links';
 
@@ -105,6 +109,14 @@
 
     // *--------- SERVICE ---------*
     @import 'views/service';
+
+
+    // *--------- MY ISSUES ---------*
+    @import 'views/my-issues';
+
+
+    // *--------- ISSUE ---------*
+    @import 'views/issue';
 
 
 // ---------------------

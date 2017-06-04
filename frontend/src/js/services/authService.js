@@ -19,7 +19,8 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
             },
             'user.read': {
                 method: 'get',
-                url: apiConfig.userUrl || 'auth/user'
+                url: apiConfig.userUrl || 'auth/user',
+                readBy: '_id'
             },
             'user.update': {
                 method: 'put',
@@ -27,18 +28,49 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
             },
             'user.delete': {
                 method: 'delete',
-                url: apiConfig.userUrl || 'auth/user'
+                url: apiConfig.userUrl || 'auth/user',
+                deleteBy: '_id'
+            },
+            users: {
+                method: 'get',
+                url: apiConfig.usersUrl || 'auth/users'
+            },
+            'issue.read': {
+                method: 'get',
+                url: apiConfig.issueUrl || 'auth/issue',
+                readBy: '_id'
+            },
+            'issue.create': {
+                method: 'post',
+                url: apiConfig.issueUrl || 'auth/issue'
+            },
+            'issue.delete': {
+                method: 'delete',
+                url: apiConfig.issueUrl || 'auth/issue',
+                deleteBy: '_id'
+            },
+            issues: {
+                method: 'get',
+                url: apiConfig.issuesUrl || 'auth/issues',
+                readBy: 'role'
+            },
+            'note.create': {
+                method: 'post',
+                url: apiConfig.noteUrl || 'auth/note'
             }
         }
     };
 
     function sendRequest(user, type) {
         return $q(function (resolve, reject) {
-            var request = configSendRequest.requests[type];
+            var request = configSendRequest.requests[type],
+                completedUrl;
 
             if (!request) {
                 return reject(false);
             }
+
+            completedUrl = baseUrl + request.url;
 
             if (!user) {
                 user = null;
@@ -52,7 +84,19 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
                 }
             }
 
-            $http[request.method](baseUrl + request.url, user).then(function (res) {
+            if ((type.indexOf('.delete') !== -1 || type.indexOf('.read') !== -1 || type === 'issues') && user !== null && typeof user === 'object') {
+                if (request.deleteBy) {
+                    completedUrl += '/' + user[request.deleteBy];
+                }
+
+                if (request.readBy) {
+                    completedUrl += '/' + user[request.readBy];
+                }
+
+                user = null;
+            }
+
+            $http[request.method](completedUrl, user).then(function (res) {
                 resolve(res);
             }, function (err) {
                 reject(err);
@@ -165,6 +209,22 @@ app.service('auth', ['APP_CONFIG', '$http', 'md5', '$q', '$window', function (AP
 
     this.user = function (type, user) {
         return sendRequest(user, 'user.' + type);
+    };
+
+    this.users = function (user) {
+        return sendRequest(user, 'users');
+    };
+
+    this.issue = function (type, issue) {
+        return sendRequest(issue, 'issue.' + type);
+    };
+
+    this.issues = function (user) {
+        return sendRequest(user, 'issues');
+    };
+
+    this.note = function (type, note) {
+        return sendRequest(note, 'note.' + type);
     };
 
     this.loginVia = loginVia;

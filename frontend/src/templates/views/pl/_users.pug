@@ -1,0 +1,50 @@
+include ../../helpers/_mixins
+
+//-
+    PL - Users Service
+
+- var users = data.section.users;
+
++serviceView("users", true, data.section.helpdesk.services.admin.users)
+    div(layout="row" layout-align="center start" class="my-issues")
+        div(flex)
+            div(class="my-issues__header")
+                div(layout class="search-wrapper md-whiteframe-z1")
+                    input(flex ng-model="filterBy.email" type="text" placeholder=users.header.search.placeholder class="search-input")
+            div(class="my-issues__body")
+                table(class="table table-hover md-whiteframe-z1")
+                    thead
+                        tr
+                            th= users.body.table.thead.lp
+                            th= users.body.table.thead.firstName
+                            th= users.body.table.thead.lastName
+                            th= users.body.table.thead.fullName
+                            th= users.body.table.thead.gender
+                            th= users.body.table.thead.email
+                            th= users.body.table.thead.isPassword
+                            th= users.body.table.thead.role
+                            th= users.body.table.thead.active
+                            th= users.body.table.thead.locale
+                            th &nbsp;
+                    tbody
+                        tr(ng-repeat="user in users | filter: filterBy")
+                            td {{$index + 1}}
+                            td {{user.firstName}}
+                            td {{user.lastName}}
+                            td {{user.fullName}}
+                            td {{user.gender}}
+                            td {{user.email}}
+                            td {{user.isPassword}}
+                            td {{user.role}}
+                            td {{user.active}}
+                            td {{user.locale}}
+                            td
+                                div(layout layout-align="center")
+                                    md-menu(md-position-mode="right bottom")
+                                        md-button(ng-click="$mdMenu.open($event)" aria-label= users.body.table.menu.ariaLabel class="icon-menu-small md-icon-button menu__icon-menu-small")
+                                        md-menu-content
+                                            md-menu-item
+                                                md-button
+                                                    a(ui-sref="helpdesk.users.user(user)" class="no-link menu__link-menu")= users.body.table.menu.openBtn
+                                            md-menu-item
+                                                md-button(ng-click="UC.removeUser(user)")= users.body.table.menu.deleteBtn

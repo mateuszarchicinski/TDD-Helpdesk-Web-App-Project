@@ -3,8 +3,9 @@
 //~~~~~~~~~~~~~~~~~~~~~//
 
 
-/****
 .icon {
+    
+    /****
     display: inline-block;
     &-dashboard {
         &__white {
@@ -30,5 +31,19 @@
             @include sprite($exit-to-app-black);
         }
     }
+    ****/
+    
+    &-menu {
+        &-small {
+            @include sprite($more-vert-black-small);
+        }
+        &-medium {
+            @include sprite($more-vert-black);
+        }
+    }
+    &-nav {
+        &-medium {
+            @include sprite($menu-white);
+        }
+    }
 }
-****/

@@ -7,11 +7,12 @@ describe('Services: authService', function () {
         md5,
         http,
         q,
-        window;
+        window,
+        APP_CONFIG;
 
     beforeEach(module('app'));
 
-    beforeEach(inject(function (_auth_, _md5_, $http, $q, $window) {
+    beforeEach(inject(function (_auth_, _md5_, $http, $q, $window, _APP_CONFIG_) {
         userMock = {
             firstName: 'Mateusz',
             email: 'a@a',
@@ -25,6 +26,7 @@ describe('Services: authService', function () {
         http = $http;
         q = $q;
         window = $window;
+        APP_CONFIG = _APP_CONFIG_;
 
         sinon.spy(http, 'post');
         sinon.spy(http, 'get');
@@ -61,7 +63,7 @@ describe('Services: authService', function () {
     it('auth.register(user) should call $http.post(url, user) with correct arguments', function () {
         auth.register(userMock);
 
-        expect(http.post).to.have.been.calledWith('http://localhost:4848/auth/register', userMock);
+        expect(http.post).to.have.been.calledWith(APP_CONFIG.apiConfig.baseUrl + 'auth/register', userMock);
     });
 
     it('auth.login(user) should corectly modified user.password', function () {
@@ -77,7 +79,7 @@ describe('Services: authService', function () {
     it('auth.login(user) should call $http.post(url, user) with correct arguments', function () {
         auth.login(userMock);
 
-        expect(http.post).to.have.been.calledWith('http://localhost:4848/auth/login', userMock);
+        expect(http.post).to.have.been.calledWith(APP_CONFIG.apiConfig.baseUrl + 'auth/login', userMock);
     });
 
     it('auth.logout(user) should return an instance of $q', function () {
@@ -87,7 +89,7 @@ describe('Services: authService', function () {
     it('auth.logout() should call $http.post(url, user) with correct arguments', function () {
         auth.logout();
 
-        expect(http.post).to.have.been.calledWith('http://localhost:4848/auth/logout', null);
+        expect(http.post).to.have.been.calledWith(APP_CONFIG.apiConfig.baseUrl + 'auth/logout', null);
     });
 
     it('auth.user("read/update/delete") should return an instance of $q', function () {
@@ -95,21 +97,21 @@ describe('Services: authService', function () {
     });
 
     it('auth.user("read") should call $http.get(url, user) with correct arguments', function () {
-        auth.user('read', userMock);
+        auth.user('read');
 
-        expect(http.get).to.have.been.calledWith('http://localhost:4848/auth/user', userMock);
+        expect(http.get).to.have.been.calledWith(APP_CONFIG.apiConfig.baseUrl + 'auth/user', null);
     });
     
     it('auth.user("update") should call $http.put(url, user) with correct arguments', function () {
         auth.user('update', userMock);
 
-        expect(http.put).to.have.been.calledWith('http://localhost:4848/auth/user', userMock);
+        expect(http.put).to.have.been.calledWith(APP_CONFIG.apiConfig.baseUrl + 'auth/user', userMock);
     });
     
     it('auth.user("delete") should call $http.delete(url, user) with correct arguments', function () {
-        auth.user('delete', userMock);
+        auth.user('delete');
 
-        expect(http.delete).to.have.been.calledWith('http://localhost:4848/auth/user', userMock);
+        expect(http.delete).to.have.been.calledWith(APP_CONFIG.apiConfig.baseUrl + 'auth/user', null);
     });
 
     it('auth.loginVia(provider) should return an instance of $q', function () {

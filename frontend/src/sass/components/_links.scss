@@ -28,4 +28,7 @@ a {
     &:active {
         color: $a__active__color;
     }
+    &.no-link {
+        color: inherit;
+    }
 }

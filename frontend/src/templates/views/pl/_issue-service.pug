@@ -1,0 +1,75 @@
+include ../../helpers/_mixins
+
+//-
+    PL - Issue Service
+
+- var issue = data.section.issue;
+
++serviceView("issue", true, data.section.helpdesk.services.issue)
+    div(layout-gt-sm layout-wrap)
+            div(flex-gt-sm="50" layout layout-align="center" class="issue-details")
+                div(class="issue-details__container")
+                    div(class="md-body-1 md-whiteframe-z1 white-bg")
+                        header(layout-padding class="issue-details__header")
+                            div(layout layout-align="start center")
+                                img(ng-src="{{issue._createdBy.pictures[0] || 'images/icons/person_white.png'}}" alt="{{issue._createdBy.fullName}}" class="user-avatar")
+                                div(class="issue-details__subject")
+                                    h3(class="md-title issue-note__heading") {{issue.subject}}
+                                    p.no-margin #{issue.details.subject.copy[0]}: {{IC.formatDate(issue.postDate)}} #{issue.details.subject.copy[1]} {{issue._createdBy.fullName}}.
+                            div
+                                p.no-margin
+                                    strong #{issue.details.category.value}:
+                                    |  
+                                    span(ng-if="issue.category === 'software'")= issue.details.category.software
+                                    span(ng-if="issue.category === 'hardware'")= issue.details.category.hardware
+                                p.no-margin
+                                    strong #{issue.details.status.value}:
+                                    |  
+                                    span(ng-if="issue.status === 'new'")= issue.details.status.new
+                                    span(ng-if="issue.status === 'in progress'")= issue.details.status.inProgress
+                                    span(ng-if="issue.status === 'resolved'")= issue.details.status.resolved
+                        div(layout-padding)
+                            p.no-margin
+                                strong Opis:
+                                br
+                                | {{issue.description}}
+            div(flex-gt-sm="50" layout layout-align="center" class="issue-note")
+                div(class="issue-note__container")
+                    div(class="md-whiteframe-z1 white-bg")
+                        header(layout-padding class="issue-note__header")
+                            h3(class="md-title issue-note__heading")= issue.note.headline
+                        div(layout-padding)
+                            form(name="noteForm" novalidate layout="column" ng-submit="noteForm.$invalid || IC.noteForm.submit($event)")
+                                md-input-container
+                                    label(for="IFS") #{issue.note.form.status.value}:
+                                    md-select(id="IFS" name="status" ng-model="status" required)
+                                        md-option(value="new")= issue.note.form.status.new
+                                        md-option(value="in progress")= issue.note.form.status.inProgress
+                                        md-option(value="resolved")= issue.note.form.status.resolved
+                                    div(class="md-errors-spacer")
+                                    div(ng-messages="noteForm.status.$error" role="alert")
+                                        div(ng-message="required")= issue.note.form.status.errors.required
+                                md-input-container
+                                    label(for="IFD") #{issue.note.form.description.value}:
+                                    textarea(id="IFD" name="description" ng-model="description" type="text" rows="2" required md-maxlength="200" md-no-asterisk)
+                                    div(ng-messages="noteForm.description.$error" role="alert")
+                                        div(ng-message="required")= issue.note.form.description.errors.required
+                                        div(ng-message="md-maxlength")= issue.note.form.description.errors.maxlength
+                                md-button(type="submit" class="btn btn-primary")= issue.note.form.submitBtn
+            div(flex-gt-sm="50" layout layout-align="center" class="issue-notes")
+                div(class="issue-notes__container")
+                    ul(class="md-body-1 issue-notes__list")
+                        li(ng-repeat="note in issue.notes" class="issue-notes__list-item")
+                            div(class="md-whiteframe-z1 white-bg")
+                                header(layout-padding class="issue-notes__header")
+                                    div(layout layout-align="start center")
+                                        img(ng-src="{{note._createdBy.pictures[0] || 'images/icons/person_white.png'}}" alt="{{note._createdBy.fullName}}" class="user-avatar")
+                                        h4(class="issue-note__heading issue-notes__subject") #{issue.notes.subject.copy[0]}: {{IC.formatDate(note.postDate)}} #{issue.notes.subject.copy[1]} {{note._createdBy.fullName}}.
+                                    div(ng-if="::note.status !== issue.status")
+                                        p.no-margin #{issue.notes.status.value} 
+                                            strong(ng-if="::note.status === 'new'")= issue.notes.status.new
+                                            strong(ng-if="::note.status === 'in progress'")= issue.notes.status.inProgress
+                                            strong(ng-if="::note.status === 'resolved'")= issue.notes.status.resolved
+                                            | .
+                                div(layout-padding)
+                                    p.no-margin {{note.description}}

@@ -5,7 +5,7 @@ div(ng-controller="userPanelController as UPC" class="user-panel")
     img(ng-src="{{user.pictures[0]}}" alt="{{user.firstName}} {{user.lastName}}" class="user-panel__user-image")
     span(ng-if="user.fullName" class="md-body-1 user-panel__user-fullname") Hi, {{user.fullName}}!
     md-menu(md-position-mode="right bottom")
-        md-button(ng-click="$mdMenu.open($event)" aria-label=data.section.modules.userPanel.ariaLabels[0] class="md-icon-button user-panel__icon-button")
+        md-button(ng-click="$mdMenu.open($event)" aria-label=data.section.modules.userPanel.ariaLabels[0] class="icon-menu-medium md-icon-button menu__icon-menu-medium")
         md-menu-content
             md-menu-item
                 md-button(ng-click="UPC.userGo('myAccount')") #{data.section.modules.userPanel.menuItems[0]}

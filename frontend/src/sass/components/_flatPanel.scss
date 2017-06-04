@@ -34,4 +34,7 @@ $flat-panel__header__border-bottom: 1px solid $divider-color !default;
     &__item-list._md {
         padding: 0;
     }
+    &__search-by {
+        width: 50%;
+    }
 }

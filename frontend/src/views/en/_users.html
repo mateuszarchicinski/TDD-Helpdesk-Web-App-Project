@@ -1,0 +1,68 @@
+
+<div class="service-view__users">
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <md-toolbar class="service-view__toolbar">
+    <header class="md-toolbar-tools service-view__toolbar-tools">
+      <h2>Users</h2>
+    </header>
+  </md-toolbar>
+  <md-content layout-padding="layout-padding">
+    <div class="my-issues" layout="row" layout-align="center start">
+      <div flex="flex">
+        <div class="my-issues__header">
+          <div class="search-wrapper md-whiteframe-z1" layout="layout">
+            <input class="search-input" flex="flex" ng-model="filterBy.email" type="text" placeholder="Search by user email..."/>
+          </div>
+        </div>
+        <div class="my-issues__body">
+          <table class="table table-hover md-whiteframe-z1">
+            <thead>
+              <tr>
+                <th>Lp</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th> Full name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Password set</th>
+                <th>Role</th>
+                <th>Activated</th>
+                <th>Localzation</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in users | filter: filterBy">
+                <td>{{$index + 1}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.fullName}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.isPassword}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.active}}</td>
+                <td>{{user.locale}}</td>
+                <td>
+                  <div layout="layout" layout-align="center">
+                    <md-menu md-position-mode="right bottom">
+                      <md-button class="icon-menu-small md-icon-button menu__icon-menu-small" ng-click="$mdMenu.open($event)" aria-label="User - More"></md-button>
+                      <md-menu-content>
+                        <md-menu-item>
+                          <md-button><a class="no-link menu__link-menu" ui-sref="helpdesk.users.user(user)">Open</a></md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="UC.removeUser(user)">Delete</md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </md-content>
+</div>

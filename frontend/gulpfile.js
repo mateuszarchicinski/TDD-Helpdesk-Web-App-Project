@@ -308,7 +308,7 @@ Remember to set up your LANGUAGES in ${PROJECT_CONFIG.CONFIG_FILE} file.`
     }))
     .pipe(wiredep({ // https://github.com/taptapship/wiredep#wiredep--
         exclude: ['animatewithsass', 'angular-mocks', 'bower_components/angular-material/angular-material.css'],
-        ignorePath: '../../'
+        ignorePath: '../'
     }))
     .pipe(gulp.dest(`${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/`));
     
@@ -580,7 +580,8 @@ To change that, add command arguments to this task ---> gulp [TASK NAME = images
         .pipe($.spritesmith({ // https://github.com/twolfson/gulp.spritesmith#documentation
             imgName: `${spriteImgName}.png`,
             cssName: `${spriteCssName}.scss`,
-            imgPath: `../images/${spriteImgName}.png`
+            imgPath: `../images/${spriteImgName}.png`,
+            padding: 20
         }))
         .pipe($.if('*.png', gulp.dest(`${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/images/`), gulp.dest(`${PROJECT_CONFIG.DIRECTORY.WORK_DIR}/sass/components/sprites/`))); // https://github.com/robrich/gulp-if#gulp-if-api
     

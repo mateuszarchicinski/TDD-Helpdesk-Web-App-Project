@@ -27,7 +27,7 @@ const sendMail = (user, config) => {
             });
 
             config.subject = 'Email verification';
-            config.html = `<p>Verify your email address by clicking on <a href="http://localhost:4848/verification/email?token=${newToken}">activate link</a>.</p>`;
+            config.html = `<p>Verify your email address by clicking on <a href="${config.redirectUri}/verification/email?token=${newToken}">activate link</a>.</p>`;
         }
 
         const transporter = nodemailer.createTransport({

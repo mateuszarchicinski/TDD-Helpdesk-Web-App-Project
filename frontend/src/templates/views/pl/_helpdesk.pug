@@ -4,7 +4,7 @@
 //Helpdesk View
 section(class="helpdesk-view")
     div(layout="row" class="helpdesk-view__container")
-        md-button(ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide" class="md-fab md-primary helpdesk-view__icon-button")
+        md-button(ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide" class="md-fab md-primary icon-nav-medium helpdesk-view__icon-nav-medium")
         md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation" class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav")
             include ../../components/lists/_services
         div(flex class="service-view")
