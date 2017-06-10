@@ -9,7 +9,8 @@
     "dev": "gulp default",
     "test": "gulp js:eslint && gulp js:test",
     "prod": "gulp build --option advanced --upload",
-    "material-tools": "material-tools -c material-tools.config.json"
+    "material-tools": "material-tools -c material-tools.config.json",
+    "jsdoc": "jsdoc -c jsdoc.config.json"
   },
   "author": "Mateusz Archiciński",
   "license": "ISC",
@@ -50,6 +51,7 @@
     "imagemin-jpegtran": "^5.0.2",
     "imagemin-optipng": "^5.2.1",
     "imagemin-svgo": "^5.2.0",
+    "jsdoc": "^3.4.3",
     "jshint-stylish": "^2.2.1",
     "karma": "^1.4.0",
     "karma-chai": "^0.1.0",
