@@ -1,0 +1,13 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* USER PANEL *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+.user-panel {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &__user-fullname {
+        margin-left: 10px;
+    }
+}

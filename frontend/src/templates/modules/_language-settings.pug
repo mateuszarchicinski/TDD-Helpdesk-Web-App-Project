@@ -1,0 +1,8 @@
+//-
+    Language Settings
+
+div(ng-controller="languageSettingsCtrl as LSC" class="language-settings")
+    ul.language-settings__list
+        each lang in languages
+            li
+                a(ng-click="LSC.translate('" + lang + "')" ng-class="{'language-settings__link-active': LSC.language === '" + lang + "'}" class="language-settings__link" ng-href="#" rel="help") #{lang}

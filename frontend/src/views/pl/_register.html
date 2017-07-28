@@ -1,51 +1,67 @@
 
 <!--Register View-->
-<section class="form-view" layout="row" layout-align="center">
-  <div class="md-whiteframe-z1 form-view__container" flex-xs="100" layout="column">
-    <md-toolbar>
-      <header class="md-toolbar-tools">
-        <h2>Zarejestruj się</h2>
-      </header>
-    </md-toolbar>
-    <md-content layout-padding="layout-padding">
-            <form class="register-form RF" name="registerForm" novalidate="novalidate" layout="column" ng-submit="registerForm.$invalid || RC.registerForm.submit($event)">
-              <md-input-container>
-                <label for="RFFN">Imię</label>
-                <input id="RFFN" name="firstName" ng-model="firstName" type="text" required="required" pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus="autofocus"/>
-                <div ng-messages="registerForm.firstName.$error" role="alert">
-                  <div ng-message="required">To jest wymagane!</div>
-                  <div ng-message="pattern">To nie jest poprawne imię!</div>
-                </div>
-              </md-input-container>
-              <md-input-container>
-                <label for="RFE">Adres email</label>
-                <input id="RFE" name="email" ng-model="email" type="email" required="required"/>
-                <div ng-messages="registerForm.email.$error" role="alert">
-                  <div ng-message="email">To nie jest poprawny adres email!</div>
-                  <div ng-message="required">To jest wymagane!</div>
-                </div>
-              </md-input-container>
-              <md-input-container>
-                <label for="RFP">Hasło</label>
-                <input id="RFP" name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
-                <div ng-messages="registerForm.password.$error" role="alert">
-                  <div ng-message="required">To jest wymagane!</div>
-                  <div ng-message="minlength">To jest za krótkie!</div>
-                  <div ng-message="maxlength">To jest za długie!</div>
-                </div>
-              </md-input-container>
-              <md-input-container>
-                <label for="RFCP">Potwierdź hasło</label>
-                <input id="RFCP" name="confirmPassword" ng-model="confirmPassword" type="password" required="required" validate-equals="password"/>
-                <div ng-messages="registerForm.confirmPassword.$error" role="alert">
-                  <div ng-message="required">To jest wymagane!</div>
-                  <div ng-message="validateEquals">Proszę dopasować hasła!</div>
-                </div>
-              </md-input-container>
-              <p class="register-form__terms-conditions text-center text-muted"><small>Klikając na Zarejestruj się, zgadzasz się z <a ng-click="RC.showDialog('terms&amp;conditions')" ng-href="#" rel="help">zasadami &amp; warunkami</a> i <a ng-click="RC.showDialog('privacyPolicy')" ng-href="#" rel="help">polityką prywatności</a>.</small></p>
-              <md-button class="btn btn-primary" type="submit">Zarejestruj się</md-button>
-            </form>
-      <p class="text-center text-muted"><small>Posiadasz już konto? <a ui-sref="login">Zaloguj się</a></small></p>
-    </md-content>
-  </div>
-</section>
+<div class="main-view unauthorized" layout="column">
+  <!--Main Header-->
+  <header class="main-header">
+    <div class="language-settings" ng-controller="languageSettingsCtrl as LSC">
+      <ul class="language-settings__list">
+        <li><a class="language-settings__link" ng-click="LSC.translate('pl')" ng-class="{'language-settings__link-active': LSC.language === 'pl'}" ng-href="#" rel="help">pl</a></li>
+        <li><a class="language-settings__link" ng-click="LSC.translate('en')" ng-class="{'language-settings__link-active': LSC.language === 'en'}" ng-href="#" rel="help">en</a></li>
+      </ul>
+    </div>
+    <h1 class="main-header__title"><span class="hide">Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT</span><img class="main-header__brand-logo" src="images/logo/HD-Logo.png" alt="Helpdesk Logo"/></h1>
+  </header>
+  <section class="form-wrapper">
+    <div class="md-whiteframe-z1 register-form__container">
+      <md-toolbar>
+        <header class="md-toolbar-tools">
+          <h2>Zarejestruj się</h2>
+        </header>
+      </md-toolbar>
+      <md-content layout-padding="layout-padding">
+                <form class="register-form__form RF" name="registerForm" novalidate="novalidate" layout="column" ng-submit="registerForm.$invalid || RC.registerForm.submit($event)">
+                  <md-input-container>
+                    <label for="RFFN">Imię</label>
+                    <input id="RFFN" name="firstName" ng-model="user.firstName" type="text" required="required" pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus="autofocus"/>
+                    <div ng-messages="registerForm.firstName.$error" role="alert">
+                      <div ng-message="required">To jest wymagane!</div>
+                      <div ng-message="pattern">To nie jest poprawne imię!</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container>
+                    <label for="RFE">Adres email</label>
+                    <input id="RFE" name="email" ng-model="user.email" type="email" required="required"/>
+                    <div ng-messages="registerForm.email.$error" role="alert">
+                      <div ng-message="email">To nie jest poprawny adres email!</div>
+                      <div ng-message="required">To jest wymagane!</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container>
+                    <label for="RFP">Hasło</label>
+                    <input id="RFP" name="password" ng-model="user.password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+                    <div ng-messages="registerForm.password.$error" role="alert">
+                      <div ng-message="required">To jest wymagane!</div>
+                      <div ng-message="minlength">To jest za krótkie!</div>
+                      <div ng-message="maxlength">To jest za długie!</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container>
+                    <label for="RFCP">Potwierdź hasło</label>
+                    <input id="RFCP" name="confirmPassword" ng-model="user.confirmPassword" type="password" required="required" validate-equals="user.password"/>
+                    <div ng-messages="registerForm.confirmPassword.$error" role="alert">
+                      <div ng-message="required">To jest wymagane!</div>
+                      <div ng-message="validateEquals">Proszę dopasować hasła!</div>
+                    </div>
+                  </md-input-container>
+                  <p class="register-form__terms-conditions text-center text-muted"><small>Klikając na Zarejestruj się, zgadzasz się z <a ng-click="RC.showDialog('terms&amp;conditions')" ng-href="#" rel="help">zasadami &amp; warunkami</a> i <a ng-click="RC.showDialog('privacy-policy')" ng-href="#" rel="help">polityką prywatności</a>.</small></p>
+                  <md-button class="btn btn-primary" type="submit">Zarejestruj się</md-button>
+                </form>
+        <p class="text-center text-muted"><small>Posiadasz już konto? <a ui-sref="login">Zaloguj się</a></small></p>
+      </md-content>
+    </div>
+  </section>
+  <!--Main Footer-->
+  <footer class="main-footer">
+    <p class="main-footer__paragraph text-center text-muted"><small class="main-footer__copyright">&copy; Mateusz Archiciński</small></p>
+  </footer>
+</div>

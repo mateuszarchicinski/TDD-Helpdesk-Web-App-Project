@@ -2,13 +2,21 @@
     PL - Register
 
 //Register View
-section(layout="row" layout-align="center" class="form-view")
-    div(flex-xs="100" layout="column" class="md-whiteframe-z1 form-view__container")
-        md-toolbar
-            header.md-toolbar-tools
-                h2 #{data.section.register.headline}
-        md-content(layout-padding)
-            include ../../components/forms/_register
-            p(class="text-center text-muted")
-                small #{data.section.register.copy[0]} 
-                    a(ui-sref="login") #{data.section.register.copy[1]}
+div(layout="column" class="main-view unauthorized")
+    //- Header
+    include ../../components/header/_header-unauthorized
+
+    //- Form Wrapper
+    section(class="form-wrapper")
+        div(class="md-whiteframe-z1 register-form__container")
+            md-toolbar
+                header.md-toolbar-tools
+                    h2 #{data.section.register.headline}
+            md-content(layout-padding)
+                include ../../components/forms/_register
+                p(class="text-center text-muted")
+                    small #{data.section.register.copy[0]} 
+                        a(ui-sref="login") #{data.section.register.copy[1]}
+
+    //- Footer
+    include ../../components/footer/_footer

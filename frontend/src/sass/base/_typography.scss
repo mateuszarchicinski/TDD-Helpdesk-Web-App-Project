@@ -122,6 +122,9 @@ $strong__font-weight: $font-weight__bold !default;
     &-hidden {
         @include no-text;
     }
+    &-uppercase {
+        text-transform: uppercase;
+    }
     &-muted {
         color: $text-muted__color;
     }

@@ -1,7 +1,10 @@
 {
     "source": {
         "include": [
-            "./"
+            "./src/js",
+            "./src/js/controllers",
+            "./src/js/directives",
+            "./src/js/services"
         ],
         "exclude": [
             "./node_modules"

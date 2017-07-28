@@ -42,11 +42,11 @@
 
     // *--------- ICONS ---------*
     @import 'components/icons/icons';
-    @import 'components/icons/htmlSymbols-Entities';
+    @import 'components/icons/html-symbols-entities';
 
 
     // *--------- FORMS ---------*
-    @import 'components/forms/register';
+    @import 'components/forms/login&register';
 
 
     // *--------- LISTS ---------*
@@ -62,11 +62,23 @@
 
 
     // *--------- FLAT PANEL ---------*
-    @import 'components/flatPanel';
+    @import 'components/flat-panel';
+
+
+    // *--------- SEARCH ---------*
+    @import 'components/search';
 
 
     // *--------- TABLE ---------*
     @import 'components/table';
+
+
+    // *--------- MENU ---------*
+    @import 'components/menu';
+
+
+    // *--------- USER ---------*
+    @import 'components/user';
 
 
     // *--------- LINKS ---------*
@@ -78,7 +90,7 @@
 
 
     // *--------- BREAK LINES ---------*
-    @import 'components/breakLines';
+    @import 'components/break-lines';
 
 
 // ---------------------
@@ -87,11 +99,11 @@
 
 
     // *--------- LANGUAGE SETTINGS ---------*
-    @import 'modules/languageSettings';
+    @import 'modules/language-settings';
 
 
     // *--------- USER PANEL ---------*
-    @import 'modules/userPanel';
+    @import 'modules/user-panel';
 
 
 // ---------------------
@@ -100,7 +112,7 @@
 
 
     // *--------- LOGIN & REGISTER ---------*
-    @import 'views/login&register';
+    @import 'views/main-view';
 
 
     // *--------- HELPDESK ---------*
@@ -108,11 +120,11 @@
 
 
     // *--------- SERVICE ---------*
-    @import 'views/service';
+    @import 'views/service-view';
 
 
-    // *--------- MY ISSUES ---------*
-    @import 'views/my-issues';
+    // *--------- ISSUES & USERS ---------*
+    @import 'views/issues&users';
 
 
     // *--------- ISSUE ---------*
@@ -138,6 +150,10 @@
 
     // *--------- MAIN FOOTER ---------*
     @import 'layout/footer';
+
+
+    // *--------- UI VIEW ---------*
+    @import 'layout/ui-view';
 
 
 // ---------------------

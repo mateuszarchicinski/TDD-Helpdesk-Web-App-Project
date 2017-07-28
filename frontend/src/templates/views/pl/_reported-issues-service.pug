@@ -1,0 +1,45 @@
+include ../../helpers/_mixins
+
+//-
+    PL - Reported Issues Service
+
+- var reportedIssues = data.section.reportedIssues;
+
++serviceView("reported-issues", true, data.section.helpdesk.services.assistant.reportedIssues)
+    div(class="reported-issues__container")
+        div(class="reported-issues__header")
+            div(layout class="search-wrapper")
+                input(flex ng-model="filterBy.subject" type="text" placeholder=reportedIssues.header.search.placeholder class="search-input md-whiteframe-z1")
+        div(class="reported-issues__body")
+            md-content(class="white-bg md-whiteframe-z1")
+                table(class="table table-hover")
+                    thead
+                        tr
+                            th= reportedIssues.body.table.thead.lp
+                            th= reportedIssues.body.table.thead.subject
+                            th= reportedIssues.body.table.thead.category
+                            th= reportedIssues.body.table.thead.status
+                            th= reportedIssues.body.table.thead.postDate
+                            th &nbsp;
+                    tbody
+                        tr(ng-repeat="issue in issues | filter: filterBy")
+                            td {{$index + 1}}
+                            td {{issue.subject}}
+                            td
+                                span(ng-if="issue.category === 'software'")= reportedIssues.body.table.body.category.software
+                                span(ng-if="issue.category === 'hardware'")= reportedIssues.body.table.body.category.hardware
+                            td
+                                span(ng-if="issue.status === 'new'")= reportedIssues.body.table.body.status.new
+                                span(ng-if="issue.status === 'in progress'")= reportedIssues.body.table.body.status.inProgress
+                                span(ng-if="issue.status === 'resolved'")= reportedIssues.body.table.body.status.resolved
+                            td {{RIC.formatDate(issue.postDate)}}
+                            td
+                                div(layout layout-align="center")
+                                    md-menu(md-position-mode="right bottom")
+                                        md-button(ng-click="$mdMenu.open($event)" aria-label=reportedIssues.body.table.menu.ariaLabel class="icon-menu-small md-icon-button menu__icon-menu-small")
+                                        md-menu-content
+                                            md-menu-item
+                                                md-button
+                                                    a(ui-sref="helpdesk.reportedIssues.issue(issue)" class="no-link menu__link-menu")= reportedIssues.body.table.menu.openBtn
+                                            md-menu-item
+                                                md-button(ng-click="RIC.removeIssue(issue)")= reportedIssues.body.table.menu.deleteBtn

@@ -1,0 +1,28 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* ISSUES & USERS *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+.my-issues,
+.reported-issues,
+.users {
+    &__container {
+        width: 75%;
+        @media screen and (max-width: $break-point__1) {
+            width: 100%;
+        }
+    }
+    &__header {
+        padding: 0 0 10px;
+    }
+    &__body {
+        padding: 15px 0 0;
+    }
+}
+
+
+.users {
+    &__container {
+        width: 100%;
+    }
+}

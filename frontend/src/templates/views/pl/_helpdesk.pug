@@ -2,11 +2,25 @@
     PL - Helpdesk
 
 //Helpdesk View
-section(class="helpdesk-view")
-    div(layout="row" class="helpdesk-view__container")
-        md-button(ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide" class="md-fab md-primary icon-nav-medium helpdesk-view__icon-nav-medium")
-        md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation" class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav")
-            include ../../components/lists/_services
-        div(flex class="service-view")
-            div(class="service-view__container")
-                md-content(ui-view="service" class="ui-animate")
+div(layout="row" class="main-view authorized")
+    md-sidenav(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" role="navigation" class="md-sidenav-left md-whiteframe-z2 helpdesk-view__sidenav")
+        //- Header
+        include ../../components/header/_header-authorized
+
+        //- Services List
+        include ../../components/lists/_services
+
+        //- Footer
+        include ../../components/footer/_footer
+    div(flex layout="column")
+        header(layout="row" layout-align="center" class="md-whiteframe-z1 helpdesk-view__header")
+            div(ng-style="HC.spacerStyle()" class="helpdesk-view__header-speacer")
+                md-button(ng-click="HC.toggleSidenav()" aria-label="Sidenav Show - Hide" class="md-fab md-primary icon-nav-medium helpdesk-view__icon-nav-medium")
+
+            //- Language Settings
+            include ../../modules/_language-settings
+
+            //- User Panel
+            include ../../modules/_user-panel
+        md-content(flex)
+            div(ui-view="services")

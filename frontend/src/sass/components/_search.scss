@@ -1,0 +1,20 @@
+//~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* SEARCH *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~//
+
+
+.search {
+    &-wrapper {
+        height: 54px;
+    }
+    &-input {
+        padding: 8px 15px;
+        border: 0;
+        &:focus {
+            outline: 0;
+        }
+        &:nth-child(n+2) {
+            margin-left: 10px;
+        }
+    }
+}

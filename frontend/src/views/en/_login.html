@@ -1,42 +1,58 @@
 
 <!--Login View-->
-<section class="form-view" layout="row" layout-align="center">
-  <div class="md-whiteframe-z1 form-view__container" flex-xs="100" layout="column">
-    <md-toolbar>
-      <header class="md-toolbar-tools">
-        <h2>Sign In</h2>
-      </header>
-    </md-toolbar>
-    <md-content layout-padding="layout-padding">
-            <form class="login-form LF" name="loginForm" novalidate="novalidate" layout="column" ng-submit="loginForm.$invalid || LC.loginForm.submit($event)">
-              <md-input-container>
-                <label for="LFE">Email address</label>
-                <input id="LFE" name="email" ng-model="email" type="email" required="required" autofocus="autofocus"/>
-                <div ng-messages="loginForm.email.$error" role="alert">
-                  <div ng-message="email">This is not an correct email address!</div>
-                  <div ng-message="required">This is required!</div>
-                </div>
-              </md-input-container>
-              <md-input-container>
-                <label for="LFP">Password</label>
-                <input id="LFP" name="password" ng-model="password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
-                <div ng-messages="loginForm.password.$error" role="alert">
-                  <div ng-message="required">This is required!</div>
-                  <div ng-message="minlength">That's too short!</div>
-                  <div ng-message="maxlength">That's too long!</div>
-                </div>
-              </md-input-container>
-              <md-button class="btn btn-primary" type="submit">Sign In</md-button>
-            </form>
-      <p class="text-center text-muted"><small>Don't have an account yet? <a ui-sref="register">Sign up</a></small></p>
-    </md-content>
-    <md-divider></md-divider>
-    <md-content layout-padding="layout-padding">
-      <p class="text-center text-muted"><small>or Sign in with</small></p>
-      <div layout="row">
-        <md-button class="btn btn-facebook" ng-click="LC.loginViaFacebook()" flex="50">Facebook</md-button>
-        <md-button class="btn btn-google" ng-click="LC.loginViaGoogle()" flex="50">Google</md-button>
-      </div>
-    </md-content>
-  </div>
-</section>
+<div class="main-view unauthorized" layout="column">
+  <!--Main Header-->
+  <header class="main-header">
+    <div class="language-settings" ng-controller="languageSettingsCtrl as LSC">
+      <ul class="language-settings__list">
+        <li><a class="language-settings__link" ng-click="LSC.translate('pl')" ng-class="{'language-settings__link-active': LSC.language === 'pl'}" ng-href="#" rel="help">pl</a></li>
+        <li><a class="language-settings__link" ng-click="LSC.translate('en')" ng-class="{'language-settings__link-active': LSC.language === 'en'}" ng-href="#" rel="help">en</a></li>
+      </ul>
+    </div>
+    <h1 class="main-header__title"><span class="hide">Helpdesk Application - Help in solving IT problems</span><img class="main-header__brand-logo" src="images/logo/HD-Logo.png" alt="Helpdesk Logo"/></h1>
+  </header>
+  <section class="form-wrapper">
+    <div class="md-whiteframe-z1 login-form__container">
+      <md-toolbar>
+        <header class="md-toolbar-tools">
+          <h2>Sign In</h2>
+        </header>
+      </md-toolbar>
+      <md-content layout-padding="layout-padding">
+                <form class="login-form__form LF" name="loginForm" novalidate="novalidate" layout="column" ng-submit="loginForm.$invalid || LC.loginForm.submit($event)">
+                  <md-input-container>
+                    <label for="LFE">Email address</label>
+                    <input id="LFE" name="email" ng-model="user.email" type="email" required="required" autofocus="autofocus"/>
+                    <div ng-messages="loginForm.email.$error" role="alert">
+                      <div ng-message="email">This is not an correct email address!</div>
+                      <div ng-message="required">This is required!</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container>
+                    <label for="LFP">Password</label>
+                    <input id="LFP" name="password" ng-model="user.password" type="password" required="required" ng-minlength="8" ng-maxlength="25"/>
+                    <div ng-messages="loginForm.password.$error" role="alert">
+                      <div ng-message="required">This is required!</div>
+                      <div ng-message="minlength">That's too short!</div>
+                      <div ng-message="maxlength">That's too long!</div>
+                    </div>
+                  </md-input-container>
+                  <md-button class="btn btn-primary" type="submit">Sign In</md-button>
+                </form>
+        <p class="text-center text-muted"><small>Don't have an account yet? <a ui-sref="register">Sign up</a></small></p>
+      </md-content>
+      <md-divider></md-divider>
+      <md-content layout-padding="layout-padding">
+        <p class="text-center text-muted"><small>or Sign in with</small></p>
+        <div layout="row">
+          <md-button class="btn btn-facebook" ng-click="LC.loginViaFacebook()" flex="50">Facebook</md-button>
+          <md-button class="btn btn-google" ng-click="LC.loginViaGoogle()" flex="50">Google</md-button>
+        </div>
+      </md-content>
+    </div>
+  </section>
+  <!--Main Footer-->
+  <footer class="main-footer">
+    <p class="main-footer__paragraph text-center text-muted"><small class="main-footer__copyright">&copy; Mateusz Archiciński</small></p>
+  </footer>
+</div>

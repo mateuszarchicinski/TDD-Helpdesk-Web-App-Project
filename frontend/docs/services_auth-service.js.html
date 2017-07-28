@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/auth-service.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/auth-service.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @class angular_module.Module:app.Service:auth
+ * @description This is an AngularJS service component, can be defined in JavaScript source file as a extension to AngularJS application module
+ * &lt;br>Link to AngularJS service component documentation:
+ * {@link https://docs.angularjs.org/guide/providers}
+ * @example
+ * angular.module('app').service('auth', [function () {
+ *  // Here is place for service logic
+ * }]);
+ */
+
+
+app.service('auth', ['APP_CONFIG', '$window', 'sendRequest', 'authToken', 'user', '$state', function (APP_CONFIG, $window, sendRequest, authToken, user, $state) {
+    var newWindow = null;
+
+    function openNewWindow(url, options, forceReload) {
+        if (newWindow === null || newWindow.closed || forceReload) {
+            newWindow = $window.open(url, 'newWindow', options);
+        } else {
+            newWindow.focus();
+        }
+
+        return newWindow;
+    }
+
+
+    var configLoginVia = {
+        providers: {
+            facebook: {
+                name: 'facebook',
+                authEndpoint: 'https://www.facebook.com/v2.5/dialog/oauth',
+                clientId: APP_CONFIG.facebook.clientId,
+                redirectUri: $window.location.origin + '/',
+                scope: [
+                    'email',
+                    'public_profile'
+                ]
+            },
+            google: {
+                name: 'google',
+                authEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+                clientId: APP_CONFIG.google.clientId,
+                redirectUri: $window.location.origin,
+                scope: [
+                    'email',
+                    'profile'
+                ]
+            }
+        },
+        currentProvider: null,
+        previusProvider: null,
+        getCurrentProvider: function () {
+            return this.providers[this.currentProvider];
+        }
+    };
+
+    function loginVia(providerType) {
+        var provider = configLoginVia.providers[providerType];
+
+        if (!provider) {
+            return;
+        }
+
+        configLoginVia.previusProvider = configLoginVia.currentProvider;
+        configLoginVia.currentProvider = providerType;
+
+        var isEqual = configLoginVia.previusProvider === configLoginVia.currentProvider,
+            url = provider.authEndpoint + '?client_id=' + provider.clientId + '&amp;redirect_uri=' + provider.redirectUri + '&amp;response_type=code' + '&amp;scope=' + provider.scope.join(' '),
+            options = 'width=500, height=500, left=' + ($window.outerWidth - 500) / 2 + ', top=' + ($window.outerHeight - 500) / 2.5;
+
+        newWindow = openNewWindow(url, options, !isEqual);
+    }
+
+
+    $window.addEventListener('message', function (evt) {
+        var provider = configLoginVia.getCurrentProvider();
+
+        if (evt.origin === $window.location.origin &amp;&amp; evt.data.loginVia) {
+            sendRequest(provider.name, {
+                code: evt.data.code,
+                clientId: provider.clientId,
+                redirectUri: provider.redirectUri
+            }).then(fnOnSuccess, fnOnError);
+
+            newWindow.close();
+        }
+    });
+
+
+    function fnOnSuccess(res) {
+        var token = res.data.token;
+
+        if (token) {
+            authToken.setToken(token);
+
+            user(res.data);
+
+            $state.go('helpdesk.dashboard');
+        }
+    }
+
+    /* eslint-disable */
+    function fnOnError(err) {}
+    /* eslint-enable */
+
+
+    /**
+     * @function auth&amp;sdot;register
+     * @memberOf angular_module.Module:app.Service:auth
+     * @instance
+     * @description This method provides user registration functionality
+     * @param {Object} property Required param to pass user object from registration form
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['auth', '$scope', function (auth, $scope){
+     *  auth.register($scope.user);
+     * }]);
+     */
+
+
+    this.register = function (user) {
+        sendRequest('register', user).then(fnOnSuccess, fnOnError);
+    };
+
+
+    /**
+     * @function auth&amp;sdot;login
+     * @memberOf angular_module.Module:app.Service:auth
+     * @instance
+     * @description This method provides user login functionality
+     * @param {Object} property Required param to pass user object from login form
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['auth', '$scope', function (auth, $scope){
+     *  auth.login($scope.user);
+     * }]);
+     */
+
+
+    this.login = function (user) {
+        sendRequest('login', user).then(fnOnSuccess, fnOnError);
+    };
+
+
+    /**
+     * @function auth&amp;sdot;logout
+     * @memberOf angular_module.Module:app.Service:auth
+     * @instance
+     * @description This method provides user logout functionality
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['auth', function (auth){
+     *  auth.logout();
+     * }]);
+     */
+
+
+    this.logout = function () {
+        sendRequest('logout').then(function () {
+            authToken.removeToken();
+
+            user.removeUser();
+
+            $state.go('root');
+
+            /* eslint-disable */
+        }, function (err) {
+            /* eslint-enable */
+        });
+    };
+
+
+    /**
+     * @function auth&amp;sdot;user
+     * @memberOf angular_module.Module:app.Service:auth
+     * @instance
+     * @description This method provides any kind of user resource
+     * @param {String} type Required param to pass name of request type
+     * @param {Object} user Required param to pass user object
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['auth', function (auth){
+     *  auth.user('read');
+     * }]);
+     */
+
+
+    this.user = function (type, user) {
+        return sendRequest('user.' + type, user);
+    };
+
+
+    /**
+     * @function auth&amp;sdot;loginVia
+     * @memberOf angular_module.Module:app.Service:auth
+     * @instance
+     * @description This method provides user login via Facebook &amp; Google
+     * @param {String} providerType Required param to pass name of provider type
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['auth', function (auth){
+     *  auth.loginVia('facebook'); // or auth.loginVia('google');
+     * }]);
+     */
+
+
+    this.loginVia = loginVia;
+}]);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="angular_module.Module_app.html">Module:app</a></li><li><a href="angular_module.Module_app.Config_appConfig.html">Config:appConfig</a></li><li><a href="angular_module.Module_app.Controller_dashboardCtrl.html">Controller:dashboardCtrl</a></li><li><a href="angular_module.Module_app.Controller_helpdeskCtrl.html">Controller:helpdeskCtrl</a></li><li><a href="angular_module.Module_app.Controller_issueCtrl.html">Controller:issueCtrl</a></li><li><a href="angular_module.Module_app.Controller_languageSettingsCtrl.html">Controller:languageSettingsCtrl</a></li><li><a href="angular_module.Module_app.Controller_loginCtrl.html">Controller:loginCtrl</a></li><li><a href="angular_module.Module_app.Controller_logoutCtrl.html">Controller:logoutCtrl</a></li><li><a href="angular_module.Module_app.Controller_myAccountCtrl.html">Controller:myAccountCtrl</a></li><li><a href="angular_module.Module_app.Controller_myIssuesCtrl.html">Controller:myIssuesCtrl</a></li><li><a href="angular_module.Module_app.Controller_registerCtrl.html">Controller:registerCtrl</a></li><li><a href="angular_module.Module_app.Controller_reportedIssuesCtrl.html">Controller:reportedIssuesCtrl</a></li><li><a href="angular_module.Module_app.Controller_reportIssueCtrl.html">Controller:reportIssueCtrl</a></li><li><a href="angular_module.Module_app.Controller_rootCtrl.html">Controller:rootCtrl</a></li><li><a href="angular_module.Module_app.Controller_userCtrl.html">Controller:userCtrl</a></li><li><a href="angular_module.Module_app.Controller_userPanelCtrl.html">Controller:userPanelCtrl</a></li><li><a href="angular_module.Module_app.Controller_usersCtrl.html">Controller:usersCtrl</a></li><li><a href="angular_module.Module_app.Factory_appState.html">Factory:appState</a></li><li><a href="angular_module.Module_app.Factory_authInterceptor.html">Factory:authInterceptor</a></li><li><a href="angular_module.Module_app.Factory_authToken.html">Factory:authToken</a></li><li><a href="angular_module.Module_app.Factory_sendRequest.html">Factory:sendRequest</a></li><li><a href="angular_module.Module_app.Factory_user.html">Factory:user</a></li><li><a href="angular_module.Module_app.Provider_routesInjector.html">Provider:routesInjector</a></li><li><a href="angular_module.Module_app.Provider_urlParams.html">Provider:urlParams</a></li><li><a href="angular_module.Module_app.Service_auth.html">Service:auth</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Jul 28 2017 11:45:26 GMT+0200 (Środkowoeuropejski czas letni)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

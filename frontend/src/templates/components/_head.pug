@@ -30,6 +30,13 @@ meta(property="og:title" content=data.ogTitle)
 meta(property="og:description" content=data.ogDescription)
 meta(property="og:image" content=host + "tile-1200x630px.png")
 meta(name="robots" content="index, follow, noodp, noydir")
+meta(name="country" content=data.lang)
+meta(name="language" content=data.lang)
+each value, index in languages
+    if value !== data.lang
+        link(rel="alternate" href=host + value hreflang=value)
+    else
+        link(rel="alternate" href=host hreflang="x-default")
 
 //Web application manifest which provides information about an application
 link(rel="manifest" href="manifest.json")

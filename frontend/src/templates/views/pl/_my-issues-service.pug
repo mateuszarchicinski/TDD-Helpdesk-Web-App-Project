@@ -1,0 +1,45 @@
+include ../../helpers/_mixins
+
+//-
+    PL - My Issues Service
+
+- var myIssues = data.section.myIssues;
+
++serviceView("my-issues", true, data.section.helpdesk.services.myIssues)
+    div(class="my-issues__container")
+        div(class="my-issues__header")
+            div(layout class="search-wrapper md-whiteframe-z1")
+                input(flex ng-model="filterBy.subject" type="text" placeholder=myIssues.header.search.placeholder class="search-input")
+        div(class="my-issues__body")
+            md-content(class="white-bg md-whiteframe-z1")
+                table(class="table table-hover")
+                    thead
+                        tr
+                            th= myIssues.body.table.thead.lp
+                            th= myIssues.body.table.thead.subject
+                            th= myIssues.body.table.thead.category
+                            th= myIssues.body.table.thead.status
+                            th= myIssues.body.table.thead.postDate
+                            th &nbsp;
+                    tbody
+                        tr(ng-repeat="issue in issues | filter: filterBy")
+                            td {{$index + 1}}
+                            td {{issue.subject}}
+                            td
+                                span(ng-if="issue.category === 'software'")= myIssues.body.table.body.category.software
+                                span(ng-if="issue.category === 'hardware'")= myIssues.body.table.body.category.hardware
+                            td
+                                span(ng-if="issue.status === 'new'")= myIssues.body.table.body.status.new
+                                span(ng-if="issue.status === 'in progress'")= myIssues.body.table.body.status.inProgress
+                                span(ng-if="issue.status === 'resolved'")= myIssues.body.table.body.status.resolved
+                            td {{MIC.formatDate(issue.postDate)}}
+                            td
+                                div(layout layout-align="center")
+                                    md-menu(md-position-mode="right bottom")
+                                        md-button(ng-click="$mdMenu.open($event)" aria-label=myIssues.body.table.menu.ariaLabel class="icon-menu-small md-icon-button menu__icon-menu-small")
+                                        md-menu-content
+                                            md-menu-item
+                                                md-button
+                                                    a(ui-sref="helpdesk.myIssues.issue(issue)" class="no-link menu__link-menu")= myIssues.body.table.menu.openBtn
+                                            md-menu-item
+                                                md-button(ng-click="MIC.removeIssue(issue)")= myIssues.body.table.menu.deleteBtn

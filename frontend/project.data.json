@@ -3,11 +3,11 @@
         "pl": {
             "lang": "pl",
             "title": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT",
-            "description": "",
-            "keywords": "",
+            "description": "Aplikacja Helpdesk przygotowana na potrzeby pracy inżynierskiej i nauki związanej z metodyką Test-driven development. Przygotowana aplikacja powstała z wykorzystaniem nowoczesnych technologii związanych z językiem JavaScript, MongoDB, ExpressJS, AngularJS i NodeJS.",
+            "keywords": "Praca inżynierska, Engineering work, Aplikacja internetowa, Web application, Test-driven development, Helpdesk application, Klient-server application, Backend, Frontend, MongoDB, ExpressJS, AngularJS, NodeJS",
             "author": "Mateusz Archiciński",
-            "ogTitle": "",
-            "ogDescription": "",
+            "ogTitle": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT",
+            "ogDescription": "Aplikacja Helpdesk przygotowana na potrzeby pracy inżynierskiej i nauki związanej z metodyką Test-driven development. Przygotowana aplikacja powstała z wykorzystaniem nowoczesnych technologii związanych z językiem JavaScript, MongoDB, ExpressJS, AngularJS i NodeJS.",
             "header": {
                 "headline": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT"
             },
@@ -254,30 +254,90 @@
                 "users": {
                     "header": {
                         "search": {
-                            "placeholder": "Search by user email..."
+                            "placeholder": {
+                                "email": "Wyszukaj po adresie email...",
+                                "firstName": "Wyszukaj po imieniu...",
+                                "lastName": "Wyszukaj po nazwisku...",
+                                "role": "Wyszukaj po uprawnieniach..."
+                            }
                         }
                     },
                     "body": {
                         "table": {
                             "thead": {
                                 "lp": "Lp",
-                                "firstName": "First name",
-                                "lastName": "Last name",
-                                "fullName": " Full name",
-                                "gender": "Gender",
-                                "email": "Email",
-                                "isPassword": "Password set",
-                                "role": "Role",
-                                "active": "Activated",
-                                "locale": "Lokalizacja"
+                                "firstName": "Imię",
+                                "lastName": "Nazwisko",
+                                "fullName": "Imię i naziwsko",
+                                "gender": "Płeć",
+                                "email": "Adres email",
+                                "isPassword": "Hasło",
+                                "role": "Uprawnienia",
+                                "active": "Konto aktywowane",
+                                "locale": "Kod lokalizacji"
                             },
                             "body": {
-                                
+                                "gender": {
+                                    "male": "Mężczyzna",
+                                    "female": "Kobieta"
+                                },
+                                "isPassword": {
+                                    "true": "Tak",
+                                    "false": "Nie"
+                                },
+                                "role": {
+                                    "user": "Użytkownik",
+                                    "assistant": "Asystent",
+                                    "admin": "Administrator"
+                                },
+                                "active": {
+                                    "true": "Tak",
+                                    "fals": "Nie"
+                                }
                             },
                             "menu": {
-                                "ariaLabel": "User - More",
-                                "openBtn": "Open",
-                                "deleteBtn": "Delete"
+                                "ariaLabel": "Użytkownik - Więcej",
+                                "openBtn": "Otwóż użytkownika",
+                                "givePermissions": {
+                                    "user": "Nadaj uprawnienia użytkownika",
+                                    "assistant": "Nadaj uprawnienia asystenta",
+                                    "admin": "Nadaj uprawnienia administratora"
+                                },
+                                "deleteBtn": "Usuń użytkownika"
+                            }
+                        }
+                    }
+                },
+                "reportedIssues": {
+                    "header": {
+                        "search": {
+                            "placeholder": "Wyszukaj po nazwie tematu..."
+                        }
+                    },
+                    "body": {
+                        "table": {
+                            "thead": {
+                                "lp": "Lp",
+                                "subject": "Temat",
+                                "category": "Kategoria",
+                                "status": "Status",
+                                "postDate": "Data zgłoszenia"
+                            },
+                            "body": {
+                                "category": {
+                                    "software": "Oprogramowanie komputerowe",
+                                    "hardware": "Sprzęt komputerowy"
+                                },
+                                "status": {
+                                    "new": "Nowe",
+                                    "inProgress": "W trakcie",
+                                    "resolved": "Rozwiązane"
+                                }
+                            },
+                            "menu": {
+                                "ariaLabel": "Zgłoszenie - Więcej",
+                                "openBtn": "Otwórz",
+                                "deleteBtn": "Usuń"
                             }
                         }
                     }
@@ -332,6 +392,12 @@
                             },
                             "submitBtn": "Uaktualnij konto",
                             "deleteBtn": "Usuń konto"
+                        },
+                        "confirmDeletion": {
+                            "ariaLabel": "Potwierdzenie usunięcia konta",
+                            "headline": "Czy chcesz usunąć swoje konto?",
+                            "yesBtn": "Proszę zrób to!",
+                            "noBtn": "Nie, zostanę!"
                         }
                     },
                     "accountInformation": {
@@ -339,25 +405,25 @@
                         "password": {
                             "value": "Hasło:",
                             "info": {
-                                "success": "ustawione",
-                                "error": "brak"
+                                "success": "Tak",
+                                "error": "Nie"
                             }
                         },
                         "role": {
                             "value": "Uprawnienia:",
-                            "user": "użytkownika",
-                            "assistant": "asystenta",
-                            "admin": "admina"
+                            "user": "Użytkownika",
+                            "assistant": "Asystenta",
+                            "admin": "Administratora"
                         },
                         "active": {
                             "value": "Konto aktywowane:",
                             "info": {
-                                "success": "tak",
-                                "error": "nie"
+                                "success": "Tak",
+                                "error": "Nie"
                             }
                         },
                         "locale": {
-                            "value": "Lokalizacja:"
+                            "value": "Kod lokalizacji:"
                         }
                     }
                 },
@@ -390,11 +456,11 @@
         "en": {
             "lang": "en",
             "title": "Helpdesk Application - Help in solving IT problems",
-            "description": "",
-            "keywords": "",
+            "description": "Helpdesk Application created for engineering work and learning to methodology Test-driven development. The application was developed using modern JavaScript technologies, MongoDB, ExpressJS, AngularJS and NodeJS.",
+            "keywords": "Praca inżynierska, Engineering work, Aplikacja internetowa, Web application, Test-driven development, Helpdesk application, Klient-server application, Backend, Frontend, MongoDB, ExpressJS, AngularJS, NodeJS",
             "author": "Mateusz Archiciński",
-            "ogTitle": "",
-            "ogDescription": "",
+            "ogTitle": "Helpdesk Application - Help in solving IT problems",
+            "ogDescription": "Helpdesk Application created for engineering work and learning to methodology Test-driven development. The application was developed using modern JavaScript technologies, MongoDB, ExpressJS, AngularJS and NodeJS.",
             "header": {
                 "headline": "Helpdesk Application - Help in solving IT problems"
             },
@@ -641,7 +707,12 @@
                 "users": {
                     "header": {
                         "search": {
-                            "placeholder": "Search by user email..."
+                            "placeholder": {
+                                "email": "Search by user email...",
+                                "firstName": "Search by user first name...",
+                                "lastName": "Search by user last name...",
+                                "role": "Search by user permissions..."
+                            }
                         }
                     },
                     "body": {
@@ -653,16 +724,71 @@
                                 "fullName": " Full name",
                                 "gender": "Gender",
                                 "email": "Email",
-                                "isPassword": "Password set",
-                                "role": "Role",
-                                "active": "Activated",
-                                "locale": "Localzation"
+                                "isPassword": "Password",
+                                "role": "Permissions",
+                                "active": "Account activated",
+                                "locale": "Localization code"
                             },
                             "body": {
-                                
+                                "gender": {
+                                    "male": "Man",
+                                    "female": "Woman"
+                                },
+                                "isPassword": {
+                                    "true": "Yes",
+                                    "false": "No"
+                                },
+                                "role": {
+                                    "user": "User",
+                                    "assistant": "Assistant",
+                                    "admin": "Admin"
+                                },
+                                "active": {
+                                    "true": "Yes",
+                                    "fals": "No"
+                                }
                             },
                             "menu": {
                                 "ariaLabel": "User - More",
+                                "openBtn": "Open user",
+                                "givePermissions": {
+                                    "user": "Give user permissions",
+                                    "assistant": "Give assistant permissions",
+                                    "admin": "Give admin permissions"
+                                },
+                                "deleteBtn": "Delete user"
+                            }
+                        }
+                    }
+                },
+                "reportedIssues": {
+                    "header": {
+                        "search": {
+                            "placeholder": "Search by subject name..."
+                        }
+                    },
+                    "body": {
+                        "table": {
+                            "thead": {
+                                "lp": "Lp",
+                                "subject": "Subject",
+                                "category": "Category",
+                                "status": "Status",
+                                "postDate": "Issue date"
+                            },
+                            "body": {
+                                "category": {
+                                    "software": "Software",
+                                    "hardware": "Hardware"
+                                },
+                                "status": {
+                                    "new": "New",
+                                    "inProgress": "In progress",
+                                    "resolved": "Resolved"
+                                }
+                            },
+                            "menu": {
+                                "ariaLabel": "Issue - More",
                                 "openBtn": "Open",
                                 "deleteBtn": "Delete"
                             }
@@ -719,6 +845,12 @@
                             },
                             "submitBtn": "Update Account",
                             "deleteBtn": "Delete Account"
+                        },
+                        "confirmDeletion": {
+                            "ariaLabel": "Confirmation of your account deletion",
+                            "headline": "Would you like to delete your account?",
+                            "yesBtn": "Please do it!",
+                            "noBtn": "No, I will stay!"
                         }
                     },
                     "accountInformation": {
@@ -726,25 +858,25 @@
                         "password": {
                             "value": "Password:",
                             "info": {
-                                "success": "is set",
-                                "error": "no"
+                                "success": "Yes",
+                                "error": "No"
                             }
                         },
                         "role": {
-                            "value": "Permisions:",
-                            "user": "user",
-                            "assistant": "assistant",
-                            "admin": "admin"
+                            "value": "Permissions:",
+                            "user": "User",
+                            "assistant": "Assistant",
+                            "admin": "Admin"
                         },
                         "active": {
                             "value": "Account activated:",
                             "info": {
-                                "success": "yes",
-                                "error": "no"
+                                "success": "Yes",
+                                "error": "No"
                             }
                         },
                         "locale": {
-                            "value": "Localization:"
+                            "value": "Localization code:"
                         }
                     }
                 },

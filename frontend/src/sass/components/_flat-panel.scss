@@ -1,0 +1,40 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* FLAT PANEL *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+// .flat-panel
+$flat-panel__background-color: $color__white !default;
+$flat-panel__color: $primary-text-color !default;
+// .flat-panel__header
+$flat-panel__header__border-bottom: 1px solid $divider-color !default;
+
+
+.flat-panel {
+    background-color: $flat-panel__background-color;
+    color: $flat-panel__color;
+    margin-bottom: 25px;
+    &:nth-child(2n+2) {
+        margin-left: 25px;
+        @media screen and (max-width: $break-point__2) {
+            margin: 0;
+        }
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &__toolbar,
+    &__toolbar._md,
+    &__header,
+    &__body {
+        background-color: transparent;
+        color: inherit;
+    }
+    &__header {
+        border-bottom: $flat-panel__header__border-bottom;
+    }
+    &__list-item,
+    &__list-item._md {
+        padding: 0;
+    }
+}

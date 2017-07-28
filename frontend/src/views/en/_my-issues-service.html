@@ -1,0 +1,58 @@
+
+<div class="service-view">
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <md-toolbar class="service-view__toolbar service-view__header">
+    <header class="md-toolbar-tools">
+      <h2>My Issues</h2>
+    </header>
+  </md-toolbar>
+  <div class="service-view__body service-view__my-issues" layout="row" layout-align="center start" layout-wrap="layout-wrap">
+    <div class="my-issues__container">
+      <div class="my-issues__header">
+        <div class="search-wrapper md-whiteframe-z1" layout="layout">
+          <input class="search-input" flex="flex" ng-model="filterBy.subject" type="text" placeholder="Search by subject name..."/>
+        </div>
+      </div>
+      <div class="my-issues__body">
+        <md-content class="white-bg md-whiteframe-z1">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Lp</th>
+                <th>Subject</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Issue date</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="issue in issues | filter: filterBy">
+                <td>{{$index + 1}}</td>
+                <td>{{issue.subject}}</td>
+                <td><span ng-if="issue.category === 'software'">Software</span><span ng-if="issue.category === 'hardware'">Hardware</span></td>
+                <td><span ng-if="issue.status === 'new'">New</span><span ng-if="issue.status === 'in progress'">In progress</span><span ng-if="issue.status === 'resolved'">Resolved</span></td>
+                <td>{{MIC.formatDate(issue.postDate)}}</td>
+                <td>
+                  <div layout="layout" layout-align="center">
+                    <md-menu md-position-mode="right bottom">
+                      <md-button class="icon-menu-small md-icon-button menu__icon-menu-small" ng-click="$mdMenu.open($event)" aria-label="Issue - More"></md-button>
+                      <md-menu-content>
+                        <md-menu-item>
+                          <md-button><a class="no-link menu__link-menu" ui-sref="helpdesk.myIssues.issue(issue)">Open</a></md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="MIC.removeIssue(issue)">Delete</md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-content>
+      </div>
+    </div>
+  </div>
+</div>

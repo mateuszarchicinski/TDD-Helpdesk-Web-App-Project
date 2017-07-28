@@ -3,36 +3,26 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
-// __paragraph
-$main-footer__paragraph__color: $color__white !default;
 // __copyright
 $main-footer__copyright__font-size: $base__font-size * 0.80 !default;
 $main-footer__copyright__font-weight: $base__font-weight !default;
 
 
-// Authorized
-// .main-footer
-$main-footer__width: $sidenav__width !default;
-
-
 .main-footer {
-    width: $main-footer__width;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    z-index: 100;
-    padding: 0;
+    &__paragraph {
+        padding: 40px 0 35px;
+        margin: 0;
+    }
     &__copyright {
         font-size: $main-footer__copyright__font-size;
         font-weight: $main-footer__copyright__font-weight;
-    }
-    @media screen and (max-width: $break-point__1) {
-        display: none;
     }
 }
 
 
 // Authorized
+// __paragraph
+$main-footer__paragraph__color: $color__white !default;
 .authorized {
     .main-footer {
         &__paragraph {

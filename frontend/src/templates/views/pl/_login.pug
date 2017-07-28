@@ -2,20 +2,28 @@
     PL - Login
 
 //Login View
-section(layout="row" layout-align="center" class="form-view")
-    div(flex-xs="100" layout="column" class="md-whiteframe-z1 form-view__container")
-        md-toolbar
-            header.md-toolbar-tools
-                h2 #{data.section.login.headline}
-        md-content(layout-padding)
-            include ../../components/forms/_login
-            p(class="text-center text-muted")
-                small #{data.section.login.copy[0]} 
-                    a(ui-sref="register") #{data.section.login.copy[1]}
-        md-divider
-        md-content(layout-padding)
-            p(class="text-center text-muted")
-                small #{data.section.login.copy[2]}
-            div(layout="row")
-                md-button(ng-click="LC.loginViaFacebook()" flex="50" class="btn btn-facebook") Facebook
-                md-button(ng-click="LC.loginViaGoogle()" flex="50" class="btn btn-google") Google
+div(layout="column" class="main-view unauthorized")
+    //- Header
+    include ../../components/header/_header-unauthorized
+
+    //- Form Wrapper
+    section(class="form-wrapper")
+        div(class="md-whiteframe-z1 login-form__container")
+            md-toolbar
+                header.md-toolbar-tools
+                    h2 #{data.section.login.headline}
+            md-content(layout-padding)
+                include ../../components/forms/_login
+                p(class="text-center text-muted")
+                    small #{data.section.login.copy[0]} 
+                        a(ui-sref="register") #{data.section.login.copy[1]}
+            md-divider
+            md-content(layout-padding)
+                p(class="text-center text-muted")
+                    small #{data.section.login.copy[2]}
+                div(layout="row")
+                    md-button(ng-click="LC.loginViaFacebook()" flex="50" class="btn btn-facebook") Facebook
+                    md-button(ng-click="LC.loginViaGoogle()" flex="50" class="btn btn-google") Google
+
+    //- Footer
+    include ../../components/footer/_footer

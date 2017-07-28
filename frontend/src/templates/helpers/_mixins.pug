@@ -3,16 +3,16 @@
 
 //- Login Form
 mixin loginForm(name, shortName, ctrlAs, data)
-    form(name=name novalidate layout="column" class="login-form " + shortName ng-submit=name + ".$invalid || " + ctrlAs + "." + name + ".submit($event)")
+    form(name=name novalidate layout="column" class="login-form__form " + shortName ng-submit=name + ".$invalid || " + ctrlAs + "." + name + ".submit($event)")
         md-input-container
             label(for=shortName + "E")= data.email.value
-            input(id=shortName + "E" name="email" ng-model="email" type="email" required autofocus)
+            input(id=shortName + "E" name="email" ng-model="user.email" type="email" required autofocus)
             div(ng-messages=name + ".email.$error" role="alert")
                 div(ng-message="email")= data.email.errors.email
                 div(ng-message="required")= data.email.errors.required
         md-input-container
             label(for=shortName + "P")= data.password.value
-            input(id=shortName + "P" name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
+            input(id=shortName + "P" name="password" ng-model="user.password" type="password" required ng-minlength="8" ng-maxlength="25")
             div(ng-messages=name + ".password.$error" role="alert")
                 div(ng-message="required")= data.password.errors.required
                 div(ng-message="minlength")= data.password.errors.minLength
@@ -21,29 +21,29 @@ mixin loginForm(name, shortName, ctrlAs, data)
 
 //- Register Form
 mixin registerForm(name, shortName, ctrlAs, data)
-    form(name=name novalidate layout="column" class="register-form " + shortName ng-submit=name + ".$invalid || " + ctrlAs + "." + name + ".submit($event)")
+    form(name=name novalidate layout="column" class="register-form__form " + shortName ng-submit=name + ".$invalid || " + ctrlAs + "." + name + ".submit($event)")
         md-input-container
             label(for=shortName + "FN")= data.name.value
-            input(id=shortName + "FN" name="firstName" ng-model="firstName" type="text" required pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus)
+            input(id=shortName + "FN" name="firstName" ng-model="user.firstName" type="text" required pattern="^[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]{1,50}$" autofocus)
             div(ng-messages=name + ".firstName.$error" role="alert")
                 div(ng-message="required")= data.name.errors.required
                 div(ng-message="pattern")= data.name.errors.pattern
         md-input-container
             label(for=shortName + "E")= data.email.value
-            input(id=shortName + "E" name="email" ng-model="email" type="email" required)
+            input(id=shortName + "E" name="email" ng-model="user.email" type="email" required)
             div(ng-messages=name + ".email.$error" role="alert")
                 div(ng-message="email")= data.email.errors.email
                 div(ng-message="required")= data.email.errors.required
         md-input-container
             label(for=shortName + "P")= data.password.value
-            input(id=shortName + "P" name="password" ng-model="password" type="password" required ng-minlength="8" ng-maxlength="25")
+            input(id=shortName + "P" name="password" ng-model="user.password" type="password" required ng-minlength="8" ng-maxlength="25")
             div(ng-messages=name + ".password.$error" role="alert")
                 div(ng-message="required")= data.password.errors.required
                 div(ng-message="minlength")= data.password.errors.minLength
                 div(ng-message="maxlength")= data.password.errors.maxLength
         md-input-container
             label(for=shortName + "CP")= data.confirmPassword.value
-            input(id=shortName + "CP" name="confirmPassword" ng-model="confirmPassword" type="password" required validate-equals="password")
+            input(id=shortName + "CP" name="confirmPassword" ng-model="user.confirmPassword" type="password" required validate-equals="user.password")
             div(ng-messages=name + ".confirmPassword.$error" role="alert")
                 div(ng-message="required")= data.confirmPassword.errors.required
                 div(ng-message="validateEquals")= data.confirmPassword.errors.validateEquals
@@ -51,19 +51,19 @@ mixin registerForm(name, shortName, ctrlAs, data)
             small #{data.termsConditions[0]} 
                 a(ng-click=ctrlAs + ".showDialog('terms&conditions')" ng-href="#" rel="help") #{data.termsConditions[1]}
                 |  #{data.termsConditions[2]} 
-                a(ng-click=ctrlAs + ".showDialog('privacyPolicy')" ng-href="#" rel="help") #{data.termsConditions[3]}
+                a(ng-click=ctrlAs + ".showDialog('privacy-policy')" ng-href="#" rel="help") #{data.termsConditions[3]}
                 | .
         md-button(type="submit" class="btn btn-primary")= data.submitBtn
 
 //- Service View
 mixin serviceView(modifierClass, breadcrumb, data)
-    div(class="service-view__" + modifierClass)
+    div(class="service-view")
         if breadcrumb
             div(ncy-breadcrumb)
-        md-toolbar(class="service-view__toolbar")
-            header.md-toolbar-tools(class="service-view__toolbar-tools")
+        md-toolbar(class="service-view__toolbar service-view__header")
+            header.md-toolbar-tools
                 h2= data.fullName || data.name
-        md-content(layout-padding)
+        div(layout="row" layout-align="center start" layout-wrap class="service-view__body service-view__" + modifierClass)
             if block
                 block
 

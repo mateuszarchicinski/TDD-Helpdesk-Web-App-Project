@@ -3,13 +3,6 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
-// Authorized
-// .main-header
-$main-header__background-color: $color__white !default;
-// __brand-logo
-$brand-logo__margin: 0 0 0 ($sidenav__width - 96px)/2 !default;
-
-
 .main-header {
     &__title {
         padding: 25px 0 18px;
@@ -23,30 +16,25 @@ $brand-logo__margin: 0 0 0 ($sidenav__width - 96px)/2 !default;
 
 
 // Authorized
+// .main-header
+$main-header__height: $sideheader__height * 2 !default;
+$main-header__background-color: $color__white !default;
+$main-header__border-bottom: 1px solid $accent-color !default;
+// __brand-logo
+$brand-logo__margin-top: ($main-header__height - 62.5) /2 !default;
+
+
 .authorized {
     .main-header {
-        height: 65px;
+        height: $main-header__height;
         background: $main-header__background-color;
-        position: relative;
-        display: flex;
-        z-index: 10;
-        padding: 0 8px;
-        > * {
-            flex: 1;
-        }
+        border-bottom: $main-header__border-bottom;
         &__title {
-            display: flex;
-            align-items: center;
-            order: -1;
             padding: 0;
             margin: 0;
         }
         &__brand-logo {
-            max-width: 80px;
-            margin: $brand-logo__margin;
-            @media screen and (max-width: $break-point__2) {
-                margin: 0 0 0 22px;
-            }
+            margin-top: $brand-logo__margin-top;
         }
     }
 }

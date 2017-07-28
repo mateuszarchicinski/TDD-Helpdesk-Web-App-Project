@@ -1,0 +1,77 @@
+
+<div class="service-view">
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <md-toolbar class="service-view__toolbar service-view__header">
+    <header class="md-toolbar-tools">
+      <h2>Użytkownicy</h2>
+    </header>
+  </md-toolbar>
+  <div class="service-view__body service-view__users" layout="row" layout-align="center start" layout-wrap="layout-wrap">
+    <div class="users__container">
+      <div class="users__header">
+        <div class="search-wrapper" layout="layout">
+          <input class="search-input md-whiteframe-z1" flex="flex" ng-model="filterBy.email" type="text" placeholder="Wyszukaj po adresie email..."/>
+          <input class="search-input md-whiteframe-z1" flex="flex" ng-model="filterBy.firstName" type="text" placeholder="Wyszukaj po imieniu..."/>
+          <input class="search-input md-whiteframe-z1" flex="flex" ng-model="filterBy.lastName" type="text" placeholder="Wyszukaj po nazwisku..."/>
+          <input class="search-input md-whiteframe-z1" flex="flex" ng-model="filterBy.role" type="text" placeholder="Wyszukaj po uprawnieniach..."/>
+        </div>
+      </div>
+      <div class="users__body">
+        <md-content class="white-bg md-whiteframe-z1">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Lp</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Imię i naziwsko</th>
+                <th>Płeć</th>
+                <th>Adres email</th>
+                <th>Hasło</th>
+                <th>Uprawnienia</th>
+                <th>Konto aktywowane</th>
+                <th>Kod lokalizacji</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in users | filter: filterBy">
+                <td>{{$index + 1}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.fullName}}</td>
+                <td><span ng-if="user.gender === 'male'">Mężczyzna</span><span ng-if="user.gender === 'female'">Kobieta</span></td>
+                <td>{{user.email}}</td>
+                <td><span ng-if="user.isPassword === true">Tak</span><span ng-if="user.isPassword === false">Nie</span></td>
+                <td><span ng-if="user.role === 'user'">Użytkownik</span><span ng-if="user.role === 'assistant'">Asystent</span><span ng-if="user.role === 'admin'">Administrator</span></td>
+                <td><span ng-if="user.active === true">Tak</span><span ng-if="user.active === false"></span></td>
+                <td class="text-uppercase">{{user.locale}}</td>
+                <td>
+                  <div layout="layout" layout-align="center">
+                    <md-menu md-position-mode="right bottom">
+                      <md-button class="icon-menu-small md-icon-button menu__icon-menu-small" ng-click="$mdMenu.open($event)" aria-label="Użytkownik - Więcej"></md-button>
+                      <md-menu-content>
+                        <md-menu-item>
+                          <md-button ng-click="UC.givePermissions(user, 'user')">Nadaj uprawnienia użytkownika</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="UC.givePermissions(user, 'assistant')">Nadaj uprawnienia asystenta</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="UC.givePermissions(user, 'admin')">Nadaj uprawnienia administratora</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="UC.removeUser(user)">Usuń użytkownika</md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-content>
+      </div>
+    </div>
+  </div>
+</div>

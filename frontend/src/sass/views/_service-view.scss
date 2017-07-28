@@ -1,0 +1,23 @@
+//~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* SERVICE *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+// __toolbar
+$service-view__toolbar__color: $primary-text-color !default;
+
+
+.service-view {
+    &__toolbar,
+    &__toolbar._md {
+        background-color: transparent;
+        color: $service-view__toolbar__color;
+    }
+    &__header {}
+    &__body {
+        padding: 16px 16px 32px;
+        &.service-view__issue {
+            justify-content: flex-start;
+        }
+    }
+}

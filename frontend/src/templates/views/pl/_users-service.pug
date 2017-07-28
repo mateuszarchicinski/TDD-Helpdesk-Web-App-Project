@@ -1,0 +1,68 @@
+include ../../helpers/_mixins
+
+//-
+    PL - Users Service
+
+- var users = data.section.users;
+
++serviceView("users", true, data.section.helpdesk.services.admin.users)
+    div(class="users__container")
+        div(class="users__header")
+            div(layout class="search-wrapper")
+                input(flex ng-model="filterBy.email" type="text" placeholder=users.header.search.placeholder.email class="search-input md-whiteframe-z1")
+                input(flex ng-model="filterBy.firstName" type="text" placeholder=users.header.search.placeholder.firstName class="search-input md-whiteframe-z1")
+                input(flex ng-model="filterBy.lastName" type="text" placeholder=users.header.search.placeholder.lastName class="search-input md-whiteframe-z1")
+                input(flex ng-model="filterBy.role" type="text" placeholder=users.header.search.placeholder.role class="search-input md-whiteframe-z1")
+        div(class="users__body")
+            md-content(class="white-bg md-whiteframe-z1")
+                table(class="table table-hover")
+                    thead
+                        tr
+                            th= users.body.table.thead.lp
+                            th= users.body.table.thead.firstName
+                            th= users.body.table.thead.lastName
+                            th= users.body.table.thead.fullName
+                            th= users.body.table.thead.gender
+                            th= users.body.table.thead.email
+                            th= users.body.table.thead.isPassword
+                            th= users.body.table.thead.role
+                            th= users.body.table.thead.active
+                            th= users.body.table.thead.locale
+                            th &nbsp;
+                    tbody
+                        tr(ng-repeat="user in users | filter: filterBy")
+                            td {{$index + 1}}
+                            td {{user.firstName}}
+                            td {{user.lastName}}
+                            td {{user.fullName}}
+                            td
+                                span(ng-if="user.gender === 'male'")= users.body.table.body.gender.male
+                                span(ng-if="user.gender === 'female'")= users.body.table.body.gender.female
+                            td {{user.email}}
+                            td
+                                span(ng-if="user.isPassword === true")= users.body.table.body.isPassword.true
+                                span(ng-if="user.isPassword === false")= users.body.table.body.isPassword.false
+                            td
+                                span(ng-if="user.role === 'user'")= users.body.table.body.role.user
+                                span(ng-if="user.role === 'assistant'")= users.body.table.body.role.assistant
+                                span(ng-if="user.role === 'admin'")= users.body.table.body.role.admin
+                            td
+                                span(ng-if="user.active === true")= users.body.table.body.active.true
+                                span(ng-if="user.active === false")= users.body.table.body.active.false
+                            td.text-uppercase {{user.locale}}
+                            td
+                                div(layout layout-align="center")
+                                    md-menu(md-position-mode="right bottom")
+                                        md-button(ng-click="$mdMenu.open($event)" aria-label=users.body.table.menu.ariaLabel class="icon-menu-small md-icon-button menu__icon-menu-small")
+                                        md-menu-content
+                                            //- md-menu-item
+                                                md-button
+                                                    a(ui-sref="helpdesk.users.user(user)" class="no-link menu__link-menu")= users.body.table.menu.openBtn
+                                            md-menu-item
+                                                md-button(ng-click="UC.givePermissions(user, 'user')")= users.body.table.menu.givePermissions.user
+                                            md-menu-item
+                                                md-button(ng-click="UC.givePermissions(user, 'assistant')")= users.body.table.menu.givePermissions.assistant
+                                            md-menu-item
+                                                md-button(ng-click="UC.givePermissions(user, 'admin')")= users.body.table.menu.givePermissions.admin
+                                            md-menu-item
+                                                md-button(ng-click="UC.removeUser(user)")= users.body.table.menu.deleteBtn

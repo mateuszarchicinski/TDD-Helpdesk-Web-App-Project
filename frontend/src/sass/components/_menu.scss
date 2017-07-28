@@ -1,0 +1,23 @@
+//~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* MENU *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~//
+
+
+.menu {
+    &__icon-menu-small {
+        background-position: -80px -128px;
+    }
+    &__icon-menu-medium {
+        background-position: -4px -72px;
+    }
+    &__link-menu {
+        width: 100%;
+        height: 100%;
+        line-height: 48px;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        padding: 0 16px;
+    }
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/user-factory.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/user-factory.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @class angular_module.Module:app.Factory:user
+ * @description This is an AngularJS factory component, can be defined in JavaScript source file as a extension to AngularJS application module
+ * &lt;br>Link to AngularJS factory component documentation:
+ * {@link https://docs.angularjs.org/guide/providers}
+ * @example
+ * angular.module('app').factory('user', [function (){
+ *  // Here is place for factory logic
+ * }]);
+ */
+
+
+app.factory('user', ['SCHEMAS_CONFIG', function (SCHEMAS_CONFIG) {
+    var userData = null,
+        userSchema = SCHEMAS_CONFIG.user;
+
+
+    /**
+     * @function user
+     * @memberOf angular_module.Module:app.Factory:user
+     * @instance
+     * @description This method creates a user object which will be sharing data between application components
+     * @param {Object} data Required param to set user data object
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['user', function (user){
+     *  user({
+     *   firstName: 'Mateusz'
+     *  });
+     * }]);
+     */
+
+
+    function user(data) {
+        if (userData !== null || typeof data !== 'object' || !data.firstName) {
+            return false;
+        }
+
+        userData = data;
+    }
+
+
+    /**
+     * @function user&amp;sdot;set
+     * @memberOf angular_module.Module:app.Factory:user
+     * @instance
+     * @description This method is used to set value in user object
+     * @param {String} property Required param to pass name of property
+     * @param {(Number|String|Boolean|Object)} value Required param to pass value
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['user', function (user){
+     *  user.set('my-issues', myIssues);
+     * }]);
+     */
+
+
+    user.set = function (property, value) {
+        if (!userData) {
+            return false;
+        }
+
+        userData[property] = value;
+    };
+
+
+    /**
+     * @function user&amp;sdot;get
+     * @memberOf angular_module.Module:app.Factory:user
+     * @instance
+     * @description This method is used to get value from user object
+     * @param {String} property Required param to pass name of property
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['user', function (user){
+     *  user.get('my-issues');
+     * }]);
+     */
+
+
+    user.get = function (property) {
+        if (!userData) {
+            return null;
+        }
+
+        return userData[property];
+    };
+
+
+    /**
+     * @function user&amp;sdot;remove
+     * @memberOf angular_module.Module:app.Factory:user
+     * @instance
+     * @description This method is used to remove value from user object
+     * @param {String} property Required param to pass name of property
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['user', function (user){
+     *  user.remove('my-issues');
+     * }]);
+     */
+
+
+    user.remove = function (property) {
+        if (!userData) {
+            return false;
+        }
+
+        delete userData[property];
+    };
+
+
+    /**
+     * @function user&amp;sdot;getUser
+     * @memberOf angular_module.Module:app.Factory:user
+     * @instance
+     * @description This method is used to get only user data as object
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['user', function (user){
+     *  user.getUser();
+     * }]);
+     */
+
+
+    user.getUser = function () {
+        if (!userData) {
+            return null;
+        }
+
+        var properties = Object.keys(userSchema),
+            data = {};
+
+        for (var i in properties) {
+            var value = userData[properties[i]];
+
+            if (value) {
+                data[properties[i]] = value;
+            }
+        }
+
+        return data;
+    };
+
+
+    /**
+     * @function user&amp;sdot;removeUser
+     * @memberOf angular_module.Module:app.Factory:user
+     * @instance
+     * @description This method is used to remove user data object
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['user', function (user){
+     *  user.removeUser();
+     * }]);
+     */
+
+
+    user.removeUser = function () {
+        if (userData) {
+            userData = null;
+        }
+    };
+
+
+    /**
+     * @function user&amp;sdot;isUser
+     * @memberOf angular_module.Module:app.Factory:user
+     * @instance
+     * @description This method is used to check if user data object is set
+     * @example
+     * angular.module('app').controller('exampleCtrl', ['user', function (user){
+     *  user.isUser();
+     * }]);
+     */
+
+
+    user.isUser = function () {
+        return !!userData;
+    };
+
+    return user;
+}]);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="angular_module.Module_app.html">Module:app</a></li><li><a href="angular_module.Module_app.Config_appConfig.html">Config:appConfig</a></li><li><a href="angular_module.Module_app.Controller_dashboardCtrl.html">Controller:dashboardCtrl</a></li><li><a href="angular_module.Module_app.Controller_helpdeskCtrl.html">Controller:helpdeskCtrl</a></li><li><a href="angular_module.Module_app.Controller_issueCtrl.html">Controller:issueCtrl</a></li><li><a href="angular_module.Module_app.Controller_languageSettingsCtrl.html">Controller:languageSettingsCtrl</a></li><li><a href="angular_module.Module_app.Controller_loginCtrl.html">Controller:loginCtrl</a></li><li><a href="angular_module.Module_app.Controller_logoutCtrl.html">Controller:logoutCtrl</a></li><li><a href="angular_module.Module_app.Controller_myAccountCtrl.html">Controller:myAccountCtrl</a></li><li><a href="angular_module.Module_app.Controller_myIssuesCtrl.html">Controller:myIssuesCtrl</a></li><li><a href="angular_module.Module_app.Controller_registerCtrl.html">Controller:registerCtrl</a></li><li><a href="angular_module.Module_app.Controller_reportedIssuesCtrl.html">Controller:reportedIssuesCtrl</a></li><li><a href="angular_module.Module_app.Controller_reportIssueCtrl.html">Controller:reportIssueCtrl</a></li><li><a href="angular_module.Module_app.Controller_rootCtrl.html">Controller:rootCtrl</a></li><li><a href="angular_module.Module_app.Controller_userCtrl.html">Controller:userCtrl</a></li><li><a href="angular_module.Module_app.Controller_userPanelCtrl.html">Controller:userPanelCtrl</a></li><li><a href="angular_module.Module_app.Controller_usersCtrl.html">Controller:usersCtrl</a></li><li><a href="angular_module.Module_app.Factory_appState.html">Factory:appState</a></li><li><a href="angular_module.Module_app.Factory_authInterceptor.html">Factory:authInterceptor</a></li><li><a href="angular_module.Module_app.Factory_authToken.html">Factory:authToken</a></li><li><a href="angular_module.Module_app.Factory_sendRequest.html">Factory:sendRequest</a></li><li><a href="angular_module.Module_app.Factory_user.html">Factory:user</a></li><li><a href="angular_module.Module_app.Provider_routesInjector.html">Provider:routesInjector</a></li><li><a href="angular_module.Module_app.Provider_urlParams.html">Provider:urlParams</a></li><li><a href="angular_module.Module_app.Service_auth.html">Service:auth</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Jul 28 2017 11:45:26 GMT+0200 (Środkowoeuropejski czas letni)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

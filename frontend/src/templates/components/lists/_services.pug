@@ -1,7 +1,7 @@
 //-
     Services List
 
-md-list(class="services-list md-body-1")
+md-list(flex class="services-list md-body-1")
     md-list-item(class="services-list__list-item")
         a(ui-sref="helpdesk.dashboard" ui-sref-active="services-list__link-active" class="services-list__link") #{data.section.helpdesk.services.dashboard.name}
     inject-component(include="servicesTmpUrl")

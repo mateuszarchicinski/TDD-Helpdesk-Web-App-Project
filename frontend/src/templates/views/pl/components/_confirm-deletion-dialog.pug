@@ -1,0 +1,13 @@
+include ../../../helpers/_mixins
+
+//-
+    PL - Confirm Deletion Dialog
+
+- var confirmDeletionDialog = data.section.myaccount.userInformation.confirmDeletion;
+
+md-dialog(aria-label=confirmDeletionDialog.ariaLabel)
+    md-dialog-content(layout-padding)
+        h3.no-margin= confirmDeletionDialog.headline
+    md-dialog-actions(layout layout-align="center")
+        md-button(ng-click="CDC.isConfirmation(true)")= confirmDeletionDialog.yesBtn
+        md-button(ng-click="CDC.isConfirmation(false)" md-focus)= confirmDeletionDialog.noBtn

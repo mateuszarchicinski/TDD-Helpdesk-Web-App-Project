@@ -3,27 +3,50 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
+// __header
+$hw__header__height: $sideheader__height !default;
+$hw__header__background-color: $color__white !default;
+// __header::after
+$hw__header__after__background-color: $color__white !default;
 // __sidenav
 $hv__sidenav__width: $sidenav__width !default;
 $hv__sidenav__background-color: $primary-color-dark !default;
 
 
 .helpdesk-view {
-    &__container {
-        position: relative;
-    }
-    &__icon-nav-medium {
-        background-position: -64px 4px;
-        position: absolute;
-        left: 0;
-        top: 51px;
-    }
     &__sidenav {
         width: $hv__sidenav__width;
         background-color: $hv__sidenav__background-color;
     }
-    &__container,
-    &__sidenav {
-        min-height: calc(100vh - 65px);
+    &__header {
+        height: $hw__header__height;
+        background-color: $hw__header__background-color;
+        position: relative;
+        z-index: 10;
+        /*
+        @include after {
+            content: "";
+            width: 5px;
+            height: 100%;
+            background: $hw__header__after__background-color;
+            position: absolute;
+            display: block;
+            left: -2.5px;
+            top: 0;
+        }
+        */
+    }
+    &__header-speacer {
+        width: 100px;
+        @media screen and (max-width: $break-point__2) {
+            width: auto;
+        }
+    }
+    &__icon-nav-medium {
+        background-position: -64px 4px;
+        display: none;
+        @media screen and (max-width: $break-point__1) {
+            display: block;
+        }
     }
 }

@@ -1,0 +1,15 @@
+//~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~* USER *~~~~~~//+
+//~~~~~~~~~~~~~~~~~~~~//
+
+
+// .user-avatar
+$user-avatar__background-color: $accent-color !default;
+
+
+.user {
+    &-avatar {
+        background-color: $user-avatar__background-color;
+        border-radius: 50%;
+    }
+}

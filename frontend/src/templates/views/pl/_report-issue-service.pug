@@ -1,0 +1,34 @@
+include ../../helpers/_mixins
+
+//-
+    PL - Report Issue Service
+
+- var reportIssue = data.section.reportIssue;
+
++serviceView("report-issue", true, data.section.helpdesk.services.reportIssue)
+    div(flex-gt-sm="55" layout="column" class="md-whiteframe-z1 flat-panel")
+        md-toolbar(class="flat-panel__toolbar flat-panel__header")
+            header(class="md-toolbar-tools")
+                h3= reportIssue.headline
+        md-content(layout-padding class="flat-panel__body")
+            form(name="issueForm" novalidate layout="column" class="issue-form__form IF" ng-submit="issueForm.$invalid || RIC.issueForm.submit($event)")
+                md-input-container
+                    label(for="IFS")= reportIssue.form.subject.value
+                    input(id="IFS" name="subject" ng-model="issue.subject" type="text" required)
+                    div(ng-messages="issueForm.subject.$error" role="alert")
+                        div(ng-message="required")= reportIssue.form.subject.errors.required
+                md-input-container
+                    label(for="IFC")= reportIssue.form.category.value
+                    md-select(id="IFC" name="category" ng-model="issue.category" required)
+                        md-option(value="software")= reportIssue.form.category.software
+                        md-option(value="hardware")= reportIssue.form.category.hardware
+                    div(class="md-errors-spacer")
+                    div(ng-messages="issueForm.category.$error" role="alert")
+                        div(ng-message="required")= reportIssue.form.category.errors.required
+                md-input-container
+                    label(for="IFD")= reportIssue.form.description.value
+                    textarea(id="IFD" name="description" ng-model="issue.description" type="text" rows="8" required md-maxlength="800" md-no-asterisk)
+                    div(ng-messages="issueForm.description.$error" role="alert")
+                        div(ng-message="required")= reportIssue.form.description.errors.required
+                        div(ng-message="md-maxlength")= reportIssue.form.description.errors.maxlength
+                md-button(type="submit" class="btn btn-primary")= reportIssue.form.submitBtn
