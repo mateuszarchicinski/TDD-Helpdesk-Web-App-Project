@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/google.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/google.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// NODE MODULES
+const request = require('request');
+
+
+// APP CONFIG
+const APP_CONFIG = require('../app.config');
+const HTTP_CODES_CONFIG = APP_CONFIG.HTTP_CODES_CONFIG;
+
+
+// APP SERVICES
+const mongoose = require('../services/mongoose');
+const tokenHandler = require('../services/token-handler');
+
+
+// APP MODELS
+const userModelName = 'User';
+const userModel = mongoose.models[userModelName] ? mongoose.model(userModelName) : mongoose.model(userModelName, require('../models/user').schema);
+
+
+/**
+ * @module {Function} Google Controller
+ * @description This module is used to user login via google.Available method: POST &lt;Create>
+ * @param {RequestObject} req Required param to pass request object
+ * @param {ResponseObject} res Required param to pass response object
+ * @param {NextFunction} next Required param to pass next function as a callback
+ * @example
+ * const app = require('express')();
+ * const googleCtrl = require('./controllers/google');
+ * 
+ * app.post('/google', googleCtrl);
+ * 
+ * app.listen(3000, 'localhost'); // http://localhost:3000/google
+ */
+
+
+// Google Controller
+module.exports = function (req, res, next) {
+    if (!req.body.code || !req.body.clientId || !req.body.redirectUri) {
+        return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
+            message: 'Request body do not have specified properties code, clientId or redirectUri.'
+        });
+    }
+
+    const accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
+    const googleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
+    const urlParams = {
+        code: req.body.code,
+        client_id: req.body.clientId,
+        client_secret: APP_CONFIG.AUTH.GOOGLE.SECRET,
+        redirect_uri: req.body.redirectUri,
+        grant_type: 'authorization_code'
+    };
+
+    request.post({
+        url: accessTokenUrl,
+        form: urlParams,
+        json: true
+    }, (error, response, accessToken) => {
+        if (accessToken.error) {
+            return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
+                message: accessToken.error
+            });
+        }
+
+        const reqHeaders = {
+            Authorization: accessToken.token_type + ' ' + accessToken.access_token
+        };
+
+        request.get({
+            url: googleApiUrl,
+            headers: reqHeaders,
+            json: true
+        }, (error, response, googleUser) => {
+            if (googleUser.error) {
+                return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
+                    message: googleUser.error.message
+                });
+            }
+
+            userModel.find({
+                email: googleUser.email
+            }, [], {
+                limit: 1
+            }, (err, users) => {
+                if (err) {
+                    return next(err);
+                }
+
+                const user = users[0];
+                let newToken;
+
+                if (user) {
+                    user.lastName = user.lastName || googleUser.family_name;
+                    user.fullName = user.fullName || googleUser.name;
+                    user.gender = user.gender || googleUser.gender;
+
+                    if (!user.pictures.includes(googleUser.picture)) {
+                        user.pictures.push(googleUser.picture);
+                    }
+
+                    if (!user.active &amp;&amp; user.active !== googleUser.email_verified) {
+                        user.active = googleUser.email_verified;
+                    }
+
+                    user.locale = user.locale || googleUser.locale;
+                    user.googleId = user.googleId || googleUser.sub;
+
+                    newToken = tokenHandler.encode({
+                        sub: user._id,
+                        email: user.email,
+                        device: req.headers['user-agent']
+                    });
+
+                    user.active_tokens.push(newToken);
+
+                    user.save((err, user) => {
+                        if (err) {
+                            if (err.name === 'ValidationError') {
+                                return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
+                                    message: err.message
+                                });
+                            }
+
+                            return next(err);
+                        }
+
+                        const loggedUser = user.toJSON();
+                        loggedUser.token = newToken;
+
+                        res.status(HTTP_CODES_CONFIG.SUCCESS).json(loggedUser);
+                    });
+                } else {
+                    const newUser = new userModel({
+                        firstName: googleUser.given_name,
+                        lastName: googleUser.family_name,
+                        fullName: googleUser.name,
+                        gender: googleUser.gender,
+                        pictures: [googleUser.picture],
+                        email: googleUser.email,
+                        isPassword: false,
+                        active: googleUser.email_verified,
+                        locale: googleUser.locale,
+                        googleId: googleUser.sub
+                    });
+
+                    newUser.save((err, user) => {
+                        if (err) {
+                            if (err.name === 'ValidationError') {
+                                return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
+                                    message: err.message
+                                });
+                            }
+
+                            return next(err);
+                        }
+
+                        newToken = tokenHandler.encode({
+                            sub: user._id,
+                            email: user.email,
+                            device: req.headers['user-agent']
+                        });
+
+                        user.active_tokens.push(newToken);
+
+                        user.save((err, user) => {
+                            if (err) {
+                                if (err.name === 'ValidationError') {
+                                    return res.status(HTTP_CODES_CONFIG.BAD_REQUEST).json({
+                                        message: err.message
+                                    });
+                                }
+
+                                return next(err);
+                            }
+
+                            const registeredUser = user.toJSON();
+                            registeredUser.token = newToken;
+
+                            res.status(HTTP_CODES_CONFIG.CREATED).json(registeredUser);
+                        });
+                    });
+                }
+            });
+        });
+    });
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Angular%2520Controller.html">Angular Controller</a></li><li><a href="module-Email%2520Verification%2520Controller.html">Email Verification Controller</a></li><li><a href="module-Ensure%2520Authentication%2520Middleware.html">Ensure Authentication Middleware</a></li><li><a href="module-Facebook%2520Controller.html">Facebook Controller</a></li><li><a href="module-Google%2520Controller.html">Google Controller</a></li><li><a href="module-Issue%2520Controller.html">Issue Controller</a></li><li><a href="module-Issues%2520Controller.html">Issues Controller</a></li><li><a href="module-Login%2520Controller.html">Login Controller</a></li><li><a href="module-Logout%2520Controller.html">Logout Controller</a></li><li><a href="module-Note%2520Controller.html">Note Controller</a></li><li><a href="module-Register%2520Controller.html">Register Controller</a></li><li><a href="module-User%2520Controller.html">User Controller</a></li><li><a href="module-Users%2520Controller.html">Users Controller</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Aug 02 2017 09:02:33 GMT+0200 (Środkowoeuropejski czas letni)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

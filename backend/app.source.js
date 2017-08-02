@@ -1,7 +1,3 @@
-/* eslint no-console: 0 */
-/* eslint no-unused-vars: ["error", { "args": "none" }] */
-
-
 'use strict';
 
 
@@ -18,33 +14,27 @@ const HTTP_CODES_CONFIG = APP_CONFIG.HTTP_CODES_CONFIG;
 
 
 // APP HELPERS
-const dataInjector = require('./helpers/dataInjector');
-const routesInjector = require('./helpers/routesInjector');
+const dataInjector = require('./helpers/data-injector');
+const routesInjector = require('./helpers/routes-injector');
 
 
 // APP MIDDLEWARES
+const errorsHandler = require('./middlewares/errors-handler');
 const middlewares = require('./middlewares/middlewares');
-const errorHandler = require('./middlewares/errorHandler')[APP_CONFIG.MODE];
 
 
 // APP SERVICES
+const alertHandler = require('./services/alert-handler');
 const mongoose = require('./services/mongoose');
-const alertHandler = require('./services/alertHandler');
 
 
 // APP MODELS
-const routeModelName = `${APP_CONFIG.MODE}Route`;
+const routeModelName = 'Route';
 const routeModel = mongoose.models[routeModelName] ? mongoose.model(routeModelName) : mongoose.model(routeModelName, require('./models/route').schema);
-const pageModelName = 'Page';
-const pageModel = mongoose.models[pageModelName] ? mongoose.model(pageModelName) : mongoose.model(pageModelName, require('./models/page').schema);
-
-
-//APP PAGES
-const pages = require('./pages/pages');
 
 
 // APP ROUTES
-const routes = require('./routes/routes')[APP_CONFIG.MODE];
+const routes = require('./routes/routes');
 
 
 
@@ -100,14 +90,14 @@ app.use(express.static(`${__dirname}${APP_CONFIG.DIRECTORY.STATIC_DIR}`, {
 1. First way not recommended: Example route code below.
 
 
-app[METHOD:get,post,put,delete...]('/ROUTE_EXAMPLE', MIDDLEWARE(req, res, next), FUNCTION(req, res, next) => {
+app[METHOD:get,post,put,delete...]('/ROUTE_EXAMPLE', MIDDLEWARE(req, res, next), CONTROLLER FUNCTION(req, res, next) => {
 
     res.send('Your message!');
 
 });
 
 
-2. Second way recommended: Go into directory ./routes then in file routes.js defines your route objects for any mode.
+2. Second way recommended: Go into directory ./routes then in file routes.js define your routes as objects in array.
 
 *****/
 
@@ -125,6 +115,10 @@ mongoose.connection.on('connected', () => {
 
     // Injects static objects of routes to database
     dataInjector(routeModel, routes).then((data) => {
+        if (data.success.length !== 0) {
+            alertHandler('success', `Newly added routes: ${JSON.stringify(data.success)}`);
+        }
+
         const sortBy = {
             url: -1
         };
@@ -132,7 +126,7 @@ mongoose.connection.on('connected', () => {
         // Searching for all routes in database
         routeModel.find().sort(sortBy).then((data) => {
 
-            // Depends on currently selected mode adds routes to app object
+            // Injects routes objects from database to app object
             const incorrectInjectedRoutes = routesInjector(app, data).incorrect;
 
             if (incorrectInjectedRoutes.length !== 0) {
@@ -140,18 +134,12 @@ mongoose.connection.on('connected', () => {
             }
 
             // Handles HTTP errors
-            app.use(errorHandler);
+            app.use(errorsHandler);
 
         }).catch((err) => {
             alertHandler('error', err);
         });
-
     }).catch((err) => {
-        alertHandler('error', err);
-    });
-
-    // Injects static objects of pages to database
-    dataInjector(pageModel, pages).catch((err) => {
         alertHandler('error', err);
     });
 
@@ -179,10 +167,12 @@ module.exports = {
 
         return createServer;
     },
-    appInit: () => {
+    appInitialize: () => {
         app.listen(app.get('port'), app.get('host'), () => {
 
+            /* eslint-disable */
             console.log('\x1b[34m%s\x1b[0m', '[Restful API]', `Listening on address: http://${app.get('host')}:${app.get('port')}`);
+            /* eslint-enable */
 
         });
     }

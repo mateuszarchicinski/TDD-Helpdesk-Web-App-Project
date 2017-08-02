@@ -9,6 +9,7 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
+const nodeMocksHttp = require('node-mocks-http');
 
 
 const helpers = {
@@ -26,11 +27,6 @@ const helpers = {
             }
         }
     },
-    MODES_ARRAY: [ // Array with all available modes - Used in test/routes/routes.js
-        'normal',
-        'angular',
-        'api'
-    ],
     PAGE_MODEL: { // Used in test/models/page.js
         EXAMPLE_DATA: {
             name: 'test',
@@ -73,24 +69,28 @@ const helpers = {
         EQUAL_ROUTE: {
             url: '/test',
             method: 'get',
-            controller: 'mainController'
+            controller: 'main'
         },
         RANDOM_EQUAL_ROUTE: {
             url: '/login',
             method: 'post',
             middlewares: 'default,default',
-            controller: 'loginController'
+            controller: 'login'
         }
     },
     USER_MODEL: { // Used in test/models/user.js
         EXAMPLE_DATA: {
             firstName: 'Mateusz',
+            pictures: [],
             email: 'ma@ma.pl',
             password: 'aaaaaaaa',
+            isPassword: true,
+            role: 'user',
             active: false,
             active_tokens: [
                 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0'
-            ]
+            ],
+            issues: []
         },
         MOCK: () => { // Used in test/controllers/registerController.js && test/controllers/loginController.js
             const mock = {
@@ -98,6 +98,7 @@ const helpers = {
                 firstName: 'Aa',
                 email: 'a@a',
                 password: 'aaaaaaaa',
+                isPassword: true,
                 active: false,
                 active_tokens: [],
                 token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNDk0ODU1OTgxLCJleHAiOjE0OTU0NjA3ODF9.3n7ognYsQRw0n9UirTB8DCpXAzHNYWyutPz92gskVT0',
@@ -186,7 +187,7 @@ const helpers = {
                     message: 'User validation failed',
                     name: 'ValidationError'
                 },
-                usernotfound: {
+                userNotFound: {
                     message: 'User not found.'
                 }
             };
@@ -204,6 +205,9 @@ global.chai = chai;
 global.expect = chai.expect;
 global.sinon = sinon;
 chai.use(sinonChai);
+
+// MOCKS
+global.nodeMocksHttp = nodeMocksHttp;
 
 
 module.exports = helpers;

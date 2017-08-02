@@ -1,19 +1,9 @@
 'use strict';
 
 
-// CHAI SETUP & HELPERS
-const chai = require('chai');
-const expect = chai.expect;
-const sinon = require('sinon');
-const sinonChai = require('sinon-chai');
-
-chai.use(sinonChai);
-
-
-// NODE MODULES
-const mocks = require('node-mocks-http');
-const reqMock = mocks.createRequest();
-const resMock = mocks.createResponse();
+// MOCKS
+const reqMock = nodeMocksHttp.createRequest();
+const resMock = nodeMocksHttp.createResponse();
 
 
 // PAGES CONFIG
@@ -66,7 +56,7 @@ describe('Middlewares:', () => {
         });
 
         it('with "pl" language param req.lang.value should return "pl"', () => {
-            const reqMockPL = mocks.createRequest({
+            const reqMockPL = nodeMocksHttp.createRequest({
                 params: {
                     lang: 'pl'
                 }
@@ -78,7 +68,7 @@ describe('Middlewares:', () => {
         });
 
         it('with "en" language param req.lang.value should return "en"', () => {
-            const reqMockEN = mocks.createRequest({
+            const reqMockEN = nodeMocksHttp.createRequest({
                 params: {
                     lang: 'en'
                 }
@@ -90,7 +80,7 @@ describe('Middlewares:', () => {
         });
 
         it('with any language param req.lang.exist should return true', () => {
-            const reqMockANY = mocks.createRequest({
+            const reqMockANY = nodeMocksHttp.createRequest({
                 params: {
                     lang: 'plpl'
                 }

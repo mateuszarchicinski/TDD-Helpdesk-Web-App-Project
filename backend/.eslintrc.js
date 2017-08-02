@@ -5,6 +5,13 @@ module.exports = {
         'node': true
     },
     'extends': 'eslint:recommended',
+    'globals': {
+        'helpers': true,
+        'chai': true,
+        'expect': true,
+        'sinon': true,
+        'nodeMocksHttp': true
+    },
     'parserOptions': {
         'sourceType': 'module',
         'ecmaFeatures': {

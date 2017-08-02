@@ -1,11 +1,6 @@
 'use strict';
 
 
-// CHAI SETUP
-const chai = require('chai');
-const expect = chai.expect;
-
-
 // APP MIDDLEWARES
 const middlewares = require('../../middlewares/middlewares');
 

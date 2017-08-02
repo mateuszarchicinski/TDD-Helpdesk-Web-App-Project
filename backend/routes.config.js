@@ -8,7 +8,7 @@ module.exports = {
             'delete'
         ],
         DEFAULT_METHOD: 'get',
-        DEFAULT_CONTROLLER: 'mainController'
+        DEFAULT_CONTROLLER: 'main'
     },
     DIRECTORY: {
         MIDDLEWARES_DIR: '/middlewares', // Middlewares files directory

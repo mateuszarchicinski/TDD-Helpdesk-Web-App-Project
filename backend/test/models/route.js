@@ -1,14 +1,4 @@
-/* eslint no-console: 0 */
-/* eslint no-unused-vars: ["error", { "args": "none" }] */
-
-
 'use strict';
-
-
-// CHAI SETUP & HELPERS
-const chai = require('chai');
-const expect = chai.expect;
-const helpers = require('../helpers/helpers');
 
 
 // APP SERVICES
@@ -16,62 +6,52 @@ const mongoose = require('../../services/mongoose');
 
 
 // APP MODELS
-let routeModel,
-    route,
-    routeN;
+let routeModel;
 
 
-describe('Models:', () => {
+describe('Models: route.js', () => {
 
-    describe('route.js', () => {
+    describe('Tests with required mongoose connection:', () => {
+        let route;
+
         before((done) => {
-
             mongoose.connect(`mongodb://${helpers.MONGO_DB.USER}:${helpers.MONGO_DB.PASSDOWRD}@${helpers.MONGO_DB.HOST}:${helpers.MONGO_DB.PORT}/${helpers.MONGO_DB.NAME}`, helpers.MONGO_DB.OPTIONS, (err) => {
                 if (err) {
+                    /* eslint-disable */
                     console.log(err.message);
+                    /* eslint-enable */
                 }
 
                 done();
             });
-
         });
 
-        beforeEach((done) => {
+        before((done) => {
             routeModel = mongoose.models.Route ? mongoose.model('Route') : mongoose.model('Route', require('../../models/route').schema);
 
             route = new routeModel(helpers.ROUTE_MODEL.EXAMPLE_DATA);
 
-            routeN = new routeModel(helpers.ROUTE_MODEL.RANDOM_EQUAL_ROUTE);
-
+            /* eslint-disable */
             route.save((err, route) => {
                 if (err) {
-                    console.log('1.', err.message);
+                    console.log(err.message);
+                    /* eslint-enable */
                 }
 
                 done();
             });
         });
 
-        afterEach((done) => {
-
+        after((done) => {
             routeModel.collection.drop().then(() => {
                 done();
             });
-
         });
 
         after((done) => {
-
             mongoose.connection.close().then(() => {
                 done();
             });
-
-        });
-
-        it('is a function', (done) => {
-            expect(routeModel).to.be.a('function');
-
-            done();
         });
 
         it('method find should return an array with one object', (done) => {
@@ -87,11 +67,11 @@ describe('Models:', () => {
         });
 
         it('method save on object with the same property url should return an error', (done) => {
-            const routeU = new routeModel({
-                url: '/test'
-            });
+            const route = new routeModel(helpers.ROUTE_MODEL.EXAMPLE_DATA);
 
-            routeU.save((err, route) => {
+            /* eslint-disable */
+            route.save((err, route) => {
+                /* eslint-enable */
                 if (!err) {
                     throw Error('Something went wrong!');
                 }
@@ -101,7 +81,9 @@ describe('Models:', () => {
         });
 
         it('route model constructor without required object property url should return an error', (done) => {
+            /* eslint-disable */
             routeModel.create({}, (err, route) => {
+                /* eslint-enable */
                 if (!err) {
                     throw Error('Something went wrong!');
                 }
@@ -119,13 +101,27 @@ describe('Models:', () => {
 
             expect(routeEqual).to.deep.equal(helpers.ROUTE_MODEL.EQUAL_ROUTE);
         });
+    });
+
+    describe('Tests without required mongoose connection:', () => {
+        let route;
+
+        beforeEach(() => {
+            route = new routeModel(helpers.ROUTE_MODEL.RANDOM_EQUAL_ROUTE);
+        });
+
+        it('is a function', () => {
+
+            expect(routeModel).to.be.a('function');
+
+        });
 
         it('new route object created with all random object properties should return correct object', () => {
             const routeEqual = {
-                url: routeN.url,
-                method: routeN.method,
-                middlewares: routeN.middlewares,
-                controller: routeN.controller
+                url: route.url,
+                method: route.method,
+                middlewares: route.middlewares,
+                controller: route.controller
             };
 
             expect(routeEqual).to.deep.equal(helpers.ROUTE_MODEL.RANDOM_EQUAL_ROUTE);
@@ -134,7 +130,7 @@ describe('Models:', () => {
         it('method getMiddlewares should return an array with exported modules function', () => {
             expect(route.getMiddlewares()).to.be.an('array');
 
-            routeN.getMiddlewares().forEach((elem) => {
+            route.getMiddlewares().forEach((elem) => {
                 expect(elem).to.be.a('function');
             });
         });

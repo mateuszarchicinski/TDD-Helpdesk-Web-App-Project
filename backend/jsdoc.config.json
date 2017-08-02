@@ -1,7 +1,14 @@
 {
     "source": {
         "include": [
-            "./"
+            "./",
+            "./controllers",
+            "./helpers",
+            "./middlewares",
+            "./models",
+            "./pages",
+            "./routes",
+            "./services"
         ],
         "exclude": [
             "./node_modules"

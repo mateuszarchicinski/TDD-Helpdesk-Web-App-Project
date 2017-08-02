@@ -3,7 +3,7 @@
 
 /*!
  *
- * RESTFULL API - NODEJS & EXPRESSJS - INIT
+ * RESTFULL API - NODEJS & EXPRESSJS - INITIALIZE
  *
  * Copyright(©) 2017 Mateusz Archiciński
  *
@@ -12,4 +12,4 @@
  */
 
 
-require('./app.source').appInit();
+require('./app.source').appInitialize();

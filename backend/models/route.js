@@ -47,8 +47,8 @@ routeSchema.methods.getController = function () {
 
 routeSchema.pre('save', function (next) {
     const self = this;
-    const routeModelName = `${APP_CONFIG.MODE}Route`;
-    const routeModel = mongoose.models[routeModelName] ? mongoose.model(routeModelName) : mongoose.model('Route');
+    const routeModelName = 'Route';
+    const routeModel = mongoose.models[routeModelName] ? mongoose.model(routeModelName) : mongoose.model(routeModelName, routeSchema);
 
     routeModel.find({
         url: self.url,

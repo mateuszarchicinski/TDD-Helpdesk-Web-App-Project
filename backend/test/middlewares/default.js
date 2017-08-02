@@ -1,24 +1,15 @@
 'use strict';
 
 
-// CHAI & SINON
-const chai = require('chai');
-const expect = chai.expect;
-const sinon = require('sinon');
-const sinonChai = require('sinon-chai');
-chai.use(sinonChai);
-
-
-// NODE MODULES
-const mocks = require('node-mocks-http');
-const reqMock = mocks.createRequest({
+// MOCKS
+const reqMock = nodeMocksHttp.createRequest({
     protocol: 'https',
     hostname: 'localhost-hostname',
     headers: {
         host: 'localhost-host'
     }
 });
-const resMock = mocks.createResponse();
+const resMock = nodeMocksHttp.createResponse();
 
 
 // APP MIDDLEWARES

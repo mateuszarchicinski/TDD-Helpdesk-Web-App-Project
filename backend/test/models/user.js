@@ -1,14 +1,4 @@
-/* eslint no-console: 0 */
-/* eslint no-unused-vars: ["error", { "args": "none" }] */
-
-
 'use strict';
-
-
-// CHAI SETUP & HELPERS
-const chai = require('chai');
-const expect = chai.expect;
-const helpers = require('../helpers/helpers');
 
 
 // APP SERVICES
@@ -25,7 +15,9 @@ describe('Models: user.js', () => {
         before((done) => {
             mongoose.connect(`mongodb://${helpers.MONGO_DB.USER}:${helpers.MONGO_DB.PASSDOWRD}@${helpers.MONGO_DB.HOST}:${helpers.MONGO_DB.PORT}/${helpers.MONGO_DB.NAME}`, helpers.MONGO_DB.OPTIONS, (err) => {
                 if (err) {
+                    /* eslint-disable */
                     console.log(err.message);
+                    /* eslint-enable */
                 }
 
                 done();
@@ -51,7 +43,9 @@ describe('Models: user.js', () => {
         it('method user.save() should save new user in a database', (done) => {
             const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA);
 
+            /* eslint-disable */
             user.save((err, user) => {
+                /* eslint-enable */
                 if (err) {
                     throw Error(err);
                 }
@@ -63,7 +57,9 @@ describe('Models: user.js', () => {
         it('method user.save() with user whose email address already exists in a database should return an error', (done) => {
             const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA);
 
+            /* eslint-disable */
             user.save((err, user) => {
+                /* eslint-enable */
                 if (!err) {
                     throw Error(err);
                 }
@@ -108,17 +104,17 @@ describe('Models: user.js', () => {
         });
     });
 
-
     describe('Tests without required mongoose connection:', () => {
         it('new user object should contain all required properties with correct values', () => {
             const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA).toObject();
+            const userEqual = helpers.USER_MODEL.EXAMPLE_DATA;
 
-            delete user._id;
+            userEqual._id = user._id;
 
             expect(user).to.deep.equal(helpers.USER_MODEL.EXAMPLE_DATA);
         });
 
-        it('method user.toJSON() should return correct user object with removed _id and password properties', () => {
+        it('method user.toJSON() should return correct user object with removed password and active_tokens properties', () => {
             const user = new userModel(helpers.USER_MODEL.EXAMPLE_DATA).toJSON();
             const userEqual = helpers.USER_MODEL.EXAMPLE_DATA;
 

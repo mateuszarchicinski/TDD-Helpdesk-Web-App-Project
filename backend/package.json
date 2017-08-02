@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "nodemon": "nodemon app.js --ignore test/",
-    "eslint": "eslint **/*.js || true",
+    "eslint": "eslint **/*.js --ignore-pattern docs/**/*.js || true",
     "mocha": "mocha -s 2500 -t 10000 -w test/helpers/helpers.js test/**/*.js || true",
     "dev": "npm run nodemon",
     "test": "npm run eslint && npm run mocha",
