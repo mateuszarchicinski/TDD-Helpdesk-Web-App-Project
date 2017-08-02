@@ -84,17 +84,17 @@ app.controller('myAccountCtrl', ['$scope', 'auth', 'user', 'urlParams', '$mdDial
 
         $mdDialog.show(dialogConfig).then(function (isConfirmed) {
             if (isConfirmed) {
-                auth.user('delete').then(function () {
-                    authToken.removeToken();
+                /* eslint-disable */
+                auth.user('delete', user.getUser()).then(function (res) {}, function (err) {
+                    if (err.status === 410) {
+                        authToken.removeToken();
 
-                    user.removeUser();
+                        user.removeUser();
 
-                    $state.go('root');
-
-                    /* eslint-disable */
-                }, function (err) {
-                    /* eslint-enable */
+                        $state.go('root');
+                    }
                 });
+                /* eslint-enable */
             }
         }, function () {});
     };

@@ -16,7 +16,7 @@ app.controller('usersCtrl', ['sendRequest', 'user', '$scope', function (sendRequ
     sendRequest('users').then(function (res) {
         user.set('users', res.data);
 
-        users = $scope.users = user.get('users') || res.data;
+        users = $scope.users = user.get('users') || res.data || [];
 
         /* eslint-disable */
     }, function (err) {
@@ -49,10 +49,13 @@ app.controller('usersCtrl', ['sendRequest', 'user', '$scope', function (sendRequ
             return;
         }
 
-        user.role = permissions;
-
         /* eslint-disable */
-        sendRequest('user.update', user).then(function (res) {}, function (err) {});
+        sendRequest('user.update', {
+            _id: user._id,
+            role: permissions
+        }).then(function (res) {
+            user.role = permissions;
+        }, function (err) {});
         /* eslint-enable */
     };
 

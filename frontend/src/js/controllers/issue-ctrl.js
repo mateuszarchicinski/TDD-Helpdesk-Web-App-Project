@@ -62,10 +62,12 @@ app.controller('issueCtrl', ['$scope', '$state', 'sendRequest', 'user', function
 
     noteForm.submit = function (evt) {
         var issue = $scope.issue,
-            note = $scope.note;
+            note = $scope.note,
+            nUser = user.getUser();
 
         evt.preventDefault();
 
+        note._createdBy = nUser._id;
         note._issueId = issue._id;
         note.postDate = Date();
 
@@ -75,7 +77,7 @@ app.controller('issueCtrl', ['$scope', '$state', 'sendRequest', 'user', function
                 issue.status = note.status;
             }
 
-            note._createdBy = user.getUser();
+            note._createdBy = nUser;
 
             issue.notes.push(note);
 

@@ -18,7 +18,7 @@ app.controller('reportedIssuesCtrl', ['sendRequest', 'user', '$scope', function 
     }).then(function (res) {
         user.set('reported-issues', res.data);
 
-        issues = $scope.issues = user.get('reported-issues') || res.data;
+        issues = $scope.issues = user.get('reported-issues') || res.data || [];
 
         /* eslint-disable */
     }, function (err) {
@@ -46,9 +46,11 @@ app.controller('reportedIssuesCtrl', ['sendRequest', 'user', '$scope', function 
 
     this.removeIssue = function (issue) {
         /* eslint-disable */
-        sendRequest('issue.delete', issue).then(function (res) {
-            issues.splice(issues.indexOf(issue), 1);
-        }, function (err) {});
+        sendRequest('issue.delete', issue).then(function (res) {}, function (err) {
+            if (err.status === 410) {
+                issues.splice(issues.indexOf(issue), 1);
+            }
+        });
         /* eslint-enable */
     };
 }]);
