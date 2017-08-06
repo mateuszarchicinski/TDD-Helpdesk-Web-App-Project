@@ -14,35 +14,30 @@ Pogląd aplikacji internetowej jest dostępny <a href="https://www.helpdesk-app.
 
 ## Przydatne komendy środowiskowe NPM'a
 
+Sprawdza kod JavaScript wszystkich plików z rozszerzeniem .js poszczególnej części aplikacji według kilku własnych i ogólno rekomendowanych ustawień w pliku .eslint.json;
 ```
 npm run eslint
 ```
-- Sprawdza kod JavaScript wszystkich plików z rozszerzeniem .js poszczególnej części aplikacji według kilku własnych i ogólno rekomendowanych ustawień w pliku .eslint.json;
 
-
+Uruchamia serwer, który nasłuchuje na zmiany w plikach i automatycznie wprowadza zmiany na uruchomionym serwerze;
 ```
 npm run dev
 ```
-- Uruchamia serwer, który nasłuchuje na zmiany w plikach i automatycznie wprowadza zmiany na uruchomionym serwerze;
 
-
+Uruchamia wszystkie testy jednostkowe i w następstwie zmian w plikach testów wykonuje testy ponownie;
 ```
 npm run test
-
 ```
-- Uruchamia wszystkie testy jednostkowe i w następstwie zmian w plikach testów wykonuje testy ponownie;
- 
 
+Uruchamia proces generowania raportu testów jednostkowych;
 ```
 npm run test-report
 ```
-- Uruchamia proces generowania raportu testów jednostkowych;
- 
 
+Uruchamia proces generowania dokumentacji;
 ```
 npm run jsdoc
 ```
-- Uruchamia proces generowania dokumentacji;
 
 Wymienione powyżej komendy mogą zostać uruchomione z poziomu wiersza poleceń podczas przebywania w katalogach backend/frontend.
 
