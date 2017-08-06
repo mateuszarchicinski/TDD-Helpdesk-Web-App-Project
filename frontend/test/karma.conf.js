@@ -6,6 +6,17 @@
 var PROJECT_CONFIG = require('../project.config');
 
 
+// USEFUL FUNCTIONS
+function getCurrentDate() {
+    const date = new Date();
+    const day = date.getDate().toString();
+    const month = (date.getMonth() + 1).toString();
+    const year = parseInt(date.getFullYear());
+
+    return `${day.length !== 1 ? day : '0' + day}.${month.length !== 1 ? month : '0' + month}.${year}`;
+}
+
+
 module.exports = function (config) {
     config.set({
 
@@ -89,9 +100,16 @@ module.exports = function (config) {
         coverageReporter: {
             type: 'text-summary'
         },
+        htmlReporter: {
+            outputDir: 'test-reports',
+            focusOnFailures: true,
+            namedFiles: true,
+            reportName: `test-report-${getCurrentDate()}`
+        },
         reporters: [
             'spec',
-            'coverage'
+            'coverage',
+            'html'
         ],
 
 

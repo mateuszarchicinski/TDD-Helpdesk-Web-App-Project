@@ -1,5 +1,5 @@
 {
-  "name": "helpdesk-app-backend",
+  "name": "helpdesk-application-backend",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,6 +9,7 @@
     "mocha": "mocha -s 2500 -t 10000 -w test/helpers/helpers.js test/**/*.js || true",
     "dev": "npm run nodemon",
     "test": "npm run eslint && npm run mocha",
+    "test-report": "mocha -s 2500 -t 10000 test/helpers/helpers.js test/**/*.js --reporter doc > test-reports/test-report-05.08.2017.html || true",
     "jsdoc": "jsdoc -c jsdoc.config.json"
   },
   "author": "Mateusz Archicinski",
