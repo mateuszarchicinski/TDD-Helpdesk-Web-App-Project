@@ -13,7 +13,7 @@ function getCurrentDate() {
     const month = (date.getMonth() + 1).toString();
     const year = parseInt(date.getFullYear());
 
-    return `${day.length !== 1 ? day : '0' + day}.${month.length !== 1 ? month : '0' + month}.${year}`;
+    return `${day.length !== 1 ? day : '0' + day}-${month.length !== 1 ? month : '0' + month}-${year}`;
 }
 
 
@@ -104,7 +104,8 @@ module.exports = function (config) {
             outputDir: 'test-reports',
             focusOnFailures: true,
             namedFiles: true,
-            reportName: `test-report-${getCurrentDate()}`
+            pageTitle: 'Test-Report__Frontend',
+            reportName: `test-report_${getCurrentDate()}`
         },
         reporters: [
             'spec',

@@ -9,7 +9,7 @@
     "mocha": "mocha -s 2500 -t 10000 -w test/helpers/helpers.js test/**/*.js || true",
     "dev": "npm run nodemon",
     "test": "npm run eslint && npm run mocha",
-    "test-report": "mocha -s 2500 -t 10000 test/helpers/helpers.js test/**/*.js --reporter doc > test-reports/test-report-05.08.2017.html || true",
+    "test-report": "mocha -s 2500 -t 10000 test/helpers/helpers.js test/**/*.js --reporter mochawesome --reporter-options reportDir=test-reports,reportFilename=test-report,reportPageTitle=Test-Report__Backend,timestamp=dd/mm/yyyy || true",
     "jsdoc": "jsdoc -c jsdoc.config.json"
   },
   "author": "Mateusz Archicinski",
@@ -20,6 +20,7 @@
     "eslint": "^3.18.0",
     "jsdoc": "^3.4.3",
     "mocha": "^3.2.0",
+    "mochawesome": "^2.3.0",
     "node-mocks-http": "^1.6.1",
     "nodemon": "^1.11.0",
     "sinon": "^2.1.0",
