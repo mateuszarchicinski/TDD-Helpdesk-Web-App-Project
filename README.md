@@ -3,8 +3,8 @@
 <blockquote>
  <p>Projekt podzielony został na następujące części:</p>
  <ul>
-   <li><strong>Backend</strong> - Katalog zawierający część aplikacji uruchamianej po stronie serwera na platformie <a href="https://nodejs.org/en/" target="_blank" rel="help">Node.js</a>;</li>
-   <li><strong>Frontend</strong> - Katalog zawierający część aplikacji uruchamianej po stronie klienta wykorzystującej platformę Node.js w celu automatyzacji większości zadań deweloperskich;</li>
+   <li><strong>Backend</strong> - Katalog zawierający część aplikacji uruchamianej po stronie serwera na platformie <a href="https://nodejs.org/en/" target="_blank" rel="help">Node.js</a>, której zadaniem jest świadczenie usług i udostępnianie zasobów użytkownikom/klientom będącym np. przeglądarką;</li>
+   <li><strong>Frontend</strong> - Katalog zawierający część aplikacji uruchamianej po stronie klienta wykorzystującej platformę Node.js do automatyzacji większości zadań deweloperskich mających na celu przygotowanie gotowego builda aplikacji wysyłanego do użytkownika korzystającego z przeglądarki internetowej;</li>
  </ul>
  <p>
 </blockquote>
