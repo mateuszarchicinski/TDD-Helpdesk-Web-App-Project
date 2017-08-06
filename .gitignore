@@ -1,7 +1,4 @@
 node_modules
 bower_components
-dist
 .material-cache
 angular-material
-backend/app.config.js
-frontend/project.config.js
