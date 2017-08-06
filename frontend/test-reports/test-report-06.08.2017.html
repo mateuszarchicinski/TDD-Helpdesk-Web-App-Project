@@ -1,0 +1,597 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>test-report-06.08.2017</title>
+<style>
+body { background-color: #eeeeee; padding: 0; margin: 5px; overflow-y: scroll; }
+#HTMLReporter h1 { font-size: 12px; font-weight: normal; text-align: right; margin: 10px 0 10px 0 !important; }
+#HTMLReporter { font-size: 11px; font-family: Monaco, "Lucida Console", monospace; line-height: 14px; color: #333333; }
+#HTMLReporter a { text-decoration: none; }
+#HTMLReporter a:hover { text-decoration: underline; }
+#HTMLReporter p, #HTMLReporter h1, #HTMLReporter h2, #HTMLReporter h3, #HTMLReporter h4, #HTMLReporter h5, #HTMLReporter h6 { margin: 0; line-height: 14px; }
+#HTMLReporter .banner, #HTMLReporter .symbolSummary, #HTMLReporter .summary, #HTMLReporter .resultMessage, #HTMLReporter .specDetail .description, #HTMLReporter .alert .bar, #HTMLReporter .stackTrace { padding-left: 9px; padding-right: 9px; }
+
+#HTMLReporter #jasmine_content { position: fixed; right: 100%; }
+#HTMLReporter .version { color: #aaaaaa; }
+#HTMLReporter .banner { margin-top: 14px; }
+#HTMLReporter .duration { color: #aaaaaa; float: right; }
+#HTMLReporter .exceptions { color: #fff; float: right; margin-top: 5px; margin-right: 5px; }
+#HTMLReporter .bar { line-height: 28px; font-size: 14px; display: block; color: #eee; }
+#HTMLReporter .runningAlert { background-color: #666666; }
+#HTMLReporter .skippedAlert { background-color: #aaaaaa; }
+#HTMLReporter .skippedAlert:first-child { background-color: #333333; }
+#HTMLReporter .skippedAlert:hover { text-decoration: none; color: white; text-decoration: underline; }
+#HTMLReporter .passingAlert { background-color: #a6b779; }
+#HTMLReporter .passingAlert:first-child { background-color: #5e7d00; }
+#HTMLReporter .failingAlert { background-color: #cf867e; }
+#HTMLReporter .failingAlert:first-child { background-color: #b03911; }
+#HTMLReporter .results { margin-top: 14px; }
+#HTMLReporter #details { display: none; }
+#HTMLReporter .resultsMenu { color: #999; background-color: #fff; }
+
+#HTMLReporter .summaryMenuItem { font-weight: normal; text-decoration: none; margin-right: 5px; color: #333; }
+#HTMLReporter .detailsMenuItem { font-weight: normal; text-decoration: none; margin-left: 5px; color: #999; }
+
+#HTMLReporter.showDetails .summaryMenuItem { color: #999; }
+#HTMLReporter.showDetails .detailsMenuItem { color: #333; }
+#HTMLReporter.showDetails .summaryMenuItem:hover { text-decoration: underline; }
+#HTMLReporter             .detailsMenuItem:hover { text-decoration: underline; }
+
+
+#HTMLReporter.showDetails .summary { display: none; }
+#HTMLReporter.showDetails #details { display: block; }
+#HTMLReporter .summary { margin-top: 14px; margin-bottom: 40px; }
+#HTMLReporter .summary .suite .suite, #HTMLReporter .summary .specSummary { margin-left: 14px; }
+#HTMLReporter .summary .specSummary.passed { color: #5e7d00; }
+#HTMLReporter .summary .specSummary.failed { color: #b03911; }
+#HTMLReporter .summary .specSummary.skipped { color: #ba9d37; }
+#HTMLReporter .description + .suite { margin-top: 0; }
+#HTMLReporter .suite { margin-top: 14px; }
+#HTMLReporter .suite a { color: #333333; }
+#HTMLReporter #details .specDetail { margin-bottom: 28px; }
+#HTMLReporter #details .specDetail .description { display: block; color: white; background-color: #b03911; }
+#HTMLReporter .resultMessage { padding-top: 14px; color: #333333; }
+#HTMLReporter .resultMessage span.result { display: block; }
+#HTMLReporter .stackTrace { margin: 5px 0 0 0; max-height: 224px; overflow: auto; 
+    line-height: 18px; color: #666666; border: 1px solid #ddd; background: white; white-space: pre; }
+
+
+.fold-buttons { float: right; }
+.fold-buttons a { color: #fff; font-size: 12px; }
+.fold-buttons { display: none } 
+#HTMLReporter .br { margin-top: 8px; }
+#HTMLReporter .section-starter { font-size: 14px; line-height: 18px }
+#HTMLReporter .summary-section { 
+  cursor: -webkit-zoom-out; cursor: -moz-zoom-out; cursor: zoom-out; 
+  background: #fafafa; 
+  padding: 10px; 
+  border-bottom: #eaeaea 1px solid; }
+#HTMLReporter .summary-section.folded { 
+  cursor: -webkit-zoom-in; cursor: -moz-zoom-in; cursor: zoom-in; 
+  padding-bottom: 8px;
+}
+#HTMLReporter .summary-section.folded div { display: none }
+#HTMLReporter .summary-section.folded div.section-starter { display: block }
+/*#HTMLReporter .summary-section:hover { background: #e9e9e9; }*/
+#HTMLReporter .summary-section:hover { background: #f5f5f5; }
+#HTMLReporter .summary-section-totals { 
+  font-size: 11px;
+  display: none; 
+  margin-left: 11px; 
+  overflow: hidden; 
+  position: relative;
+  top: -1px; 
+}
+#HTMLReporter .summary-section.folded .summary-section-totals { display: inline; }
+#HTMLReporter .summary-section-total { color: #fff; vertical-align: baseline; padding: 1px 8px; }
+#HTMLReporter .summary-section-total.passed { background: #5e7d00;  }
+#HTMLReporter .summary-section-total.failed { background: #b03911;  }
+#HTMLReporter .summary-section-total.skipped { background: #ba9d37;  }
+
+#HTMLReporter { font-size: 12px; line-height: 18px; } /*larget font-size*/
+
+</style>
+</head>
+
+<body id="HTMLReporter" class="html-reporter">
+<h1>Tested in PhantomJS 2.1.1 (Windows 7 0.0.0) on Sun Aug 06 2017</h1>
+
+<div class="alert">
+
+
+
+  
+  <span class="passingAlert bar"><span class="fold-buttons"><a href="#" onclick="fold();">Fold</a> | 
+  <a href="#" onclick="unfold();">Unfold</a></span>88 specs, 0 failed, 0 pending</span>
+  
+
+
+</div>
+<div class="results">
+  <div class="summary">
+  
+  
+  
+  
+  
+    <div class="suite passed">
+      <span class="description">Controllers: helpdeskCtrl</span>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.toggleSidenav should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.toggleSidenav() should call $mdSidenav(&quot;left&quot;).toggle() once</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">$scope should have property servicesTmpUrl which is a string</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.getResources should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.getResources() on success response should call user(res.data)</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.getResources() on error response should call errorCallback(err)</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.getResources() should not call auth.user</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Controllers: languageSettingsCtrl</span>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.language should be a string</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.language should return correct language code</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.translate(langCode) should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.translate(langCode) called with another language of current state should call window.location.href</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.translate(langCode) called with the same language of current state should not call window.location.href</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Controllers: loginCtrl</span>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginForm should be an object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginForm.submit should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginForm.submit() should call event.preventDefault() once</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginForm.submit() should call once auth.login(user) with correct user object as argument</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginViaFacebook should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginViaFacebook should call auth.loginVia(&quot;facebook&quot;)</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginViaGoogle should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.loginViaGoogle should call auth.loginVia(&quot;google&quot;)</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Controllers: logoutCtrl</span>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.logout should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.logout() should call auth.logout() twice</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Controllers: registerCtrl</span>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.registerForm should be an object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.registerForm.submit should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.registerForm.submit() should call event.preventDefault() once</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.registerForm.submit() should call once auth.register(user) with correct user object as argument</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.showDialog should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.showDialog(&quot;terms&amp;conditions&quot;) should call $mdDialog.show() once with correct arguments</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.showDialog(&quot;privacyPolicy&quot;) should call $mdDialog.show() once with correct arguments</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Controllers: rootCtrl</span>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.redirectTo should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.redirectTo() should call $state.go() once</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Controllers: userPanelCtrl</span>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.userGo should be a function</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.userGo(&quot;myAccount&quot;) should call $state.go(&quot;helpdesk.myAccount&quot;) once</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">ctrl.userGo(&quot;logout&quot;) should call $state.go(&quot;helpdesk.logout&quot;) once</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Directives: injectComponentDirective</span>
+    
+      <div class="specSummary passed">
+      <span class="description">&lt;inject-component condtion=&quot;true&quot; include=&quot;something&quot;&gt;&lt;/inject-component&gt; should inject component</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">&lt;inject-component condtion=&quot;false&quot; include=&quot;something&quot;&gt;&lt;/inject-component&gt; should not inject component</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">&lt;inject-component include=&quot;something&quot;&gt;&lt;/inject-component&gt; should inject component</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Directives: validateEqualsDirective</span>
+    
+      <div class="specSummary passed">
+      <span class="description">should add new property validateEquals &lt;function&gt; to $validators object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">should not add new error property {validateEquals: true} to errors object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">should add new error property {validateEquals: true} to errors object</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Services: appStateFactory</span>
+    
+      <div class="specSummary passed">
+      <span class="description">appState should return an object with methods language and isAuthorized</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">appState.language() should return a string</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">appState.isAuthorized() should return a boolean</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Services: authInterceptorFactory</span>
+    
+      <div class="specSummary passed">
+      <span class="description">authInterceptor should return an object with methods request, requestError, response, responseError</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authInterceptor.request(config) should return config without Authorization header</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authInterceptor.request(config) should return config with Authorization header which contains token with prefix Bearer</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authInterceptor.requestError({}) should return rejected promise with object without any changes</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authInterceptor.response({}) should return object without any changes</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authInterceptor.responseError({}) should return rejected promise with object without any changes</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authInterceptor.responseError({status: 401, statusText: &quot;Unauthorized&quot;}) should call authToken.removeToken(), user.removeUser() and $rootScope.$emit(&quot;Unauthorized&quot;, resErr.data)</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Services: authService</span>
+    
+      <div class="specSummary passed">
+      <span class="description">auth should return an object with methods register, login, logout, user and loginVia</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.register(user) should corectly modified user.password</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.register(user) should call $http.post(url, user) with correct arguments</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.login(user) should corectly modified user.password</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.login(user) should call $http.post(url, user) with correct arguments</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.logout() should call $http.post(url, user) with correct arguments</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.user(&quot;read/update/delete&quot;) should return an instance of $q</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.user(&quot;read&quot;) should call $http.get(url, user) with correct arguments</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.user(&quot;update&quot;) should call $http.put(url, user) with correct arguments</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.user(&quot;delete&quot;) should call $http.delete(url, user) with correct arguments</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.loginVia(provider) should call $window.open once</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">auth.loginVia(provider) should call $window.open twice</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Services: authTokenFactory</span>
+    
+      <div class="specSummary passed">
+      <span class="description">authToken.config should contains properties with custom values</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authToken.setToken(token) should set/save token in localStorage</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authToken.getToken() should return correct token from localStorage</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authToken.getToken() should return cached token</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authToken.removeToken() should remove M-mamToken from localStorage</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authToken.isAuthenticated() with token should return true</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">authToken.isAuthenticated() without token should return false</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Services: routesInjectorProvider</span>
+    
+      <div class="specSummary passed">
+      <span class="description">routesInjector should return an empty object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">routesInjectorProvider.inject() should return undefined</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">routesInjectorProvider.inject(config) should correctly modified routes objects</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">routesInjectorProvider.inject(config) should call $stateProvider.state(route)</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">routesInjectorProvider.inject(config) should call $urlRouterProvider.otherwise(route.url)</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">routesInjectorProvider.inject(config) should call locationProvider.html5Mode(true)</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Services: urlParamsProvider</span>
+    
+      <div class="specSummary passed">
+      <span class="description">urlParams.currentLanguage() should return a string</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">urlParams.currentLanguage() should return current language code</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">urlParams.currentLanguage() should return default language code</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">urlParams.rightPath() should return a string</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">urlParams.rightPath() should return complete path after language param</span>
+      </div>
+    
+    </div>
+  
+    <div class="suite passed">
+      <span class="description">Models: userFactory</span>
+    
+      <div class="specSummary passed">
+      <span class="description">user should return a function with methods set, get, remove, getUser and removeUser</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">user(data) should return a boolean (false)</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">user.set(property, value) should return an undefined and correctly modify user object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">user.get(property) should return correct value</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">user.remove(property) should return an undefined and correctly modify user object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">user.getUser() should return an user object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">user.removeUser() should return an undefined and correctly remove user object</span>
+      </div>
+    
+      <div class="specSummary passed">
+      <span class="description">user.isUser() should return a boolean (false/true)</span>
+      </div>
+    
+    </div>
+  
+  
+</div>
+
+<div id="details">
+  
+</div>
+
+<script>
+
+var folded = false;
+
+document.body.onkeypress = function (e) {
+  if (!e || !e.keyCode) return;
+  switch (e.keyCode) {
+    case 102: toggleFold(); break;
+    case 49: showSummary(); break;
+    
+  }
+};
+
+function showSummary() { document.body.className = "html-reporter showSummary"; }
+function showFailures() { document.body.className = "html-reporter showDetails"; }
+
+function toggleSection(el) {
+  el.className = el.className === 'summary-section' ? 'summary-section folded' : 'summary-section';
+}
+
+function toggleFold() { (folded) ? unfold() : fold(); }
+function fold() {
+  var els = document.querySelectorAll('.summary-section');
+  for (var i = 0; i < els.length; i++) {
+    els[i].className = 'summary-section folded';
+  }
+  folded = true;
+}
+function unfold() {
+  var els = document.querySelectorAll('.summary-section');
+  for (var i = 0; i < els.length; i++) {
+    els[i].className = 'summary-section';
+  }
+  folded = false;
+}
+
+</script>
+
+
+</body>
+</html>
+
