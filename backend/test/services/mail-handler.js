@@ -56,15 +56,15 @@ describe('Services:', () => {
                 type: 'verification_email'
             };
 
+            /* eslint-disable */
             mailHandler(config, user).catch((err) => {
-                /* eslint-disable */
-                console.log(err);
-                /* eslint-enable */
+                //console.log(err);
             });
+            /* eslint-enable */
 
             expect(config).to.deep.equal({
                 type: 'verification_email',
-                from: '[Restful API] <admin@helpdesk-app.mateusz-archicinski.pl>',
+                from: '[Restful API] <admin@mateusz-archicinski.pl>',
                 to: 'a@a',
                 subject: 'Email verification',
                 html: '<p>Verify your email address by clicking on <a href="undefined/verification/email?token=token">activate link</a>.</p>'

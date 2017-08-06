@@ -1,6 +1,3 @@
-/* eslint no-unused-vars: ["error", { "args": "none" }] */
-
-
 /**
  * @class angular_module.Module:app.Config:appConfig
  * @description This is an AngularJS config component, can be defined in JavaScript source file
@@ -249,7 +246,7 @@
             }
         ],
         apiConfig: {
-            baseUrl: 'http://192.168.1.21:4848/',
+            baseUrl: '',
             registerUrl: '',
             loginUrl: '',
             logoutUrl: '',
@@ -367,7 +364,9 @@
          *
          */
 
+        /* eslint-disable */
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+            /* eslint-enable */
             if (toState.name !== 'root' && ((!appState.isAuthorized() && toState.authRequired) || (appState.isAuthorized() && !toState.authRequired))) {
                 event.preventDefault();
 
@@ -384,7 +383,9 @@
          * - Is doing the same as on $stateChangeStart event.
          */
 
+        /* eslint-disable */
         $rootScope.$on('Unauthorized', function (event, data) {
+            /* eslint-enable */
             if (!appState.isAuthorized() && $state.current.authRequired) {
                 event.preventDefault();
 

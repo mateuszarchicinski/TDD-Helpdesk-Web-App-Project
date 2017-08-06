@@ -1,6 +1,3 @@
-/* eslint no-unused-vars: 0 */
-
-
 'use strict';
 
 
@@ -16,4 +13,6 @@
  */
 
 
+/* eslint-disable */
 var app = angular.module('app', ['ui.router', 'ngMaterial', 'ngMessages', 'angular-md5', 'ncy-angular-breadcrumb']);
+/* eslint-enable */

@@ -116,7 +116,7 @@ mongoose.connection.on('connected', () => {
     // Injects static objects of routes to database
     dataInjector(routeModel, routes).then((data) => {
         if (data.success.length !== 0) {
-            alertHandler('success', `Newly added routes: ${JSON.stringify(data.success)}`);
+            // alertHandler('success', `Newly added routes: ${JSON.stringify(data.success)}`);
         }
 
         const sortBy = {

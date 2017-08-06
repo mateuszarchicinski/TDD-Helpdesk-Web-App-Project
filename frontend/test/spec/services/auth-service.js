@@ -29,6 +29,10 @@ describe('Services: authService', function () {
         window = $window;
         APP_CONFIG = _APP_CONFIG_;
 
+        if (!APP_CONFIG.apiConfig.baseUrl) {
+            APP_CONFIG.apiConfig.baseUrl = '/';
+        }
+
         sinon.spy(http, 'post');
         sinon.spy(http, 'get');
         sinon.spy(http, 'put');

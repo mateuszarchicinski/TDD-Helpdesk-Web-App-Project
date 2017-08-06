@@ -4,7 +4,6 @@ const HTTP_CODES_CONFIG = APP_CONFIG.HTTP_CODES_CONFIG;
 
 
 // APP SERVICES
-const alertHandler = require('../services/alert-handler');
 const mailHandler = require('../services/mail-handler');
 const mongoose = require('../services/mongoose');
 const tokenHandler = require('../services/token-handler');
@@ -54,13 +53,13 @@ module.exports = function (req, res, next) {
             return next(err);
         }
 
+        /* eslint-disable */
         mailHandler({
             from: `Helpdesk Application <${APP_CONFIG.SMTP.USER}>`,
             type: 'verification_email',
             redirectUri: req.createFullUrl()
-        }, user).catch((err) => {
-            alertHandler('error', err);
-        });
+        }, user).catch((err) => {});
+        /* eslint-enable */
 
         const newToken = tokenHandler.encode({
             sub: user._id,

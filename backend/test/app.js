@@ -39,7 +39,7 @@ describe('Application responses:', () => {
 
                     done();
                 });
-            }, 5000);
+            }, 2500);
         });
 
         it('should returns header with a value of property content-type: text/html; charset=utf-8', (done) => {
@@ -55,7 +55,41 @@ describe('Application responses:', () => {
 
                     done();
                 });
-            }, 5000);
+            }, 1250);
+        });
+
+        it('should returns status code 301', (done) => {
+            /* eslint-disable */
+            request.get({
+                url: baseUrl + '///',
+                followRedirect: false
+            }, (error, response, body) => {
+                /* eslint-enable */
+                if (error) {
+                    throw error;
+                }
+
+                expect(response.statusCode).to.equal(301);
+
+                done();
+            });
+        });
+
+        it(`should returns header with a value of property location: ${baseUrl}`, (done) => {
+            /* eslint-disable */
+            request.get({
+                url: baseUrl + '///',
+                followRedirect: false
+            }, (error, response, body) => {
+                /* eslint-enable */
+                if (error) {
+                    throw error;
+                }
+
+                expect(response.headers.location).to.equal(baseUrl);
+
+                done();
+            });
         });
     });
 

@@ -7,7 +7,6 @@
 // NODE MODULES
 const gulp = require('gulp'), // https://gulp.readme.io/docs/getting-started
       $ = require('gulp-load-plugins')( {lazy: true} ), // https://github.com/jackfranklin/gulp-load-plugins#options
-      jshintStylish = require('jshint-stylish'),
       htmlhintStylish = require('htmlhint-stylish'),
       wiredep = require('wiredep').stream,
       browserSync = require('browser-sync'),

@@ -17,7 +17,7 @@ module.exports = function (config, user) {
             return reject(false);
         }
 
-        config.from = config.from || `[Restful API] <${APP_CONFIG.SMTP.USER}>`;
+        config.from = config.from || `[Restful API] <${APP_CONFIG.SMTP.USER || 'admin@mateusz-archicinski.pl'}>`;
 
         if (config.type === 'verification_email') {
             if (!user) {

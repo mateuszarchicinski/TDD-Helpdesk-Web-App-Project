@@ -3,11 +3,11 @@
         "pl": {
             "lang": "pl",
             "title": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT",
-            "description": "Aplikacja Helpdesk przygotowana na potrzeby pracy inżynierskiej i nauki związanej z metodyką Test-driven development. Przygotowana aplikacja powstała z wykorzystaniem nowoczesnych technologii związanych z językiem JavaScript, MongoDB, ExpressJS, AngularJS i NodeJS.",
+            "description": "Aplikacja Helpdesk przygotowana na potrzeby pracy inżynierskiej i nauki związanej z metodyką Test-driven development. Aplikacja powstała z wykorzystaniem nowoczesnych technologii związanych z językiem JavaScript, MongoDB, ExpressJS, AngularJS i NodeJS.",
             "keywords": "Praca inżynierska, Engineering work, Aplikacja internetowa, Web application, Test-driven development, Helpdesk application, Klient-server application, Backend, Frontend, MongoDB, ExpressJS, AngularJS, NodeJS",
             "author": "Mateusz Archiciński",
             "ogTitle": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT",
-            "ogDescription": "Aplikacja Helpdesk przygotowana na potrzeby pracy inżynierskiej i nauki związanej z metodyką Test-driven development. Przygotowana aplikacja powstała z wykorzystaniem nowoczesnych technologii związanych z językiem JavaScript, MongoDB, ExpressJS, AngularJS i NodeJS.",
+            "ogDescription": "Aplikacja Helpdesk przygotowana na potrzeby pracy inżynierskiej i nauki związanej z metodyką Test-driven development. Aplikacja powstała z wykorzystaniem nowoczesnych technologii związanych z językiem JavaScript, MongoDB, ExpressJS, AngularJS i NodeJS.",
             "header": {
                 "headline": "Helpdesk Application - Pomoc w rozwiązywaniu problemów z dziedziny IT"
             },
