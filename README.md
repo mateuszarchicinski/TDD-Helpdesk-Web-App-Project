@@ -1,4 +1,4 @@
-# Aplikacja internetowa w metodyce Test-Driven Development
+# Helpdesk - Aplikacja internetowa
 
 <blockquote>
  <p>Projekt podzielony został na następujące części:</p>
