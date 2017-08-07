@@ -1,4 +1,7 @@
-node_modules
-bower_components
 .material-cache
 angular-material
+bower_components
+dist
+node_modules
+project.config.js
+app.config.js
