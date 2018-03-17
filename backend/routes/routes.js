@@ -81,9 +81,6 @@ module.exports = [
         controller: 'register'
     },
     {
-        url: '/angular'
-    },
-    {
         url: ['/', '/:lang', '/:lang/*', '*'],
         middlewares: 'language',
         controller: 'angular'

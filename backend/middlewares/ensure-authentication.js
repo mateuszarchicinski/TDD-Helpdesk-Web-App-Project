@@ -22,9 +22,9 @@ const userModel = mongoose.models[userModelName] ? mongoose.model(userModelName)
  * const app = require('express')();
  * const ensureAuthentication = require('./middlewares/ensure-authentication');
  * const userCtrl = require('./controllers/user');
- * 
+ *
  * app.get('/user/:_id', ensureAuthentication, userCtrl);
- * 
+ *
  * app.listen(3000, 'localhost'); // http://localhost:3000/user/{_id}
  */
 

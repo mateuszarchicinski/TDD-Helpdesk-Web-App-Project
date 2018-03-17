@@ -39,5 +39,7 @@ module.exports = {
     PAGES_CONFIG: require('./pages.config.js'),
     DIRECTORY: {
         STATIC_DIR: '/assets', // Static files directory
+        middlewares: '/middlewares', // Middlewares files directory
+        controllers: '/controllers' // Controllers files directory
     }
 };

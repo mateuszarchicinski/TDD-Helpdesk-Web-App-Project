@@ -23,9 +23,9 @@ const userModel = mongoose.models[userModelName] ? mongoose.model(userModelName)
  * @example
  * const app = require('express')();
  * const registerCtrl = require('./controllers/register');
- * 
+ *
  * app.post('/register', registerCtrl);
- * 
+ *
  * app.listen(3000, 'localhost'); // http://localhost:3000/register
  */
 

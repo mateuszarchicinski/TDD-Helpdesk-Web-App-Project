@@ -16,7 +16,7 @@ module.exports = {
         TEST_DIR: 'test' // Test directory
     },
     BROWSER_SYNC: { // Custom configuration of module BROWSER SYNC
-        TARGET: 'http://at-workflow',
+        TARGET: 'http://localhost:4848/',
         PORT: 3000,
         LOG_PREFIX: 'AT',
         LOG_CONNECTIONS: true

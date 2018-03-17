@@ -37,7 +37,6 @@ const routeModel = mongoose.models[routeModelName] ? mongoose.model(routeModelNa
 const routes = require('./routes/routes');
 
 
-
 // MongoDB Connect ---> http://mongoosejs.com/docs/guide.html
 mongoose.connect(`mongodb://${APP_CONFIG.MONGO_DB.USER}:${APP_CONFIG.MONGO_DB.PASSDOWRD}@${APP_CONFIG.MONGO_DB.HOST}:${APP_CONFIG.MONGO_DB.PORT}/${APP_CONFIG.MONGO_DB.NAME}`, APP_CONFIG.MONGO_DB.OPTIONS, (err) => {
     if (err) {
@@ -110,40 +109,32 @@ app[METHOD:get,post,put,delete...]('/ROUTE_EXAMPLE', MIDDLEWARE(req, res, next),
 ////////////////////////////////////
 
 
-// Event on successfully connecting to database
-mongoose.connection.on('connected', () => {
+// Injects static objects of routes to app object
+routes.forEach((route) => {
+    const getModule = (type, name) => {
+        return require(`.${APP_CONFIG.DIRECTORY[type]}/${name}`);
+    };
+    const middlewares = [];
 
-    // Injects static objects of routes to database
-    dataInjector(routeModel, routes).then((data) => {
-        if (data.success.length !== 0) {
-            // alertHandler('success', `Newly added routes: ${JSON.stringify(data.success)}`);
-        }
-
-        const sortBy = {
-            url: -1
-        };
-
-        // Searching for all routes in database
-        routeModel.find().sort(sortBy).then((data) => {
-
-            // Injects routes objects from database to app object
-            const incorrectInjectedRoutes = routesInjector(app, data).incorrect;
-
-            if (incorrectInjectedRoutes.length !== 0) {
-                alertHandler('warning', `<Database> Incorrect injected routes: ${JSON.stringify(incorrectInjectedRoutes)}`);
-            }
-
-            // Handles HTTP errors
-            app.use(errorsHandler);
-
-        }).catch((err) => {
-            alertHandler('error', err);
+    if (route.middlewares instanceof Array) {
+        route.middlewares.forEach((middleware) => {
+            middlewares.push(getModule('middlewares', middleware));
         });
-    }).catch((err) => {
-        alertHandler('error', err);
-    });
+    }
 
+    if (route.middlewares && typeof route.middlewares === 'string') {
+        middlewares.push(getModule('middlewares', route.middlewares));
+    }
+
+    const controller = getModule('controllers', route.controller);
+
+    route.method = route.method || 'get';
+    app[route.method](route.url, middlewares, controller);
 });
+
+
+// Handles HTTP errors
+app.use(errorsHandler);
 
 
 // Event on CTRL+C keys pressing
